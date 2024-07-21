@@ -40,4 +40,4 @@ MVPリリース
 search機能　API：ElasticsearchやAlgolia、images機能で画像の添付、orders機能で納品チェック、purchasesで発注チェック、chats機能、notes機能でカルテメモ機能、medications機能でお薬手帳機能
 
 画面遷移図
-https://www.figma.com/design/yetWdJ4bLDIf2NNiseZhUq/%E7%84%A1%E9%A1%8C?node-id=0-1&t=PL9gyRIgq939wjy9-1
+https://www.figma.com/design/yetWdJ4bLDIf2NNiseZhUq/%E7%84%A1%E9%A1%8C?node-id=0-1&t=wXlLD5f1hHtiKKZV-1
