@@ -43,7 +43,6 @@ search機能　API：ElasticsearchやAlgolia、images機能で画像の添付、
 画面遷移図
 https://www.figma.com/design/UHcbXJvPHX3IqJxCRjhquR/%E7%84%A1%E9%A1%8C?node-id=0-1&t=Y8FKuesioT2ZvilH-1
 
-ER図
-https://drive.google.com/file/d/1oGX2f_3SkgglrZje3b8c_OWtyTuXnALx/view?usp=sharing
+
 
 
