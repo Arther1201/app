@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 全要素のボックスサイズ設定 */
+}
+
+.header {
+  background-color: #033465; /* 任意の背景色を指定 */
+  padding: 1.5rem;
+  position: fixed; /* ヘッダーを固定する */
+  top: 0;
+  left: 0; /* 左端から開始 */
+  right: 0; /* 右端まで広がる */
+  width: 100%;
+  z-index: 1000; /* 他の要素より前に表示する */
+  color: #ffffff; /* ヘッダー内のテキスト色を白に設定 */
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between; /* ナビゲーションメニューを左右に配置 */
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-end {
+  margin-left: auto; /* 左側の余白を自動で調整して右寄せに */
+}
+
+.navbar-item, a {
+  color: #ffffff; /* リンクとボタンの色を白に指定 */
+  text-decoration: none;
+  padding: 0.5rem; /* パディングを適用 */
+  font: inherit; /* フォントを継承 */
+  cursor: pointer; /* カーソルをポインターに */
+}
+
+.navbar-item:hover, a:hover {
+  text-decoration: underline; /* ホバー時に下線を表示 */
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* コンテナが全幅を取るように設定 */
+}
+

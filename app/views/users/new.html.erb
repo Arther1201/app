@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag 'signup', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<body class="registration-background">
+  <div class="registration-container">
+    <h2 class="text-center">新規登録</h2>
+
+    <%= form_with model: @user, local: true, url: users_path, data: { turbo: false } do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %>が発生しました:</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "example@example.com" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+          <em>(最低 <%= @minimum_password_length %> 文字以上必要)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワードの確認" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :department_id, "部署" %>
+        <%= f.collection_select :department_id, Department.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" } %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "新規登録", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</body>

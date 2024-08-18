@@ -1,0 +1,45 @@
+.patient-list {
+    padding-top: 100px;
+    justify-content: center; /* テーブル全体を中央に配置 */
+    justify-content: center; /* テーブル全体を中央に配置 */
+    overflow-y: auto; /* 縦方向にスクロール可能にする */
+    max-height: 90vh; /* ビューポートの高さの80%を最大高さとする */
+  }  
+
+table {
+    width: 80rem;
+    border-collapse: collapse;
+    border: 1.4px solid #333; /* テーブル全体を囲む枠線 */
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 2px solid #c6c4c4; /* 各セルを囲む枠線 */
+}
+
+th {
+    background-color: #f4f4f4;
+    font-size: 12px;
+    text-align: center;
+}
+
+.check-column,
+.delivery-column {
+    text-align: center; /* セル内のテキストを中央揃え */
+    vertical-align: middle; /* セル内のコンテンツを縦中央揃え */
+}
+
+.check-column input[type="checkbox"],
+.delivery-column input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0; /* チェックボックスの外側の余白をリセット */
+    vertical-align: middle; /* チェックボックスを縦方向に中央揃え */
+}
+
+h1 {
+    text-align: center;
+}

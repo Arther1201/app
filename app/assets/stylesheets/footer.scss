@@ -1,0 +1,14 @@
+.footer-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #050505; /* フッターの背景色 */
+    color: #fff; /* テキストの色 */
+    padding: 1rem 0;
+  
+    p {
+      display: flex;
+      height: 100%; /* 高さをフッター全体に合わせる */
+      padding-right: 1rem;
+    }
+}

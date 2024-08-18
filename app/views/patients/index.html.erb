@@ -1,0 +1,52 @@
+<div class="patient-list">
+  <h1>患者一覧</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>印象日</th>
+        <th class="check-column">チェック</th>
+        <th>カルテ番号</th>
+        <th>氏名</th>
+        <th>補綴種類</th>
+        <th>補綴部位</th>
+        <th>メタルの種類</th>
+        <th>メタル量</th>
+        <th>依頼先</th>
+        <th>セット/試適</th>
+        <th>セット日</th>
+        <th class="delivery-column">納品チェック</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @patients.each do |patient| %>
+        <tr>
+          <td><%= patient.impression_date %></td>
+          <td class="check-column"><%= check_box_tag "note_checked_#{patient.id}", "1", patient.note_checked %></td>
+          <td><%= patient.medical_record_number %></td>
+          <td><%= patient.name %></td>
+          <td>
+            <%= patient.prosthesis_type_insurance %>
+            <%= patient.prosthesis_type_crown %>
+            <%= patient.prosthesis_type_denture %>
+          </td>
+          <td class="tooth-diagram-font">
+            <%= raw(convert_to_dental_notation(Array(patient.prosthesis_sites))) if patient.prosthesis_sites.present? %>
+          </td>
+          <td><%= patient.metal_type %></td>
+          <td>
+            <%= form_with(model: patient, local: true, url: update_metal_amount_patient_path(patient), method: :patch) do |form| %>
+              <%= form.text_field :metal_amount, value: patient.metal_amount, class: "metal-amount-field" %>
+              <span style="margin-left: 5px;">g</span>
+            <% end %>
+          </td>
+          <td><%= patient.requester %></td>
+          <td><%= patient.trial_or_set %></td>
+          <td><%= patient.set_date %></td>
+          <td class="delivery-column"><%= check_box_tag "delivery_checked_#{patient.id}", "1", patient.delivery_checked %></td>
+          <td><%= link_to '詳細', patient_path(patient), class: 'btn btn-info' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

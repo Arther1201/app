@@ -1,0 +1,20 @@
+<h1>患者詳細</h1>
+
+<p><strong>印象日:</strong> <%= @patient.impression_date %></p>
+<p><strong>チェック:</strong> <%= @patient.note_checked %></p>
+<p><strong>カルテ番号:</strong> <%= @patient.medical_record_number %></p>
+<p><strong>氏名:</strong> <%= @patient.name %></p>
+<p><strong>性別:</strong> <%= @patient.gender %></p>
+<p><strong>補綴種類:</strong> <%= @patient.prosthesis_type %></p>
+<p><strong>補綴部位:</strong> <%= @patient.prosthesis_sites %></p>
+<p><strong>メタルの種類:</strong> <%= @patient.metal_type %></p>
+<p><strong>メタル量:</strong> <%= @patient.metal_amount %></p>
+<p><strong>セット/試適:</strong> <%= @patient.trial_or_set %></p>
+<p><strong>セット日:</strong> <%= @patient.set_date %></p>
+<p><strong>依頼先:</strong> <%= @patient.requester %></p>
+<p><strong>メモ:</strong> <%= @patient.memo %></p>
+<p><strong>お薬:</strong> <%= @patient.medicine_notebook %></p>
+<p><strong>画像:</strong> <%= image_tag @patient.image if @patient.image.present? %></p>
+
+<%= link_to '編集', edit_patient_path(@patient), class: "btn btn-primary" %>
+<%= link_to '削除', patient_path(@patient), method: :delete, date: { confirm: '本当に削除しますか？' }, class: "btn btn-secondary" %>
