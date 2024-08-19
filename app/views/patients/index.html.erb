@@ -31,7 +31,7 @@
             <%= patient.prosthesis_type_denture %>
           </td>
           <td class="tooth-diagram-font">
-            <%= raw(convert_to_dental_notation(Array(patient.prosthesis_sites))) if patient.prosthesis_sites.present? %>
+            <%= convert_to_dental_notation(Array(patient.prosthesis_sites)) if patient.prosthesis_sites.present? %>
           </td>
           <td><%= patient.metal_type %></td>
           <td>

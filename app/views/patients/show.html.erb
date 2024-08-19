@@ -15,6 +15,10 @@
 <p><strong>メモ:</strong> <%= @patient.memo %></p>
 <p><strong>お薬:</strong> <%= @patient.medicine_notebook %></p>
 <p><strong>画像:</strong> <%= image_tag @patient.image if @patient.image.present? %></p>
+<div style="font-family: 'DentCode2';">
+  \5\｜
+</div>
+
 
 <%= link_to '編集', edit_patient_path(@patient), class: "btn btn-primary" %>
 <%= link_to '削除', patient_path(@patient), method: :delete, date: { confirm: '本当に削除しますか？' }, class: "btn btn-secondary" %>
