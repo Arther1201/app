@@ -22,7 +22,11 @@
       <% @patients.each do |patient| %>
         <tr>
           <td><%= patient.impression_date %></td>
-          <td class="check-column"><%= check_box_tag "note_checked_#{patient.id}", "1", patient.note_checked %></td>
+          <td class="check-column">
+            <%= form_with(url: update_note_checked_patient_path(patient), method: :patch, id: "note-checked-form-#{patient.id}", local: false) do |form| %>
+              <%= form.check_box :note_checked, checked: patient.note_checked, class: "note-checked-checkbox" %>
+            <% end %>
+          </td>
           <td><%= patient.medical_record_number %></td>
           <td><%= patient.name %></td>
           <td>
@@ -31,7 +35,13 @@
             <%= patient.prosthesis_type_denture %>
           </td>
           <td class="tooth-diagram-font">
-            <%= convert_to_dental_notation(Array(patient.prosthesis_sites)) if patient.prosthesis_sites.present? %>
+            <%= convert_to_dental_notation(
+              upper_left: patient.upper_left, 
+              upper_right: patient.upper_right, 
+              lower_left: patient.lower_left, 
+              lower_right: patient.lower_right
+            ) if patient.upper_left.present? || patient.upper_right.present? || patient.lower_left.present? || patient.lower_right.present? %>
+          </td>
           </td>
           <td><%= patient.metal_type %></td>
           <td>
@@ -43,10 +53,15 @@
           <td><%= patient.requester %></td>
           <td><%= patient.trial_or_set %></td>
           <td><%= patient.set_date %></td>
-          <td class="delivery-column"><%= check_box_tag "delivery_checked_#{patient.id}", "1", patient.delivery_checked %></td>
+          <td class="delivery-column">
+            <%= form_with(url: update_delivery_checked_patient_path(patient), method: :patch, id: "delivery-checked-form-#{patient.id}", local: false) do |form| %>
+              <%= form.check_box :delivery_checked, checked: patient.delivery_checked, class: "delivery-checked-checkbox" %>
+            <% end %>
+          </td>
           <td><%= link_to '詳細', patient_path(patient), class: 'btn btn-info' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= paginate @patients %>
 </div>

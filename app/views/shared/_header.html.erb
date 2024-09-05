@@ -1,9 +1,17 @@
 <nav class="navbar header">
   <div class="container">
     <div class="navbar-brand">
-      <% if current_page?(new_patient_path) || (defined?(@patient) && current_page?(patient_path(@patient))) %>
+      <% if params[:from] == 'calendar' %> <!-- カレンダーから来た場合 -->
+        <%= link_to '戻る', calendar_patients_path, class: "navbar-item" %>
+      <% elsif defined?(@patient) && @patient.try(:persisted?) && current_page?(edit_patient_path(@patient)) %>
+        <%= link_to '戻る', patient_path(@patient), class: "navbar-item" %>
+      <% elsif current_page?(new_patient_path) || (defined?(@patient) && @patient.try(:persisted?) && current_page?(patient_path(@patient))) %>
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
-      <% elsif current_page?(patients_path) %>
+      <% elsif current_page?(search_patients_path) || current_page?(search_form_patients_path) %>
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(calendar_patients_path) %> <!-- カレンダーから直接来た場合 -->
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif request.fullpath.start_with?(patients_path) %>
         <!-- サイドバーボタンを表示 -->
         <button id="sidebar-toggle" aria-label="Toggle Sidebar" class="navbar-item">☰</button>
       <% else %>
@@ -11,25 +19,28 @@
       <% end %>
     </div>
     <div class="navbar-end">
-      <% if current_page?(root_path) %>
+      <% if logged_in? %>
+        <!-- ログインしているユーザーの部署名を表示 -->
+        <% if current_user.department %>
+          <span class="navbar-item">部署: <%= current_user.department.name %></span>
+        <% end %>
+        <%= link_to "ログアウト", logout_path, method: :delete, data: { turbo: false }, class: "navbar-item" %>
+      <% else %>
         <%= link_to "ログイン", login_path, class: "navbar-item" %>
         <%= link_to "新規登録", signup_path, class: "navbar-item" %>
-      <% else %>
-        <% if logged_in? %>
-          <%= link_to "ログアウト", logout_path, method: :delete, data: { turbo: false }, class: "navbar-item" %>
-        <% end %>
       <% end %>
     </div>
   </div>
 </nav>
+
 
 <!-- サイドバーのHTML構造 -->
 <div id="sidebar" class="sidebar">
   <button id="sidebar-close" aria-label="Close Sidebar">✖</button>
   <ul>
     <li><%= link_to '患者登録', new_patient_path %></li>
-    <li><a href="#">患者検索</a></li>
+    <li><%= link_to '患者検索', search_form_patients_path %></li>
     <li><a href="#">チャット</a></li>
-    <li><a href="#">セット日カレンダー</a></li>
+    <li><%= link_to 'セット日カレンダー', calendar_patients_path %></li>
   </ul>
 </div>

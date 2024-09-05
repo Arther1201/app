@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
+  get 'patients/search_form', to: 'patients#search_form', as: 'search_form_patients'
+  get 'patients/search', to: 'patients#search', as: 'search_patients'
+  get 'patients/calendar', to: 'patients#calendar', as: 'calendar_patients'
   get 'patients/index'
   get 'patients/show'
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :users 
-  resources :patients, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+  resources :patients, only: [:new, :create, :index, :show, :edit, :update, :destroy, :search] do
     member do
       patch :update_metal_amount
+      patch :update_note_checked
+      patch :update_delivery_checked
     end
   end
   root 'home#index'

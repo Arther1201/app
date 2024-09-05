@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_18_083140) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_25_044255) do
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_18_083140) do
     t.boolean "delivery_checked"
     t.text "memo"
     t.string "medicine_notebook"
-    t.string "image"
+    t.text "images"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "requester"

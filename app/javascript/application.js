@@ -1,10 +1,13 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
+import "jquery";  // jQueryを先にインポート
+import "@hotwired/turbo-rails";
+import "controllers";
 import Rails from '@rails/ujs';
 Rails.start();
+import "./check_boxes";  // check_boxes.js をインポート
 
-document.addEventListener("turbo:load", function() {
+
+document.addEventListener("turbo:load", function() {  
     const sidebarToggle = document.getElementById("sidebar-toggle");
     const sidebarClose = document.getElementById("sidebar-close");
     const sidebar = document.getElementById("sidebar");
@@ -56,11 +59,11 @@ document.addEventListener("turbo:load", function() {
       updateMetalType(this.value);
     });
   }
-   
 
-
+  
+ 
+  
 });
 
-  
-  
-  
+
+

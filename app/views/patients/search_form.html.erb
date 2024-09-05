@@ -1,0 +1,43 @@
+<%= stylesheet_link_tag 'patients_search', media: 'all', 'data-turbo-track': 'reload' %>
+<body class="search-background">
+  <div class="search-form-container">
+    <h4>患者検索</h4>
+
+    <%= form_with url: search_patients_path, method: :get, local: true, class: "search-form" do %>
+      <div class="search-form-group">
+        <%= label_tag :name, "患者氏名", class: "search-form-label" %>
+        <div class="search-form-input-container">
+          <%= text_field_tag :name, params[:name], class: "search-form-input", autocomplete: "name" %>
+          <i class="material-icons search-icon">search</i>
+        </div>
+      </div>
+
+      <div class="search-form-group">
+        <%= label_tag :medical_record_number, "カルテ番号", class: "search-form-label" %>
+        <div class="search-form-input-container">
+          <%= text_field_tag :medical_record_number, params[:medical_record_number], class: "search-form-input", autocomplete: "off" %>
+          <i class="material-icons search-icon">search</i>
+        </div>
+      </div>
+
+      <div class="search-form-group">
+        <%= label_tag :impression_date, "印象日", class: "search-form-label" %>
+        <div class="search-form-input-container">
+          <%= date_field_tag :impression_date, params[:impression_date], class: "search-form-input", autocomplete: "bday" %>
+        </div>
+      </div>
+
+      <div class="search-form-group">
+        <%= label_tag :set_date, "セット日", class: "search-form-label" %>
+        <div class="search-form-input-container">
+          <%= date_field_tag :set_date, params[:set_date], class: "search-form-input", autocomplete: "off" %>
+        </div>
+      </div>
+
+      <div class="search-form-group">
+        <%= submit_tag "検索", class: "search-form-submit" %>
+      </div>
+    <% end %>
+  </div>
+</body>
+

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center; /* 水平方向の中央揃え */
     align-items: center; /* 垂直方向の中央揃え */
-    padding-top: 100px; /* ヘッダーのスペースを確保 */
+    padding-top: 20px; /* ヘッダーのスペースを確保 */
     padding-bottom: 50px; /* 必要に応じて下部の余白を追加 */
   }
   
@@ -217,4 +217,18 @@ textarea {
   input::placeholder {
     font-size: 0.7em; /* フォントサイズを小さくする */
     color: #999; /* プレースホルダーの色を変更（任意） */
+  }
+
+  h2 {
+    color:#101010;
+    font-size: 2rem;
+  }
+
+  .patient_new-background {
+    background-image: url('patient_new_image.jpg');
+    background-size: cover; /* 画像を画面全体にフィットさせる */
+    background-position: center center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 画像を繰り返さない */
+    height: 100%; /* 画面全体の高さを確保 */
+    margin: 0;
   }

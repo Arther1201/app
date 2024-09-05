@@ -1,0 +1,24 @@
+#calendar {
+    width: 70rem;
+    flex-grow: 1;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    height: calc(100vh - 100px);
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ビューポートの高さに応じて調整 */
+    margin: 0;
+    height: 10rem;
+  }
+
+  .fc-daygrid-day-number {
+    color: black; /* 日付の文字色を黒に設定 */
+  }
+  
+  .fc-daygrid-day {
+    background-color: white; /* 日付セルの背景色を白に設定 */
+  }
+  

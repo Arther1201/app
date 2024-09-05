@@ -35,6 +35,19 @@ gem 'letter_opener_web', '2.0.0'
 
 gem 'rails-ujs'
 
+gem 'kaminari'
+
+gem 'bootstrap5-kaminari-views'
+
+gem 'carrierwave', '2.2.2'
+
+gem 'mini_magick'
+
+gem 'fullcalendar-rails'
+
+gem 'jquery-rails'
+
+gem 'momentjs-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

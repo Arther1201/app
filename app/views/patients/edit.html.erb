@@ -1,0 +1,193 @@
+<%= stylesheet_link_tag 'patients_edit', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="form-container">
+  <div class="form-scroll-container">
+    <h3>患者情報の編集</h3>
+    <%= form_with(model: @patient, local: true) do |form| %>
+
+      <div>
+        <%= form.label :impression_date, "印象日" %>
+        <%= form.date_field :impression_date, class: "general-input" %>
+      </div>
+
+      <div>
+        <%= form.label :medical_record_number, "カルテ番号" %>
+        <%= form.text_field :medical_record_number, class: "general-input" %>
+      </div>
+
+      <div>
+        <%= form.label :name, "氏名" %>
+        <%= form.text_field :name, class: "general-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :gender, "性別" %>
+        <%= form.select :gender, options_for_select([["男", "男"], ["女", "女"]], @patient.gender), { include_blank: "選択してください" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :prosthesis_type_insurance, "補綴種類(保険)", for: "patient_prosthesis_type_insurance" %>
+        <%= form.select :prosthesis_type_insurance, options_for_select([["コア(Ag)", "コア(Ag)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["In", "In"], ["FMC", "FMC"], ["Br", "Br"], ["前装冠", "前装冠"], ["前装Br", "前装Br"], ["CAD冠", "CAD冠"], ["CADIn", "CADIn"], ["マウスピース", "マウスピース"], ["スプリント", "スプリント"], ["矯正装置", "矯正装置"], ["義歯", "義歯"], ["CC", "CC"], ["WRC", "WRC"], ["OPアンカ", "OPアンカ"], ["キーパー", "キーパー"], ["コーピング", "コーピング"]], @patient.prosthesis_type_insurance), { include_blank: "選択してください", id: "patient_prosthesis_type_insurance" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :prosthesis_type_crown, "補綴種類(自費・クラウン-Br)", for: "patient_prosthesis_type_crown" %>
+        <%= form.select :prosthesis_type_crown, options_for_select([["コア(Au)", "コア(Au)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["GIn", "GIn"], ["GFMC", "GFMC"], ["GBr", "GBr"], ["G前装冠", "G前装冠"], ["G前装Br", "G前装Br"], ["MB", "MB"], ["MBBr", "MBBr"], ["e-max", "e-max"], ["e-maxIn", "e-maxIn"], ["セラミックIn", "セラミックIn"], ["ジルコニア", "ジルコニア"], ["インプラント", "インプラント"], ["テセラ", "テセラ"]], @patient.prosthesis_type_crown), { include_blank: "選択してください", id: "patient_prosthesis_type_crown" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :prosthesis_type_denture, "補綴種類(自費・義歯)", for: "patient_prosthesis_type_denture" %>
+        <%= form.select :prosthesis_type_denture, options_for_select([["金属床", "金属床"], ["ノンクラスプ(エステショット)", "ノンクラスプ(エステショット)"], ["ノンクラスプ(K-プラス)", "ノンクラスプ(K-プラス)"], ["ノンクラスプ(アルティメット)", "ノンクラスプ(アルティメット)"]], @patient.prosthesis_type_denture), { include_blank: "選択してください", id: "patient_prosthesis_type_denture" } %>
+      </div>
+
+      <div>
+        <label>補綴部位</label>
+        <button type="button" id="select-upper-jaw">上顎フル</button>
+        <button type="button" id="select-lower-jaw">下顎フル</button>
+      </div>
+      
+        <div class="tooth-diagram">
+          <!-- 上顎 -->
+          <div class="row upper-jaw">
+            <div class="tooth-group upper-left">
+              <% (8).downto(1) do |i| %>
+                <label for="upper_left_<%= i %>">
+                  <%= hidden_field_tag "patient[upper_left][]", "", id: nil %>
+                  <input type="checkbox" id="upper_left_<%= i %>" name="patient[upper_left][]" value="upper_left_<%= i %>" <%= 'checked' if @patient.upper_left.include?("upper_left_#{i}") %>> <%= i %>
+                </label>
+              <% end %>
+            </div>
+            <div class="tooth-group upper-right">
+              <% (1..8).each do |i| %>
+                <label for="upper_right_<%= i %>">
+                  <%= hidden_field_tag "patient[upper_right][]", "", id: nil %>
+                  <input type="checkbox" id="upper_right_<%= i %>" name="patient[upper_right][]" value="upper_right_<%= i %>" <%= 'checked' if @patient.upper_right.include?("upper_right_#{i}") %>> <%= i %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+
+          <!-- 十字線 -->
+          <div class="cross"></div>
+
+          <!-- 下顎 -->
+          <div class="row lower-jaw">
+            <div class="tooth-group lower-left">
+              <% (8).downto(1) do |i| %>
+                <label for="lower_left_<%= i %>">
+                  <%= hidden_field_tag "patient[lower_left][]", "", id: nil %>
+                  <input type="checkbox" id="lower_left_<%= i %>" name="patient[lower_left][]" value="lower_left_<%= i %>" <%= 'checked' if @patient.lower_left.include?("lower_left_#{i}") %>> <%= i %>
+                </label>
+              <% end %>
+            </div>
+            <div class="tooth-group lower-right">
+              <% (1..8).each do |i| %>
+                <label for="lower_right_<%= i %>">
+                  <%= hidden_field_tag "patient[lower_right][]", "", id: nil %>
+                  <input type="checkbox" id="lower_right_<%= i %>" name="patient[lower_right][]" value="lower_right_<%= i %>" <%= 'checked' if @patient.lower_right.include?("lower_right_#{i}") %>> <%= i %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      <div class="form-group">
+        <%= form.label :metal_type, "メタルの種類" %>
+        <%= form.select :metal_type, options_for_select([["Ag", "Ag"], ["Pd", "Pd"], ["Co-Cr", "Co-Cr"], ["Au", "Au"]], @patient.metal_type), include_blank: "選択してください" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :metal_amount, "メタル量" %>
+        <%= form.number_field :metal_amount %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :requester, "依頼先" %>
+        <%= form.select :requester, options_for_select([["院内", "院内"], ["光デンタル", "光デンタル"], ["小坂デンタル", "小坂デンタル"], ["杏友会", "杏友会"], ["E-joint", "E-joint"], ["GIKO", "GIKO"]], @patient.requester), include_blank: "選択してください" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :trial_or_set, "セット/試適" %>
+        <%= form.select :trial_or_set, options_for_select([["SET", "SET"], ["TF", "TF"], ["再TF", "再TF"]], @patient.trial_or_set), include_blank: "選択してください" %>
+      </div>
+
+      <div>
+        <%= form.label :set_date, "セット日" %>
+        <%= form.date_field :set_date, class: "general-input" %>
+      </div>
+
+      <div>
+        <%= form.label :memo, "メモ" %>
+        <%= form.text_area :memo, rows: 3, placeholder: "メモを入力してください" %>
+      </div>
+
+      <div>
+        <%= form.label :medicine_notebook, "お薬" %>
+        <%= form.text_area :medicine_notebook,rows: 3, placeholder: "お薬に関する情報を入力してください" %>
+      </div>
+
+      <% if @patient.images.any? %>
+        <div class="existing-images">
+          <h3>既存の画像</h3>
+          <% @patient.images.each_with_index do |image, index| %>
+            <div class="image-container">
+              <%= image_tag image.url, class: "thumbnail", alt: "#{@patient.name}の画像" %>
+              <%= form.check_box :remove_images, { multiple: true, id: "patient_remove_image_#{index}", value: image.identifier }, image.identifier, false %>
+              <%= form.label "remove_image_#{index}", "この画像を削除" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <div>
+        <%= form.label :images, "画像", for: "patient_images" %>
+        <%= form.file_field :images, multiple: true, accept: "image/*", id: "patient_images" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "更新する", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const selectUpperJawBtn = document.getElementById('select-upper-jaw');
+      const selectLowerJawBtn = document.getElementById('select-lower-jaw');
+
+      if (selectUpperJawBtn && selectLowerJawBtn) {
+        // 上顎フル選択・解除機能
+        selectUpperJawBtn.addEventListener('click', function() {
+          const upperLeftTeeth = document.querySelectorAll('[id^="upper_left_"]');
+          const upperRightTeeth = document.querySelectorAll('[id^="upper_right_"]');
+
+          const allChecked = [...upperLeftTeeth, ...upperRightTeeth].every(checkbox => checkbox.checked);
+
+          if (allChecked) {
+            upperLeftTeeth.forEach(checkbox => checkbox.checked = false);
+            upperRightTeeth.forEach(checkbox => checkbox.checked = false);
+          } else {
+            upperLeftTeeth.forEach(checkbox => checkbox.checked = true);
+            upperRightTeeth.forEach(checkbox => checkbox.checked = true);
+          }
+        });
+
+        // 下顎フル選択・解除機能
+        selectLowerJawBtn.addEventListener('click', function() {
+          const lowerLeftTeeth = document.querySelectorAll('[id^="lower_left_"]');
+          const lowerRightTeeth = document.querySelectorAll('[id^="lower_right_"]');
+
+          const allChecked = [...lowerLeftTeeth, ...lowerRightTeeth].every(checkbox => checkbox.checked);
+
+          if (allChecked) {
+            lowerLeftTeeth.forEach(checkbox => checkbox.checked = false);
+            lowerRightTeeth.forEach(checkbox => checkbox.checked = false);
+          } else {
+            lowerLeftTeeth.forEach(checkbox => checkbox.checked = true);
+            lowerRightTeeth.forEach(checkbox => checkbox.checked = true);
+          }
+        });
+      }
+    });
+  </script>

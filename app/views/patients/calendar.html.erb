@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>セット日カレンダー</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag 'calendar', media: 'all', 'data-turbo-track': 'reload' %>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+</head>
+<body>
+  <h1>セット日カレンダー</h1>
+  <div id="calendar"></div>
+
+  <script>
+    document.addEventListener('turbo:load', function() {
+      var calendarEl = document.getElementById('calendar');
+      if (calendarEl) {
+        var events = <%= raw @patients.to_json(only: [:id, :name, :set_date, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture]).gsub('\'', '\\\'') %>;
+    
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          events: events.map(patient => ({
+            title: patient.name,
+            start: patient.set_date,
+            extendedProps: {
+              prosthesis: [patient.prosthesis_type_insurance, patient.prosthesis_type_crown, patient.prosthesis_type_denture]
+                .filter(Boolean).join(', '),
+              patientId: patient.id
+            }
+          })),
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          locale: 'ja',
+          buttonText: {
+            today: '今日',
+            month: '月',
+            week: '週',
+            day: '日'
+          },
+          eventContent: function(arg) {
+            let nameEl = document.createElement('div');
+            nameEl.innerHTML = '<b>' + arg.event.title + '</b>';
+
+            let prosthesisEl = document.createElement('div');
+            prosthesisEl.innerHTML = '<i>' + arg.event.extendedProps.prosthesis + '</i>';
+
+            return { domNodes: [nameEl, prosthesisEl] };
+          },
+          eventClick: function(info) {  
+            var patientId = info.event.extendedProps.patientId;
+            window.location.href = '/patients/' + patientId + '?from=calendar'; 
+          }
+        });
+
+        calendar.render();
+      }
+    });
+  </script>
+</body>
+</html>

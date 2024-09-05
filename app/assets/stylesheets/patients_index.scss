@@ -7,7 +7,7 @@
   }  
 
 table {
-    width: 80rem;
+    width: 89rem;
     border-collapse: collapse;
     border: 1.4px solid #333; /* テーブル全体を囲む枠線 */
     margin: 0 auto;
@@ -43,3 +43,31 @@ th {
 h1 {
     text-align: center;
 }
+
+.pagination {
+    display: flex; /* ページネーション全体を水平に配置 */
+    justify-content: center; /* 中央に配置 */
+    margin-top: 1rem;
+  }
+  
+  .pagination .page-item {
+    display: inline-block; /* 各ページ番号を水平に並べる */
+    margin: 0 5px; /* 各ページ間にスペースを追加 */
+  }
+  
+  .pagination .page-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: #007bff; /* テキストカラーを設定 */
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+  
+  .pagination .page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+

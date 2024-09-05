@@ -1,24 +1,128 @@
-<h1>患者詳細</h1>
+<%= stylesheet_link_tag 'patients_show', media: 'all', 'data-turbo-track': 'reload' %>
+<%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css", crossorigin: "anonymous" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", crossorigin: "anonymous" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js", crossorigin: "anonymous" %>
 
-<p><strong>印象日:</strong> <%= @patient.impression_date %></p>
-<p><strong>チェック:</strong> <%= @patient.note_checked %></p>
-<p><strong>カルテ番号:</strong> <%= @patient.medical_record_number %></p>
-<p><strong>氏名:</strong> <%= @patient.name %></p>
-<p><strong>性別:</strong> <%= @patient.gender %></p>
-<p><strong>補綴種類:</strong> <%= @patient.prosthesis_type %></p>
-<p><strong>補綴部位:</strong> <%= @patient.prosthesis_sites %></p>
-<p><strong>メタルの種類:</strong> <%= @patient.metal_type %></p>
-<p><strong>メタル量:</strong> <%= @patient.metal_amount %></p>
-<p><strong>セット/試適:</strong> <%= @patient.trial_or_set %></p>
-<p><strong>セット日:</strong> <%= @patient.set_date %></p>
-<p><strong>依頼先:</strong> <%= @patient.requester %></p>
-<p><strong>メモ:</strong> <%= @patient.memo %></p>
-<p><strong>お薬:</strong> <%= @patient.medicine_notebook %></p>
-<p><strong>画像:</strong> <%= image_tag @patient.image if @patient.image.present? %></p>
-<div style="font-family: 'DentCode2';">
-  
+<div class="patient-details-container">
+  <h1>患者詳細</h1>
+
+  <div class="patient-detail">
+    <strong>印象日:</strong>
+    <p><%= @patient.impression_date %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>チェック:</strong>
+    <p><%= check_box_tag "note_checked", "1", @patient.note_checked, disabled: true %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>カルテ番号:</strong>
+    <p><%= @patient.medical_record_number %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>氏名:</strong>
+    <p><%= @patient.name %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>性別:</strong>
+    <p><%= @patient.gender %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>補綴種類:</strong>
+    <p><%= @patient.prosthesis_type_insurance %></p>
+    <p><%= @patient.prosthesis_type_crown %></p>
+    <p><%= @patient.prosthesis_type_denture %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>補綴部位:</strong>
+    <p>
+      <%= convert_to_dental_notation(
+          upper_left: @patient.upper_left,
+          upper_right: @patient.upper_right,
+          lower_left: @patient.lower_left,
+          lower_right: @patient.lower_right
+        ) %>
+    </p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>メタルの種類:</strong>
+    <p><%= @patient.metal_type %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>メタル量:</strong>
+    <p>
+      <%= @patient.metal_amount.present? ? "#{@patient.metal_amount}g" : "" %>
+    </p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>セット/試適:</strong>
+    <p><%= @patient.trial_or_set %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>セット日:</strong>
+    <p><%= @patient.set_date %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>依頼先:</strong>
+    <p><%= @patient.requester %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>納品チェック:</strong>
+    <p><%= check_box_tag "delivery_checked", "1", @patient.delivery_checked, disabled: true %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>メモ:</strong>
+    <p><%= @patient.memo %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>お薬:</strong>
+    <p><%= @patient.medicine_notebook %></p>
+  </div>
+
+  <div class="patient-detail">
+    <strong>画像:</strong>
+    <% if @patient.images.present? %>
+      <% @patient.images.each do |image| %>
+        <%= link_to image.url, data: { lightbox: "patient-images", title: @patient.name } do %>
+          <%= image_tag image.url, class: "thumbnail", alt: "#{@patient.name}の画像" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+  </div>
+
+  <div class="patient-actions">
+    <%= link_to '編集', edit_patient_path(@patient), class: "btn btn-primary" %>
+    <%= link_to '削除', patient_path(@patient), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-secondary" %>
+  </div>
 </div>
 
-
-<%= link_to '編集', edit_patient_path(@patient), class: "btn btn-primary" %>
-<%= link_to '削除', patient_path(@patient), method: :delete, date: { confirm: '本当に削除しますか？' }, class: "btn btn-secondary" %>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('[data-lightbox]')) {  // data-lightbox属性が存在するか確認
+      if (typeof lightbox !== 'undefined') {
+        lightbox.option({
+          'resizeDuration': 200,
+          'wrapAround': true,
+          'fitImagesInViewport': true
+        });
+      } else {
+        console.error('Lightbox is not defined');
+      }
+    }
+  });
+</script>

@@ -6,6 +6,16 @@
 @import "passwords";
 @import "patients_index";
 @import "patients_new";
+@import "patients_show";
+@import "patients_edit";
+@import "patients_search";
+
+/*
+ *= require lightbox2/dist/css/lightbox
+ *= require_tree .
+ *= require_self
+ *= require fullcalendar
+ */
 
 /* app/assets/stylesheets/application.css */
   
@@ -93,11 +103,8 @@
   background-color: #0056b3;
 }
 
-@font-face {
-  font-family: 'DentCode2';
-  src: url('/assets/fonts/DentCode2_TRIAL.otf') format('opentype');
-}
+
 
 .tooth-diagram-font {
-  font-family: 'DentCode2', sans-serif;
+  font-size: 0.7rem;
 }
