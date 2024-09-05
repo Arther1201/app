@@ -1,78 +1,82 @@
-  .search-form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* 中央揃え */
-    margin-right: 12rem;
-  }
-  
-  .search-form {
-    width: 100%; /* フォームがコンテナの幅いっぱいに広がるように */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .search-form-group {
-    margin-bottom: 15px;
-    position: relative;
-    width: 100%; /* 入力欄がコンテナの幅いっぱいに広がるように */
-  }
-  
-  .search-form-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .search-form-input-container {
-    position: relative;
-  }
-  
-  .search-form-input {
-    width: 50%;
-    padding: 10px;
-    padding-right: 30px; /* アイコンの幅分 */
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    box-sizing: border-box;
-  }
-  
-  .search-icon {
-    position: absolute;
-    right: 290px; /* アイコンの位置 */
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #888;
-  }
-  
-  .search-form-submit {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-left: 6rem;
-  }    
+.search-background {
+  background-image: url('search_image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex; /* Flexboxを使用して中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  align-items: center; /* 垂直方向の中央揃え */
+  margin: 0;
+}
 
-  h4 {
-    font-size: 35px;
-    margin-bottom: 2rem;
-    margin-top: 90px;
-    margin-right: 18rem;
-    color: #022449;
-  }
-  
-  .search-background {
-    background-image: url('search_image.jpg');
-    background-size: cover; /* 画像を画面全体にフィットさせる */
-    background-position: center; /* 画像を中央に配置 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
-    height: 100vh; /* 画面全体の高さを確保 */
-    margin: 0;
+.search-form-container {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* フォーム全体を中央揃え */
+}
 
-  }
+.search-form {
+  width: 100%; /* フォームがコンテナの幅いっぱいに広がるように */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.search-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.search-form-input-container {
+  position: relative;
+  width: 100%; /* コンテナの幅に合わせる */
+}
+
+.search-form-input {
+  width: 16rem;
+  padding: 10px;
+  padding-right: 30px; /* アイコンの幅分 */
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px; /* アイコンを右端に揃える */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #888;
+}
+
+.search-form-submit {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  align-self: flex-end; /* ボタンを右に寄せる */
+}
+
+h4 {
+  font-size: 35px;
+  margin-bottom: 2rem;
+  color: #0b4584;
+  text-align: center;
+  width: 100%;
+}
