@@ -60,20 +60,10 @@
     margin-left: 6rem;
   }    
 
-  h4 {
-    font-size: 35px;
-    margin-bottom: 2rem;
-    margin-top: 90px;
-    margin-right: 18rem;
-    color: #022449;
-  }
-  
-  .search-background {
-    background-image: url('search_image.jpg');
-    background-size: cover; /* 画像を画面全体にフィットさせる */
-    background-position: center; /* 画像を中央に配置 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
-    height: 100vh; /* 画面全体の高さを確保 */
-    margin: 0;
-
-  }
+h4 {
+  font-size: 35px;
+  margin-bottom: 2rem;
+  color: #0b4584;
+  text-align: center;
+  width: 100%;
+}
