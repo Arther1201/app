@@ -16,7 +16,7 @@
 }
 
 .form-control, .btn {
-    width: 16rem; /* 全ての入力フィールドとボタンの幅を16remに設定 */
+    width: 100%; /* 全ての入力フィールドとボタンの幅を16remに設定 */
     padding: 0.8rem 1.2rem; /* パディングを調整 */
     border-radius: 4px; /* 角を丸くする */
     border: 1px solid #ccc; /* 境界線を設定 */
@@ -25,7 +25,7 @@
 }
 
 .form-group, .field {
-    width: 16rem; /* コンテナの幅に合わせる */
+    width: 100%; /* コンテナの幅に合わせる */
     flex-direction: column; /* 要素を縦に積み重ねる */
     margin-bottom: auto;
 }

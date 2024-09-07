@@ -38,7 +38,7 @@
 }
 
 .login-container .form-control, .login-container .btn {
-    width: 16rem; /* 全幅を指定 */
+    width: 100%; /* 全幅を指定 */
     padding: 12px 20px; /* パディングを適用 */
     border-radius: 4px; /* 角を丸くする */
     border: 1px solid #ccc; /* 境界線を設定 */
@@ -46,12 +46,12 @@
 }
 
 .login-container .form-group {
-    width: 16rem; /* 幅を親要素に合わせる */
+    width: 100%; /* 幅を親要素に合わせる */
     margin-bottom: 1rem; /* 各フォームグループの間隔 */
 }
 
 .login-container .actions {
-    width: 16rem; /* 幅を親要素に合わせる */
+    width: 100%; /* 幅を親要素に合わせる */
     display: flex; /* Flexbox を有効化 */
     justify-content: center; /* 子要素を中央に配置 */
 }
