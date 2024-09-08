@@ -21,7 +21,7 @@
     <div class="navbar-end">
       <% if logged_in? %>
         <!-- ログインしているユーザーの部署名を表示 -->
-        <% if current_user.department %>
+        <% if current_user.department.present? %>
           <span class="navbar-item">部署: <%= current_user.department.name %></span>
         <% end %>
         <%= link_to "ログアウト", logout_path, method: :delete, data: { turbo: false }, class: "navbar-item" %>
