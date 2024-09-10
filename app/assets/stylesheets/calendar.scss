@@ -4,6 +4,7 @@
     margin: 0 auto;
     padding-bottom: 60px;
     height: calc(100vh - 100px);
+    overflow-y: auto;
   }
   
   body {
@@ -17,8 +18,15 @@
   .fc-daygrid-day-number {
     color: black; /* 日付の文字色を黒に設定 */
   }
-  
+
   .fc-daygrid-day {
     background-color: white; /* 日付セルの背景色を白に設定 */
+  }
+
+  h7 {
+    margin-top: 7rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
   }
   

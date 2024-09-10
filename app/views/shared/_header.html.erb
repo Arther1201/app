@@ -22,12 +22,12 @@
       <% if logged_in? %>
         <!-- ログインしているユーザーの部署名を表示 -->
         <% if current_user && current_user.department %>
-          <span class="navbar-item">部署: <%= current_user.department.name %></span>
+          <span class="navbar-item department">部署: <span class="department-name"><%= current_user.department.name %></span></span>
         <% end %>
-        <%= link_to "ログアウト", logout_path, method: :delete, data: { turbo: false }, class: "navbar-item" %>
+        <%= button_to "ログアウト", logout_path, method: :delete, data: { turbo: false }, class: "navbar-item logout-button" %>
       <% else %>
-        <%= link_to "ログイン", login_path, class: "navbar-item" %>
-        <%= link_to "新規登録", signup_path, class: "navbar-item" %>
+        <%= link_to "ログイン", login_path, class: "navbar-item login-button" %>
+        <%= link_to "新規登録", signup_path, class: "navbar-item signup-button" %>
       <% end %>
     </div>
   </div>

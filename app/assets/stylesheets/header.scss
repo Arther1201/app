@@ -1,12 +1,11 @@
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box; /* 全要素のボックスサイズ設定 */
 }
 
 .header {
   background-color: #033465; /* 任意の背景色を指定 */
-  padding: 1.5rem;
+  padding: 1rem;
   position: fixed; /* ヘッダーを固定する */
   top: 0;
   left: 0; /* 左端から開始 */
@@ -25,18 +24,32 @@ nav {
 }
 
 .navbar-end {
+  display: flex;
+  align-items: center;
   margin-left: auto; /* 左側の余白を自動で調整して右寄せに */
 }
 
-.navbar-item, a {
-  color: #ffffff; /* リンクとボタンの色を白に指定 */
-  text-decoration: none;
-  padding: 0.5rem; /* パディングを適用 */
+.department {
+  display: inline-flex; /* 横並びにする */
+  align-items: center;
+}
+
+.department-name {
+  display: inline;
+}
+
+.navbar-item {
+  display: inline; /* インライン要素として表示 */
+  margin-left: 1rem; /* 横並びの間に余白を追加 */
+  background-color: #033465; /* ヘッダーと同じ背景色を指定 */
+  color: #ffffff; /* テキスト色を白に指定 */
+  padding: 0.3rem 2rem; /* パディングを設定 */
+  border: none; /* ボタンの境界線をなくす */
   font: inherit; /* フォントを継承 */
   cursor: pointer; /* カーソルをポインターに */
 }
 
-.navbar-item:hover, a:hover {
+.navbar-item:hover {
   text-decoration: underline; /* ホバー時に下線を表示 */
 }
 
@@ -46,4 +59,9 @@ nav {
   align-items: center;
   width: 100%; /* コンテナが全幅を取るように設定 */
 }
+
+.logout-button {
+  padding: 0.2rem 1rem;
+}
+
 
