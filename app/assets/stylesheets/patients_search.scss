@@ -74,9 +74,12 @@
 }
 
 h4 {
-  font-size: 35px;
-  margin-bottom: 2rem;
-  color: #022449;
   text-align: center;
-  width: 100%;
+  font-size: 3rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+  letter-spacing: 0.15em; /* 文字の間隔を広げる */
+  text-transform: uppercase; /* すべて大文字にする */
+  font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+  margin-bottom: 1rem;
 }

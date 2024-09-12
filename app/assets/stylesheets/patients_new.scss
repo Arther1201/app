@@ -17,12 +17,6 @@
   legend {
     padding: 0 10px;
   }
-  
-  h2 {
-    text-align: center;
-    margin-top: 100px;
-    margin-bottom: 20px; /* タイトルとフォームの間に余白を追加 */
-  }
 
   .form-scroll-container {
     max-width: 600px; /* コンテナの最大幅を設定 */
@@ -220,8 +214,15 @@ textarea {
   }
 
   h2 {
-    color:#101010;
-    font-size: 2rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    margin-top: 4rem;
+    margin-bottom: 3rem;
   }
 
   .patient_new-background {

@@ -1,69 +1,73 @@
 <div class="patient-list">
   <h1>患者一覧</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>印象日</th>
-        <th class="check-column">チェック</th>
-        <th>カルテ番号</th>
-        <th>氏名</th>
-        <th>補綴種類</th>
-        <th>補綴部位</th>
-        <th>メタルの種類</th>
-        <th>メタル量</th>
-        <th>依頼先</th>
-        <th>セット/試適</th>
-        <th>セット日</th>
-        <th class="delivery-column">納品チェック</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @patients.each do |patient| %>
+  <p class="patient-list-english">Patient List</p>
+
+  <!-- 患者データの表示部分 -->
+  <div id="patient-table-container">
+    <table>
+      <thead>
         <tr>
-          <td><%= patient.impression_date %></td>
-          <td class="check-column">
-            <%= form_with(url: update_note_checked_patient_path(patient), method: :patch, id: "note-checked-form-#{patient.id}", local: false) do |form| %>
-              <%= form.check_box :note_checked, checked: patient.note_checked, class: "note-checked-checkbox" %>
-            <% end %>
-          </td>
-          <td><%= patient.medical_record_number %></td>
-          <td><%= patient.name %></td>
-          <td>
-            <%= patient.prosthesis_type_insurance %>
-            <%= patient.prosthesis_type_crown %>
-            <%= patient.prosthesis_type_denture %>
-          </td>
-          <td class="tooth-diagram-font">
-            <%= convert_to_dental_notation(
-              upper_left: patient.upper_left, 
-              upper_right: patient.upper_right, 
-              lower_left: patient.lower_left, 
-              lower_right: patient.lower_right
-            ) if patient.upper_left.present? || patient.upper_right.present? || patient.lower_left.present? || patient.lower_right.present? %>
-          </td>
-          </td>
-          <td><%= patient.metal_type %></td>
-          <td>
-            <%= form_with(model: patient, local: true, url: update_metal_amount_patient_path(patient), method: :patch) do |form| %>
-              <%= form.text_field :metal_amount, value: patient.metal_amount, class: "metal-amount-field" %>
-              <span style="margin-left: 5px;">g</span>
-            <% end %>
-          </td>
-          <td><%= patient.requester %></td>
-          <td><%= patient.trial_or_set %></td>
-          <td><%= patient.set_date %></td>
-          <td class="delivery-column">
-            <%= form_with(url: update_delivery_checked_patient_path(patient), method: :patch, id: "delivery-checked-form-#{patient.id}", local: false) do |form| %>
-              <%= form.check_box :delivery_checked, checked: patient.delivery_checked, class: "delivery-checked-checkbox" %>
-            <% end %>
-          </td>
-          <td><%= link_to '詳細', patient_path(patient), class: 'btn btn-info' %></td>
+          <th>印象日</th>
+          <th class="check-column">チェック</th>
+          <th>カルテ番号</th>
+          <th>氏名</th>
+          <th>補綴種類</th>
+          <th>補綴部位</th>
+          <th>メタルの種類</th>
+          <th>メタル量</th>
+          <th>依頼先</th>
+          <th>セット/試適</th>
+          <th>セット日</th>
+          <th class="delivery-column">納品チェック</th>
+          <th>操作</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @patients %>
+      </thead>
+      <tbody>
+        <% @patients.each do |patient| %>
+          <tr>
+            <td><%= patient.impression_date %></td>
+            <td class="check-column">
+              <%= form_with(url: update_note_checked_patient_path(patient), method: :patch, id: "note-checked-form-#{patient.id}", local: false) do |form| %>
+                <%= form.check_box :note_checked, checked: patient.note_checked, class: "note-checked-checkbox" %>
+              <% end %>
+            </td>
+            <td><%= patient.medical_record_number %></td>
+            <td><%= patient.name %></td>
+            <td>
+              <%= patient.prosthesis_type_insurance %>
+              <%= patient.prosthesis_type_crown %>
+              <%= patient.prosthesis_type_denture %>
+            </td>
+            <td class="tooth-diagram-font">
+              <%= convert_to_dental_notation(
+                upper_left: patient.upper_left, 
+                upper_right: patient.upper_right, 
+                lower_left: patient.lower_left, 
+                lower_right: patient.lower_right
+              ) if patient.upper_left.present? || patient.upper_right.present? || patient.lower_left.present? || patient.lower_right.present? %>
+            </td>
+            <td><%= patient.metal_type %></td>
+            <td>
+              <%= form_with(model: patient, local: true, url: update_metal_amount_patient_path(patient), method: :patch) do |form| %>
+                <%= form.text_field :metal_amount, value: patient.metal_amount, class: "metal-amount-field" %>
+                <span style="margin-left: 5px;">g</span>
+              <% end %>
+            </td>
+            <td><%= patient.requester %></td>
+            <td><%= patient.trial_or_set %></td>
+            <td><%= patient.set_date %></td>
+            <td class="delivery-column">
+              <%= form_with(url: update_delivery_checked_patient_path(patient), method: :patch, id: "delivery-checked-form-#{patient.id}", local: false) do |form| %>
+                <%= form.check_box :delivery_checked, checked: patient.delivery_checked, class: "delivery-checked-checkbox" %>
+              <% end %>
+            </td>
+            <td><%= link_to '詳細', patient_path(patient), class: 'btn btn-info' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @patients %>
+  </div>
 </div>
 
 <script>

@@ -3,6 +3,8 @@
     <div class="navbar-brand">
       <% if params[:from] == 'calendar' %> <!-- カレンダーから来た場合 -->
         <%= link_to '戻る', calendar_patients_path, class: "navbar-item" %>
+      <% elsif params[:from] == 'search' %> <!-- 検索結果から来た場合 -->
+        <%= link_to '戻る', search_patients_path, class: "navbar-item" %>
       <% elsif defined?(@patient) && @patient.try(:persisted?) && current_page?(edit_patient_path(@patient)) %>
         <%= link_to '戻る', patient_path(@patient), class: "navbar-item" %>
       <% elsif current_page?(new_patient_path) || (defined?(@patient) && @patient.try(:persisted?) && current_page?(patient_path(@patient))) %>

@@ -3,8 +3,7 @@ class PatientsController < ApplicationController
   before_action :set_patient, only: [:update_note_checked, :update_delivery_checked]
   
   def index
-    @patients = Patient.all
-    @patients = Patient.page(params[:page]).per(20)
+    @patients = Patient.order(impression_date: :asc).page(params[:page]).per(20)
   end
 
   def show
