@@ -14,4 +14,4 @@ pin "jquery", to: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.mi
 pin "lightbox2", to: "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"
 pin "fullcalendar", to: "https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"
 pin "fullcalendar-scheduler", to: "https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.15/index.global.min.js"
-pin "check_boxes", to: "check_boxes.js"
+pin "check_boxes", to: "check_boxes.js", preload: true
