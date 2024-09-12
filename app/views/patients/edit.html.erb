@@ -5,17 +5,17 @@
     <h3>患者情報の編集</h3>
     <%= form_with(model: @patient, local: true) do |form| %>
 
-      <div>
+      <div class="form-group">
         <%= form.label :impression_date, "印象日" %>
         <%= form.date_field :impression_date, class: "general-input" %>
       </div>
 
-      <div>
+      <div class="form-group">
         <%= form.label :medical_record_number, "カルテ番号" %>
         <%= form.text_field :medical_record_number, class: "general-input" %>
       </div>
 
-      <div>
+      <div class="form-group">
         <%= form.label :name, "氏名" %>
         <%= form.text_field :name, class: "general-input" %>
       </div>
@@ -41,7 +41,7 @@
       </div>
 
       <div>
-        <label>補綴部位</label>
+        <span class="label-text">補綴部位</span>
         <button type="button" id="select-upper-jaw">上顎フル</button>
         <button type="button" id="select-lower-jaw">下顎フル</button>
       </div>
@@ -107,17 +107,17 @@
         <%= form.select :trial_or_set, options_for_select([["SET", "SET"], ["TF", "TF"], ["再TF", "再TF"]], @patient.trial_or_set), include_blank: "選択してください" %>
       </div>
 
-      <div>
+      <div class="form-group">
         <%= form.label :set_date, "セット日" %>
         <%= form.date_field :set_date, class: "general-input" %>
       </div>
 
-      <div>
+      <div class="form-group">
         <%= form.label :memo, "メモ" %>
         <%= form.text_area :memo, rows: 3, placeholder: "メモを入力してください" %>
       </div>
 
-      <div>
+      <div class="form-group">
         <%= form.label :medicine_notebook, "お薬" %>
         <%= form.text_area :medicine_notebook,rows: 3, placeholder: "お薬に関する情報を入力してください" %>
       </div>
@@ -135,7 +135,7 @@
         </div>
       <% end %>
       
-      <div>
+      <div class="form-group">
         <%= form.label :images, "画像", for: "patient_images" %>
         <%= form.file_field :images, multiple: true, accept: "image/*", id: "patient_images" %>
       </div>

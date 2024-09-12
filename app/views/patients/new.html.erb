@@ -8,17 +8,17 @@
         <fieldset>
           <legend>患者情報</legend>
       
-          <div>
+          <div class="form-group">
             <%= form.label :impression_date, "印象日" %>
             <%= form.date_field :impression_date, class: "general-input" %>
           </div>
       
-          <div>
+          <div class="form-group">
             <%= form.label :medical_record_number, "カルテ番号" %>
             <%= form.text_field :medical_record_number, class: "general-input", placeholder: "12345" %>
           </div>
       
-          <div>
+          <div class="form-group">
             <%= form.label :name, "氏名" %>
             <%= form.text_field :name, class: "general-input", placeholder: "吉良 太郎" %>
           </div>
@@ -44,7 +44,7 @@
           </div>
 
           <div>
-            <label>補綴部位</label>
+            <span class="label-text">補綴部位</span>
             <button type="button" id="select-upper-jaw">上顎フル</button>
             <button type="button" id="select-lower-jaw">下顎フル</button>
           </div>
@@ -106,22 +106,22 @@
             <%= form.select :trial_or_set, options_for_select([["SET", "SET"], ["TF", "TF"], ["再TF", "再TF"]]), include_blank: "選択してください" %>
           </div>
       
-          <div>
+          <div class="form-group">
             <%= form.label :set_date, "セット日" %>
             <%= form.date_field :set_date, class: "general-input" %>
           </div>
 
-          <div>
+          <div class="form-group">
             <%= form.label :memo, "メモ" %>
             <%= form.text_area :memo, rows: 3, placeholder: "メモを入力してください" %>
           </div>
     
-          <div>
+          <div class="form-group">
             <%= form.label :medicine_notebook, "お薬" %>
             <%= form.text_area :medicine_notebook,rows: 3, placeholder: "お薬に関する情報を入力してください" %>
           </div>
     
-          <div>
+          <div class="form-group">
             <%= form.label :image, "画像", for: "patient_images" %>
             <%= form.file_field :images, multiple: true, accept: "image/*", id: "patient_images" %>
           </div>
