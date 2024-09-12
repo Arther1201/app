@@ -4,7 +4,7 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import Rails from '@rails/ujs';
 Rails.start();
-import "./check_boxes";  // check_boxes.js をインポート
+
 
 
 document.addEventListener("turbo:load", function() {  
@@ -24,7 +24,7 @@ document.addEventListener("turbo:load", function() {
         });
     }
 
-    const prosthesisTypeInsuranceSelect = document.getElementById("patient_prosthesis_type_insurance");
+  const prosthesisTypeInsuranceSelect = document.getElementById("patient_prosthesis_type_insurance");
   const prosthesisTypeCrownSelect = document.getElementById("patient_prosthesis_type_crown");
   const prosthesisTypeDentureSelect = document.getElementById("patient_prosthesis_type_denture");
   const metalTypeSelect = document.getElementById("patient_metal_type");
