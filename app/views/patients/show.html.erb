@@ -112,17 +112,55 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    if (document.querySelector('[data-lightbox]')) {  // data-lightbox属性が存在するか確認
-      if (typeof lightbox !== 'undefined') {
+document.addEventListener("DOMContentLoaded", function() {
+  // Lightbox の設定
+  const lightboxElements = document.querySelectorAll('[data-lightbox]');
+  
+  if (lightboxElements.length > 0) {
+    if (typeof lightbox !== 'undefined') {
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'fitImagesInViewport': true
+      });
+    } else {
+      document.addEventListener('lightbox:loaded', function() {
         lightbox.option({
           'resizeDuration': 200,
           'wrapAround': true,
           'fitImagesInViewport': true
         });
-      } else {
-        console.error('Lightbox is not defined');
-      }
+      });
+    }
+  }
+
+  // チェックボックスの監視とフォーム送信
+  document.body.addEventListener('change', function(event) {
+    if (event.target.matches('.check-column input[type="checkbox"], .delivery-column input[type="checkbox"]')) {
+      event.preventDefault();
+      const checkbox = event.target;
+      const form = checkbox.closest('form');
+      const formData = new FormData(form);
+      const url = form.action;
+
+      fetch(url, {
+        method: 'PATCH',
+        body: formData,
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // 成功した場合に何か処理が必要ならここに記述
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
   });
+});
 </script>

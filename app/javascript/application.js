@@ -5,8 +5,6 @@ import "controllers";
 import Rails from '@rails/ujs';
 Rails.start();
 
-
-
 document.addEventListener("turbo:load", function() {  
     const sidebarToggle = document.getElementById("sidebar-toggle");
     const sidebarClose = document.getElementById("sidebar-close");
