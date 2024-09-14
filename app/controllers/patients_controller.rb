@@ -96,7 +96,7 @@ class PatientsController < ApplicationController
   end
 
   def search
-    @patients = Patient.all
+    @patients = Patient.order(impression_date: :asc).page(params[:page]).per(20)
 
     if params[:name].present?
       @patients = @patients.where('name LIKE ?', "%#{params[:name]}%")

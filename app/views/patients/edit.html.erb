@@ -49,17 +49,19 @@
         <div class="tooth-diagram">
           <!-- 上顎 -->
           <div class="row upper-jaw">
-            <div class="tooth-group upper-left">
+            <div class="tooth-group upper-right">
               <% (8).downto(1) do |i| %>
-                <label for="upper_left_<%= i %>">
-                  <input type="checkbox" id="upper_left_<%= i %>" name="patient[upper_left][]" value="upper_left_<%= i %>" <%= 'checked' if @patient.upper_left.include?("upper_left_#{i}") %>> <%= i %>
+                <label for="upper_right_<%= i %>">
+                  <%= hidden_field_tag "patient[upper_right][]", "" %>
+                  <input type="checkbox" id="upper_right_<%= i %>" name="patient[upper_right][]" value="upper_right_<%= i %>" <%= 'checked' if @patient.upper_right.include?("upper_right_#{i}") %>> <%= i %>
                 </label>
               <% end %>
             </div>
-            <div class="tooth-group upper-right">
+            <div class="tooth-group upper-left">
               <% (1..8).each do |i| %>
-                <label for="upper_right_<%= i %>">
-                  <input type="checkbox" id="upper_right_<%= i %>" name="patient[upper_right][]" value="upper_right_<%= i %>" <%= 'checked' if @patient.upper_right.include?("upper_right_#{i}") %>> <%= i %>
+                <label for="upper_left_<%= i %>">
+                  <%= hidden_field_tag "patient[upper_left][]", "" %>
+                  <input type="checkbox" id="upper_left_<%= i %>" name="patient[upper_left][]" value="upper_left_<%= i %>" <%= 'checked' if @patient.upper_left.include?("upper_left_#{i}") %>> <%= i %>
                 </label>
               <% end %>
             </div>
@@ -70,17 +72,19 @@
 
           <!-- 下顎 -->
           <div class="row lower-jaw">
-            <div class="tooth-group lower-left">
+            <div class="tooth-group lower-right">
               <% (8).downto(1) do |i| %>
-                <label for="lower_left_<%= i %>">
-                  <input type="checkbox" id="lower_left_<%= i %>" name="patient[lower_left][]" value="lower_left_<%= i %>" <%= 'checked' if @patient.lower_left.include?("lower_left_#{i}") %>> <%= i %>
+                <label for="lower_right_<%= i %>">
+                  <%= hidden_field_tag "patient[lower_right][]", "" %>
+                  <input type="checkbox" id="lower_right_<%= i %>" name="patient[lower_right][]" value="lower_right_<%= i %>" <%= 'checked' if @patient.lower_right.include?("lower_right_#{i}") %>> <%= i %>
                 </label>
               <% end %>
             </div>
-            <div class="tooth-group lower-right">
+            <div class="tooth-group lower-left">
               <% (1..8).each do |i| %>
-                <label for="lower_right_<%= i %>">
-                  <input type="checkbox" id="lower_right_<%= i %>" name="patient[lower_right][]" value="lower_right_<%= i %>" <%= 'checked' if @patient.lower_right.include?("lower_right_#{i}") %>> <%= i %>
+                <label for="lower_left_<%= i %>">
+                  <%= hidden_field_tag "patient[lower_left][]", "" %>
+                  <input type="checkbox" id="lower_left_<%= i %>" name="patient[lower_left][]" value="lower_left_<%= i %>" <%= 'checked' if @patient.lower_left.include?("lower_left_#{i}") %>> <%= i %>
                 </label>
               <% end %>
             </div>
