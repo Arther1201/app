@@ -152,43 +152,48 @@
 </div>
 
 <script>
-    document.addEventListener("turbo:load", function() {
-      const selectUpperJawBtn = document.getElementById('select-upper-jaw');
-      const selectLowerJawBtn = document.getElementById('select-lower-jaw');
+  document.addEventListener("turbo:load", function() {
+    const selectUpperJawBtn = document.getElementById('select-upper-jaw');
+    const selectLowerJawBtn = document.getElementById('select-lower-jaw');
 
-      if (selectUpperJawBtn && selectLowerJawBtn) {
-        // 上顎フル選択・解除機能
-        selectUpperJawBtn.addEventListener('click', function() {
-          const upperLeftTeeth = document.querySelectorAll('[id^="upper_left_"]');
-          const upperRightTeeth = document.querySelectorAll('[id^="upper_right_"]');
+    if (selectUpperJawBtn && !selectUpperJawBtn.hasAttribute('data-listener')) {
+      selectUpperJawBtn.setAttribute('data-listener', 'true');
+    
+      // 上顎フル選択・解除機能
+      selectUpperJawBtn.addEventListener('click', function() {
+        const upperLeftTeeth = document.querySelectorAll('[id^="upper_left_"]');
+        const upperRightTeeth = document.querySelectorAll('[id^="upper_right_"]');
 
-          const allChecked = [...upperLeftTeeth, ...upperRightTeeth].every(checkbox => checkbox.checked);
+        const allChecked = [...upperLeftTeeth, ...upperRightTeeth].every(checkbox => checkbox.checked);
 
-          if (allChecked) {
-            upperLeftTeeth.forEach(checkbox => checkbox.checked = false);
-            upperRightTeeth.forEach(checkbox => checkbox.checked = false);
-          } else {
-            upperLeftTeeth.forEach(checkbox => checkbox.checked = true);
-            upperRightTeeth.forEach(checkbox => checkbox.checked = true);
-          }
-        });
+        if (allChecked) {
+          upperLeftTeeth.forEach(checkbox => checkbox.checked = false);
+          upperRightTeeth.forEach(checkbox => checkbox.checked = false);
+        } else {
+          upperLeftTeeth.forEach(checkbox => checkbox.checked = true);
+          upperRightTeeth.forEach(checkbox => checkbox.checked = true);
+        }
+      });
+    }
 
-        // 下顎フル選択・解除機能
-        selectLowerJawBtn.addEventListener('click', function() {
-          const lowerLeftTeeth = document.querySelectorAll('[id^="lower_left_"]');
-          const lowerRightTeeth = document.querySelectorAll('[id^="lower_right_"]');
+    if (selectLowerJawBtn && !selectLowerJawBtn.hasAttribute('data-listener')) {
+      selectLowerJawBtn.setAttribute('data-listener', 'true');
+    
+      // 下顎フル選択・解除機能
+      selectLowerJawBtn.addEventListener('click', function() {
+        const lowerLeftTeeth = document.querySelectorAll('[id^="lower_left_"]');
+        const lowerRightTeeth = document.querySelectorAll('[id^="lower_right_"]');
 
-          const allChecked = [...lowerLeftTeeth, ...lowerRightTeeth].every(checkbox => checkbox.checked);
-
-          if (allChecked) {
-            lowerLeftTeeth.forEach(checkbox => checkbox.checked = false);
-            lowerRightTeeth.forEach(checkbox => checkbox.checked = false);
-          } else {
-            lowerLeftTeeth.forEach(checkbox => checkbox.checked = true);
-            lowerRightTeeth.forEach(checkbox => checkbox.checked = true);
-          }
-        });
-      }
-    });
-  </script>
+        const allChecked = [...lowerLeftTeeth, ...lowerRightTeeth].every(checkbox => checkbox.checked);
+        if (allChecked) {
+          lowerLeftTeeth.forEach(checkbox => checkbox.checked = false);
+          lowerRightTeeth.forEach(checkbox => checkbox.checked = false);
+        } else {
+          lowerLeftTeeth.forEach(checkbox => checkbox.checked = true);
+          lowerRightTeeth.forEach(checkbox => checkbox.checked = true);
+        }
+      });
+    }
+  });
+</script>
   

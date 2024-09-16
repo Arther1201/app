@@ -60,7 +60,7 @@ class PatientsController < ApplicationController
   def destroy
     @patient = Patient.find(params[:id])
     @patient.destroy
-    redirect_to patients_path, notice: '患者データが削除されました。'
+    redirect_to patients_path, alert: '患者データが削除されました。'
   end
 
   def update_note_checked

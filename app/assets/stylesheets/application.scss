@@ -103,8 +103,53 @@
   background-color: #0056b3;
 }
 
-
-
 .tooth-diagram-font {
   font-size: 0.7rem;
+}
+
+main {
+  .flash-window {
+    height: 50px;
+    padding: 10px;
+    color: white;
+    background: black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s 0s ease;
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 300px;
+
+    p {
+      color: white;
+
+      span {
+        margin-left: 1vw;
+        color: white;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    &.hidden {
+      opacity: 0;
+      bottom: -50px;
+    }
+
+     /* notice (緑色) のスタイル */
+     &.flash-notice {
+      background-color: #16b83c; /* 緑色 */
+    }
+
+    /* alert (赤色) のスタイル */
+    &.flash-alert {
+      background-color: #dc3545; /* 赤色 */
+    }
+  }
 }

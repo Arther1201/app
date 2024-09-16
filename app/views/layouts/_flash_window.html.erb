@@ -1,0 +1,29 @@
+<% if flash[:notice] || flash[:alert] %>
+  <div class="flash-window <%= flash[:notice] ? 'flash-notice' : 'flash-alert' %> hidden">
+    <% if flash[:notice] %>
+      <p><%= flash[:notice] %><span class="flash-window--delete">X</span></p>
+    <% end %>
+    <% if flash[:alert] %>
+      <p><%= flash[:alert] %><span class="flash-window--delete">X</span></p>
+    <% end %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const flashWindow = document.getElementsByClassName("flash-window")[0];
+    if (flashWindow && !flashWindow.hasAttribute('data-listener')) {
+      flashWindow.setAttribute('data-listener', 'true');
+      flashWindowToggle();
+      setTimeout(flashWindowToggle, 2000); // 3秒後にフラッシュメッセージを自動で非表示にする
+      const deleteButton = document.getElementsByClassName("flash-window--delete")[0];
+      if (deleteButton) {
+        deleteButton.addEventListener('click', flashWindowToggle); // バツボタンがクリックされた時の処理
+      }
+    }
+  
+    function flashWindowToggle() {
+      flashWindow.classList.toggle("hidden");
+    }
+  });
+</script>

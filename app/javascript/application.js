@@ -34,6 +34,8 @@ document.addEventListener("turbo:load", function() {
       metalTypeSelect.value = "Au";
     } else if (prosthesisType === "コア(Ag)") {
       metalTypeSelect.value = "Ag";
+    } else if (prosthesisType === "金属床") {
+      metalTypeSelect.value = "Co-Cr";
     } else {
       metalTypeSelect.value = "";
     }

@@ -1,8 +1,8 @@
 #calendar {
-    width: 70rem;
+    width: 60rem;
     flex-grow: 1;
     margin: 0 auto;
-    padding-bottom: 60px;
+    padding-bottom: 90px;
     height: calc(100vh - 100px);
     overflow-y: auto;
   }
@@ -23,10 +23,8 @@
     background-color: white; /* 日付セルの背景色を白に設定 */
   }
 
-  h7 {
-    margin-top: 7rem;
-    margin-bottom: 1rem;
-    margin-left: 3rem;
+  h6 {
+    margin-top: 5rem;
     font-size: 3rem;
     font-weight: bold;
     text-align: center;

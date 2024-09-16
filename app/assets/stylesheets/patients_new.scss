@@ -226,12 +226,14 @@ textarea {
   }
 
   .patient_new-background {
-    background-image: url('patient_new_image.jpg');
+    background-color: #051137;
     background-size: cover; /* 画像を画面全体にフィットさせる */
-    background-position: center center; /* 画像を中央に配置 */
+    background-position: center; /* 画像を中央に配置 */
     background-repeat: no-repeat; /* 画像を繰り返さない */
     height: 100%; /* 画面全体の高さを確保 */
     margin: 0;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; 
   }
 
   .label-text {

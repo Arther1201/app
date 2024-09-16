@@ -17,6 +17,9 @@ th, td {
     padding: 10px;
     text-align: left;
     border: 2px solid #c6c4c4; /* 各セルを囲む枠線 */
+    font-size: 14px; /* 通常のフォントサイズ */
+    white-space: nowrap; /* 一行に表示 */
+    overflow: hidden; /* 溢れる部分を隠す */
 }
 
 th {
@@ -96,4 +99,3 @@ h1 {
     background-color: #007bff;
     border-color: #007bff;
   }
-

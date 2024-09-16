@@ -18,9 +18,19 @@
 
   <body data-turbolinks="false">
     <%= render 'shared/header' %>
-    
-    <%= yield %>
+
+    <main>
+      <div class="main">
+        <%= yield %>
+        <%= render partial: 'layouts/flash_window' %>
+      </div>
+    </main>
 
     <%= render 'shared/footer' %>
+
+    <% if flash[:notice] || flash[:alert] %>
+      <%= javascript_include_tag 'flash_window' %>
+    <% end %>
+
   </body>
 </html>
