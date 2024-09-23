@@ -13,6 +13,18 @@
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(calendar_patients_path) %> <!-- カレンダーから直接来た場合 -->
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif @chat_room && current_page?(chat_room_path(@chat_room)) %> <!-- 各チャットルームにいる場合 -->
+        <%= link_to 'チャットルーム選択に戻る', chat_rooms_path, class: "navbar-item" %>
+      <% elsif current_page?(chat_rooms_path) %> <!-- チャットルームにいる場合 -->
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(models_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(new_model_path) %> <!-- 患者模型作成ページにいる場合 -->
+        <%= link_to '戻る', models_path, class: "navbar-item" %>
+      <% elsif current_page?(prostheses_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(list_prostheses_path) %> 
+        <%= link_to '戻る', prostheses_path, class: "navbar-item" %>
       <% elsif request.fullpath.start_with?(patients_path) %>
         <!-- サイドバーボタンを表示 -->
         <button id="sidebar-toggle" aria-label="Toggle Sidebar" class="navbar-item">☰</button>
@@ -42,7 +54,10 @@
   <ul>
     <li><%= link_to '患者登録', new_patient_path %></li>
     <li><%= link_to '患者検索', search_form_patients_path %></li>
-    <li><a href="#">チャット</a></li>
+    <li><%= link_to 'チャット', chat_rooms_path %></li>
     <li><%= link_to 'セット日カレンダー', calendar_patients_path %></li>
+    <li><%= link_to '情報', prostheses_path %></li>
+    <li><%= link_to '集荷', '#' %></li>
+    <li><%= link_to '模型管理', models_path %></li>
   </ul>
 </div>

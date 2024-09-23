@@ -43,10 +43,6 @@
     border-radius: 4px;
   }
 
-  h1 {
-    margin-bottom: 3rem;
-  }
-
   .patient-detail {
     display: flex;
     flex-wrap: wrap; /* 複数行に対応するためにフレックスアイテムを折り返す */
@@ -85,5 +81,20 @@
     margin: 0 auto !important;
   }
   
-  
+  .patient_details {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400; /* フォントの太さを調整 */
+    margin-bottom: 20px; /* テーブルとの余白を追加 */
+    color: #555;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+    -webkit-background-clip: text;
+    color: transparent; /* 背景グラデーションで文字の色を表現 */
+    background-clip: text; /* WebKit以外のブラウザでは無効 */
+    margin-bottom: 3rem;
+  }
   

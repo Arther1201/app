@@ -1,0 +1,78 @@
+<%= stylesheet_link_tag 'prostheses_index', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="prostheses-container">
+  <h1 class="prostheses-title">歯科用語</h1>
+  <p class="prosheses-sub-title">Dental terminology</p>
+
+  <!-- 英語のアルファベットも追加 -->
+  <div class="alphabet-row">
+    <% ('A'..'Z').each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: "#{letter}行", letter: letter), class: "alphabet-btn" %>
+    <% end %>
+  </div>
+
+  <!-- あかさたなはまやらわ行ボタン式目次 -->
+  <div class="alphabet-group">
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">あ行</span>
+      <% ['あ', 'い', 'う', 'え', 'お'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'あ行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">か行</span>
+      <% ['か', 'き', 'く', 'け', 'こ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'か行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">さ行</span>
+      <% ['さ', 'し', 'す', 'せ', 'そ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'さ行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <!-- 以下も同様に「た行」「な行」「は行」などを追加していきます -->
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">た行</span>
+      <% ['た', 'ち', 'つ', 'て', 'と'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'た行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">な行</span>
+      <% ['な', 'に', 'ぬ', 'ね', 'の'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'な行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">は行</span>
+      <% ['は', 'ひ', 'ふ', 'へ', 'ほ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'は行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">ま行</span>
+      <% ['ま', 'み', 'む', 'め', 'も'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'ま行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">や行</span>
+      <% ['や', 'ゆ', 'よ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'や行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">ら行</span>
+      <% ['ら', 'り', 'る', 'れ', 'ろ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'ら行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+    <div class="alphabet-row">
+      <span class="alphabet-group-title">わ行</span>
+      <% ['わ', 'を', 'ん'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'わ行', letter: letter), class: "alphabet-btn" %>
+      <% end %>
+    </div>
+</div>
+

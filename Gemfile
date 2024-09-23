@@ -48,6 +48,13 @@ gem 'fullcalendar-rails'
 gem 'jquery-rails'
 
 gem 'momentjs-rails'
+
+gem 'nkf'
+
+gem 'kana'
+
+gem 'mojinizer'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

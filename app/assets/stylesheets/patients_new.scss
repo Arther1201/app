@@ -45,18 +45,7 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
-input[type="date"],
-textarea {
-  width: 16rem; /* 横幅を100%に設定して親要素の幅に合わせる */
-  padding: 10px; /* 内側の余白を追加して入力欄を広げる */
-  font-size: 1.2em; /* 文字サイズを大きくする */
-  border: 1px solid #ccc; /* 境界線を少し目立たせる */
-  border-radius: 4px; /* 角を少し丸くする */
-  box-sizing: border-box; /* パディングとボーダーを含めた幅で計算 */
-  margin-bottom: 10px; /* 各入力欄の下に余白を追加 */
-}
-  
+
   form {
     width: 100%; /* フォームをコンテナに収める */
   }
@@ -65,7 +54,6 @@ textarea {
     margin-bottom: 15px; /* フォームの各フィールド間に余白を追加 */
   }
   
-  form input[type="date"],
   form textarea {
     width: 16rem;
     padding: 8px;
@@ -222,7 +210,7 @@ textarea {
     text-transform: uppercase; /* すべて大文字にする */
     font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
     margin-top: 4rem;
-    margin-bottom: 3rem;
+
   }
 
   .patient_new-background {
@@ -239,4 +227,20 @@ textarea {
   .label-text {
     font-size: 1rem;
     font-weight: bold;
+  }
+
+  .patient_registration {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400; /* フォントの太さを調整 */
+    margin-bottom: 20px; /* テーブルとの余白を追加 */
+    color: #555;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+    -webkit-background-clip: text;
+    color: transparent; /* 背景グラデーションで文字の色を表現 */
+    background-clip: text; /* WebKit以外のブラウザでは無効 */
   }

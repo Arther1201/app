@@ -1,0 +1,179 @@
+.model-list {
+    padding-top: 100px;
+    justify-content: center; /* テーブル全体を中央に配置 */
+    justify-content: center; /* テーブル全体を中央に配置 */
+    overflow-y: auto; /* 縦方向にスクロール可能にする */
+    max-height: 90vh; /* ビューポートの高さの80%を最大高さとする */
+  }
+  
+  .model-list table {
+    width: 89rem;
+    border-collapse: collapse;
+    border: 1.4px solid #333; /* テーブル全体を囲む枠線 */
+    margin: 0 auto;
+  }
+  
+  .model-list th, .model-list td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .model-list th {
+    background-color: #f4f4f4;
+  }
+  
+  .storage-location-field {
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .model-list-english {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400; /* フォントの太さを調整 */
+    margin-bottom: 20px; /* テーブルとの余白を追加 */
+    color: #555;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+    -webkit-background-clip: text;
+    color: transparent; /* 背景グラデーションで文字の色を表現 */
+    background-clip: text; /* WebKit以外のブラウザでは無効 */
+  }
+
+  .create-model-button {
+    margin-left: 5rem;
+    margin-bottom: 2rem;
+    margin-top: -60px;
+  }
+
+  .btn-new_model {
+    padding: 7px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    top: -20px;
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: center; /* 全体を中央に配置 */
+    margin-top: 20px;
+  }
+  
+  .model-search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* フィールドとボタンを縦中央揃えに */
+    gap: 10px; /* 検索フィールドとボタンの間にスペースを追加 */
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 10px; /* 各入力フィールドの間にスペースを追加 */
+  }
+  
+  .submit-group {
+    display: flex;
+    flex-direction: column; /* 検索ボタンを縦に並べる */
+    justify-content: flex-start; /* ボタンが上に表示されるようにする */
+  }
+  
+  .model-search-input {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .search-form-submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .search-form-submit:hover {
+    background-color: #0056b3;
+  }
+
+  .model-back-button-container {
+    text-align: center; /* ボタンを中央に配置 */
+  }
+  
+  .model-back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .model-back-button:hover {
+    background-color: #0056b3;
+  }
+
+  .editable-field {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .btn-primary {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .operation-field {
+    text-align: center; /* ボタンを中央に配置 */
+  }
+  
+  .operation-buttons {
+    display: flex;
+    gap: 10px; /* 編集ボタンと削除ボタンの間にスペースを追加 */
+    justify-content: center;
+  }
+  
+  .edit-button, .btn-danger {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545; /* 削除ボタンの色を赤に */
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333; /* 削除ボタンのホバー時の色 */
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3; /* 編集ボタンのホバー時の色 */
+  }
+
+  .model-table-container {
+
+  }

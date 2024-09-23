@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag 'chat_rooms_index', media: 'all', 'data-turbo-track': 'reload' %>
+<div class="chat-room-background">
+  <div class="chat_department">ChatRoom 選択</div>
+
+  <ul class="chat-room-list">
+    <% @chat_rooms.each do |chat_room| %>
+      <% if chat_room.department.present? %>
+        <li class="chat_department_name">
+          <%= link_to "#{chat_room.department.name}", chat_room_path(chat_room), class: "chat-room-button" %>
+        </li>
+      <% else %>
+        <li>部署が存在しません</li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+

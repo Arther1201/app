@@ -1,28 +1,35 @@
-<% if flash[:notice] || flash[:alert] %>
-  <div class="flash-window <%= flash[:notice] ? 'flash-notice' : 'flash-alert' %> hidden">
-    <% if flash[:notice] %>
-      <p><%= flash[:notice] %><span class="flash-window--delete">X</span></p>
-    <% end %>
-    <% if flash[:alert] %>
-      <p><%= flash[:alert] %><span class="flash-window--delete">X</span></p>
-    <% end %>
+<% if flash[:notice] %>
+  <div class="flash-window flash-notice hidden" data-flash-type="notice">
+    <p><%= flash[:notice] %><span class="flash-window--delete">X</span></p>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="flash-window flash-alert hidden" data-flash-type="alert">
+    <p><%= flash[:alert] %><span class="flash-window--delete">X</span></p>
   </div>
 <% end %>
 
 <script>
   document.addEventListener("turbo:load", () => {
-    const flashWindow = document.getElementsByClassName("flash-window")[0];
-    if (flashWindow && !flashWindow.hasAttribute('data-listener')) {
-      flashWindow.setAttribute('data-listener', 'true');
-      flashWindowToggle();
-      setTimeout(flashWindowToggle, 2000); // 3秒後にフラッシュメッセージを自動で非表示にする
-      const deleteButton = document.getElementsByClassName("flash-window--delete")[0];
-      if (deleteButton) {
-        deleteButton.addEventListener('click', flashWindowToggle); // バツボタンがクリックされた時の処理
+    const flashWindows = document.querySelectorAll(".flash-window");
+    
+    flashWindows.forEach(flashWindow => {
+      if (!flashWindow.hasAttribute('data-listener')) {
+        flashWindow.setAttribute('data-listener', 'true');
+        toggleFlashWindow(flashWindow);
+        
+        // 3秒後にフラッシュメッセージを自動で非表示にする
+        setTimeout(() => toggleFlashWindow(flashWindow), 3000);
+        
+        const deleteButton = flashWindow.querySelector(".flash-window--delete");
+        if (deleteButton) {
+          deleteButton.addEventListener('click', () => toggleFlashWindow(flashWindow));
+        }
       }
-    }
+    });
   
-    function flashWindowToggle() {
+    function toggleFlashWindow(flashWindow) {
       flashWindow.classList.toggle("hidden");
     }
   });

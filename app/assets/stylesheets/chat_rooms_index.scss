@@ -1,0 +1,50 @@
+.chat_department {
+    font-size: 3rem; /* 必要に応じてサイズ調整 */
+    font-weight: bold;
+    margin-bottom: 7rem;
+    margin-top: 5rem;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #121111;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+}
+
+.chat_department_name {
+    text-align: center;
+    margin-bottom: 5rem;
+    font-size: 1.6rem;
+}
+
+.chat-room-background {
+  background-image: image-url('chat_top_image.jpg');
+  background-size: cover; /* 画像を全体にフィット */
+  background-position: center center; /* 画像を中央に配置 */
+  background-repeat: no-repeat; /* 画像を繰り返さない */
+  min-height: 100vh; /* 最低限の高さを画面全体に */
+  padding: 20px;
+  box-sizing: border-box; /* パディングを含めた幅を調整 */
+}
+
+.chat-room-list {
+    list-style-type: none; /* デフォルトのリストマーカー（・）を消す */
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* チャットルームのリンクをボタン風にする */
+.chat-room-button {
+    color: white; /* リンクの文字色を白に */
+    text-decoration: none;
+    padding: 2px 20px;
+    background-color: #007bff; /* ボタンの背景色 */
+    border: 2px solid #0056b3; /* ボーダーを追加 */
+    border-radius: 10px; /* ボタンを角丸にする */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    display: inline-block; /* リンクをブロック要素にしてボタンのようにする */
+}
+  
+  .chat-room-button:hover {
+    background-color: #0056b3; /* ホバー時の背景色 */
+    border-color: #003f7f; /* ホバー時のボーダー色 */
+  }

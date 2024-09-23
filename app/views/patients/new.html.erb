@@ -4,6 +4,7 @@
   <div class="form-container">
     <div class="form-scroll-container">
       <h2>患者登録</h2>
+      <p class="patient_registration">Patient Registration</p>
       <%= form_with(model: @patient, local: true) do |form| %>
         <fieldset>
           <legend>患者情報</legend>
@@ -30,7 +31,7 @@
 
           <div class="form-group">
             <%= form.label :prosthesis_type_insurance, "補綴種類(保険)", for: "patient_prosthesis_type_insurance" %>
-            <%= form.select :prosthesis_type_insurance, options_for_select([["コア(Ag)", "コア(Ag)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["In", "In"], ["FMC", "FMC"], ["Br", "Br"], ["前装冠", "前装冠"], ["前装Br", "前装Br"], ["CAD冠", "CAD冠"], ["CADIn", "CADIn"], ["マウスピース", "マウスピース"], ["スプリント", "スプリント"], ["矯正装置", "矯正装置"], ["義歯", "義歯"], ["CC", "CC"], ["WRC", "WRC"], ["OPアンカ", "OPアンカ"], ["キーパー", "キーパー"], ["コーピング", "コーピング"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_insurance" } %>
+            <%= form.select :prosthesis_type_insurance, options_for_select([["コア(Ag)", "コア(Ag)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["In", "In"], ["FMC", "FMC"], ["Br", "Br"], ["前装冠", "前装冠"], ["前装Br", "前装Br"], ["CAD冠", "CAD冠"], ["CADIn", "CADIn"], ["マウスピース", "マウスピース"], ["スプリント", "スプリント"], ["矯正装置", "矯正装置"], ["義歯", "義歯"], ["CC", "CC"], ["WRC", "WRC"], ["OPアンカ", "OPアンカ"], ["キーパー", "キーパー"], ["コーピング", "コーピング"], ["ロケーター", "ロケーター"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_insurance" } %>
           </div>
 
           <div class="form-group">

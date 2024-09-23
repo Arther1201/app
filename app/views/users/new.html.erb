@@ -5,16 +5,6 @@
     <h2 class="text-center">新規登録</h2>
 
     <%= form_with model: @user, local: true, url: users_path, data: { turbo: false } do |f| %>
-      <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %>が発生しました:</h2>
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
 
       <div class="form-group">
         <%= f.label :email %>

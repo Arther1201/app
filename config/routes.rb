@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'messages/create'
+  get 'chat_rooms/index'
   get 'patients/search_form', to: 'patients#search_form', as: 'search_form_patients'
   get 'patients/search', to: 'patients#search', as: 'search_patients'
   get 'patients/calendar', to: 'patients#calendar', as: 'calendar_patients'
@@ -11,6 +13,19 @@ Rails.application.routes.draw do
       patch :update_metal_amount
       patch :update_note_checked
       patch :update_delivery_checked
+    end
+  end
+  resources :models do
+    patch 'update_storage_location', on: :member
+  end
+  resources :chat_rooms, only: [:index, :show] do
+    resources :messages, only: [:create] do
+      post 'favorite', on: :member
+    end
+  end
+  resources :prostheses, only: [:index, :show] do
+    collection do
+      get 'list', to: 'prostheses#list'
     end
   end
   root 'home#index'

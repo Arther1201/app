@@ -1,0 +1,95 @@
+<%= stylesheet_link_tag 'chat_rooms_show', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="chat-container">
+  <!-- チャットメッセージエリア -->
+  <div class="messages-section">
+    <div class="custom-heading">ChatRoom <%= @chat_room.department.name %></div>
+
+    <div class="messages-container">
+      <div class="messages">
+        <% @messages.each do |message| %>
+          <% if message.user == current_user %> <!-- 自分のメッセージ -->
+            <div class="message-bubble my-message">
+              <p><%= message.content %></p>
+            </div>
+            <div class="message-meta my-meta">
+              <span class="message-timestamp my-timestamp"><small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small></span>
+              <div id="favorite-button-for-message-<%= message.id %>">
+                <% if current_user.favorited_messages.exists?(message.id) %>
+                  <%= button_to '★', favorite_chat_room_message_path(@chat_room, message), method: :post, class: "favorite-button-my", data: { turbo_method: :post } %>
+                <% else %>
+                  <%= button_to '☆', favorite_chat_room_message_path(@chat_room, message), method: :post, class: "favorite-button-my", data: { turbo_method: :post } %>
+                <% end %>
+              </div>
+            </div>
+          <% else %> <!-- 他のユーザーのメッセージ -->
+            <div class="message-bubble other-message">
+              <p><%= message.content %></p>
+            </div>
+            <div class="message-meta other-meta">
+              <span class="message-timestamp other-timestamp"><small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small></span>
+              <div id="favorite-button-for-message-<%= message.id %>">
+                <% if current_user.favorited_messages.exists?(message.id) %>
+                  <%= button_to '★', favorite_chat_room_message_path(@chat_room, message), method: :post, class: "favorite-button-other", data: { turbo_method: :post } %>
+                <% else %>
+                  <%= button_to '☆', favorite_chat_room_message_path(@chat_room, message), method: :post, class: "favorite-button-other", data: { turbo_method: :post } %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= form_with model: [@chat_room, Message.new], local: true, class: "chat-form" do |f| %>
+      <div class="chat_room-container">
+        <%= f.text_area :content, rows: 2, class: "message-input", placeholder: "メッセージを入力..." %>
+        <%= f.submit "送信", class: "btn btn-primary send-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- お気に入りメッセージ表示用サイドバー -->
+  <div class="favorite-section">
+    <button class="favorite-toggle-button">お気に入りを表示</button>
+    <div id="favorite-messages-list" class="favorite-messages-list" style="display: none;">
+      <h3>お気に入りメッセージ</h3>
+      <ul>
+        <% current_user.favorited_messages.where(chat_room: @chat_room).order(created_at: :asc).each do |message| %>
+          <li>
+            <div class="message-bubble">
+              <p><%= message.content %></p>
+              <p><small>部署: <%= message.user.department.name if message.chat_room.department.present? %></small></p>
+            </div>
+            <div class="message-meta">
+              <span class="message-timestamp"><small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small></span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    setTimeout(() => {
+      const favoriteButton = document.querySelector(".favorite-toggle-button");
+      const favoriteList = document.querySelector(".favorite-messages-list");
+
+      if (favoriteButton) {
+        favoriteButton.addEventListener("click", function() {
+          event.preventDefault(); 
+
+          if (favoriteList.style.display === "none") {
+            favoriteList.style.display = "block";
+            favoriteButton.textContent = "お気に入りを隠す";
+          } else {
+            favoriteList.style.display = "none";
+            favoriteButton.textContent = "お気に入りを表示";
+          }
+        });
+      }
+    }, 100); // 100ms 遅延
+  });
+</script>

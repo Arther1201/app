@@ -1,0 +1,125 @@
+<%= stylesheet_link_tag 'models_list', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="model-list">
+  <h1 class="model-screen">模型管理</h1>
+  <p class="model-list-english">Model Management</p>
+
+  <!-- 検索フォーム -->
+  <div class="search-form">
+    <%= form_with url: models_path, method: :get, local: true, class: "model-search-form" do |f| %>
+      <div class="input-group">
+        <%= f.text_field :search, placeholder: "氏名、カルテ番号で検索", value: params[:search], class: "model-search-input" %>
+        <%= f.date_field :impression_date, value: params[:impression_date], class: "model-search-input", placeholder: "印象日で検索" %>
+      </div>
+      <div class="submit-group">
+        <%= f.submit "検索", class: "search-form-submit" %>
+      </div>
+      <div class="model-back-button-container">
+        <%= link_to '模型一覧に戻る', models_path, class: 'model-back-button' %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 患者模型作成ボタン -->
+  <div class="create-model-button">
+    <%= link_to '患者模型作成', new_model_path, class: 'btn-new_model' %>
+  </div>
+
+  <!-- モデルデータの表示部分 -->
+  <div id="model-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>印象日</th>
+          <th>カルテ番号</th>
+          <th>氏名</th>
+          <th>保管場所</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @models.each do |model| %>
+          <tr>
+            <!-- 印象日 -->
+            <td>
+              <%= form_with(model: model, local: true, url: model_path(model), method: :patch, class: "edit-form") do |form| %>
+                <%= form.date_field :impression_date, value: model.impression_date, class: "editable-field", disabled: true, id: "impression-date-#{model.id}" %>
+              <% end %>
+            </td>
+
+            <!-- カルテ番号 -->
+            <td>
+              <%= form_with(model: model, local: true, url: model_path(model), method: :patch, class: "edit-form") do |form| %>
+                <%= form.text_field :medical_record_number, value: model.medical_record_number, class: "editable-field", disabled: true, id: "medical-record-#{model.id}" %>
+              <% end %>
+            </td>
+
+            <!-- 氏名 -->
+            <td>
+              <%= form_with(model: model, local: true, url: model_path(model), method: :patch, class: "edit-form") do |form| %>
+                <%= form.text_field :patient_name, value: model.patient_name, class: "editable-field", disabled: true, id: "patient-name-#{model.id}" %>
+              <% end %>
+            </td>
+
+            <!-- 保管場所のインライン編集 -->
+            <td>
+              <%= form_with(model: model, local: true, url: update_storage_location_model_path(model), method: :patch, class: "edit-form") do |form| %>
+                <%= form.select :storage_location, options_for_select([["1F棚", "1F棚"], ["2F", "2F"], ["技工室", "技工室"], ["院長室", "院長室"]], selected: model.storage_location), class: "storage-location-field", disabled: true, id: "storage-location-#{model.id}" %>
+              <% end %>
+            </td>
+
+            <!-- 操作フィールド -->
+            <td class="operation-field">
+              <div class="operation-buttons">
+                <!-- 編集ボタン -->
+                <button class="edit-button btn btn-primary" data-model-id="<%= model.id %>">編集</button>
+
+                <!-- 削除ボタン -->
+                <%= button_to '削除', model_path(model), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @models %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const editButtons = document.querySelectorAll(".edit-button");
+    const saveButtons = document.querySelectorAll(".save-button");
+
+    editButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const modelId = button.getAttribute("data-model-id");
+
+        // 現在のフィールドが編集モードか確認
+        const isEditing = !document.getElementById(`impression-date-${modelId}`).disabled;
+        const storageField = document.getElementById(`storage-location-${modelId}`);
+
+        if (isEditing) {
+          // 編集モードを終了する
+          document.getElementById(`impression-date-${modelId}`).disabled = true;
+          document.getElementById(`medical-record-${modelId}`).disabled = true;
+          document.getElementById(`patient-name-${modelId}`).disabled = true;
+        } else {
+          // 編集モードに切り替える
+          document.getElementById(`impression-date-${modelId}`).disabled = false;
+          document.getElementById(`medical-record-${modelId}`).disabled = false;
+          document.getElementById(`patient-name-${modelId}`).disabled = false;
+        }
+      });
+    });
+
+    saveButtons.forEach(button => {
+      button.addEventListener("click", function() {
+        const modelId = button.getAttribute("data-model-id");
+
+        // フォームを送信して保存
+        document.querySelector(`.edit-form[data-model-id="${modelId}"]`).submit();
+      });
+    });
+  });
+</script>

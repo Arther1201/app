@@ -1,0 +1,134 @@
+/* コンテナスタイル */
+.prostheses-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  
+  /* コンテナスタイル */
+.prostheses-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 30px;
+  }
+  
+  /* タイトル */
+  .prostheses-title {
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    margin-top: 5rem;
+  }
+  
+  /* あかさたなはまやらわ行とアルファベットのボタン配置 */
+  .alphabet-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .alphabet-row {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin-bottom: 2rem;
+    margin-left: 5rem;
+  }
+  
+  .alphabet-group-title {
+    margin-right: 10px;
+    font-size: 1.5rem;
+    color: #333;
+    width: 70px; /* 見やすくするために固定幅を追加 */
+  }
+  
+  .alphabet-btn {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .alphabet-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+  
+  /* リスト表示エリア */
+  .prosthesis-list-container {
+    margin-top: 20px;
+  }
+  
+  .prosthesis-list li {
+    list-style-type: none;
+    margin: 5px 0;
+  }
+  
+  .prosthesis-title {
+    font-size: 1.2rem;
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .prosthesis-title:hover {
+    color: #0056b3;
+  }
+  
+  /* 詳細表示エリア */
+  .prosthesis-details-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  #details-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  #details-description {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .prostheses_name {
+    margin-top: 8rem;
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .prosheses-sub-title {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400; /* フォントの太さを調整 */
+    margin-bottom: 20px; /* テーブルとの余白を追加 */
+    color: #555;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+    -webkit-background-clip: text;
+    color: transparent; /* 背景グラデーションで文字の色を表現 */
+    background-clip: text; /* WebKit以外のブラウザでは無効 */
+    margin-bottom: 3rem;
+  }

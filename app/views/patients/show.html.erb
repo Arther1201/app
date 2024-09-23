@@ -4,8 +4,8 @@
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js", crossorigin: "anonymous" %>
 
 <div class="patient-details-container">
-  <h1>患者詳細</h1>
-
+  <h1 class="patient_show">患者詳細</h1>
+  <p class="patient_details">Patient Details</p>
   <div class="patient-detail">
     <strong>印象日:</strong>
     <p><%= @patient.impression_date %></p>

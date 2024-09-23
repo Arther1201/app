@@ -22,15 +22,25 @@
     <main>
       <div class="main">
         <%= yield %>
+
+        <!-- 非表示にするフラッシュメッセージ -->
+        <% if flash[:notice] %>
+          <div id="flash-notice" class="flash-message" style="display: none;">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+
+        <% if flash[:alert] %>
+          <div id="flash-alert" class="flash-message" style="display: none;">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+
         <%= render partial: 'layouts/flash_window' %>
       </div>
     </main>
 
     <%= render 'shared/footer' %>
-
-    <% if flash[:notice] || flash[:alert] %>
-      <%= javascript_include_tag 'flash_window' %>
-    <% end %>
-
+    
   </body>
 </html>

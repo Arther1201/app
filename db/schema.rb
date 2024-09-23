@@ -10,11 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_12_141017) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_21_112623) do
+  create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_chat_rooms_on_department_id"
+  end
+
   create_table "departments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
+    t.index ["message_id"], name: "index_favorites_on_message_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "chat_room_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "models", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "impression_date"
+    t.string "medical_record_number"
+    t.string "patient_name"
+    t.string "storage_location"
   end
 
   create_table "patients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -46,6 +79,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_12_141017) do
     t.string "prosthesis_type_denture"
   end
 
+  create_table "prostheses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "group"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -56,4 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_12_141017) do
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 
+  add_foreign_key "chat_rooms", "departments"
+  add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "messages", "users"
 end

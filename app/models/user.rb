@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   belongs_to :department
+  has_and_belongs_to_many :favorited_messages, class_name: 'Message', join_table: 'favorites'
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true

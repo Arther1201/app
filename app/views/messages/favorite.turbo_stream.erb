@@ -1,0 +1,26 @@
+<%= turbo_stream.replace "favorite-button-for-message-#{@message.id}", data: { turbo_cache: "false" } do %>
+  <% if current_user.favorited_messages.exists?(@message.id) %>
+    <%= button_to '★', favorite_chat_room_message_path(@chat_room, @message), method: :post, class: "favorite-button-my", data: { turbo_method: :post, turbo_stream: true } %>
+  <% else %>
+    <%= button_to '☆', favorite_chat_room_message_path(@chat_room, @message), method: :post, class: "favorite-button-my", data: { turbo_method: :post, turbo_stream: true } %>
+  <% end %>
+<% end %>
+
+<!-- お気に入りリストの更新 -->
+<%= turbo_stream.replace "favorite-messages-list" do %>
+    <div class="favorite-messages-list">
+      <ul>
+        <% @favorite_messages.each do |message| %>
+          <li>
+            <div class="message-bubble">
+              <p><%= message.content %></p>
+              <p><small>部署: <%= message.user.department.name if message.chat_room.department.present? %></small></p>
+            </div>
+            <div class="message-meta">
+              <span class="message-timestamp"><small><%= message.created_at.strftime("%Y-%m-%d %H:%M") %></small></span>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

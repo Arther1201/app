@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to patients_path, notice: 'ユーザー登録が完了しました。'
     else
+      flash[:alert] = @user.errors.full_messages.join(", ")
       render 'new'
     end
   end

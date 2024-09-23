@@ -1,0 +1,214 @@
+/* 親要素をフレックスボックスで中央揃え */
+.parent-container {
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え */
+    height: 100vh; /* 画面全体の高さを確保 */
+}
+  
+/* チャットルーム全体のスタイル */
+.messages-container {
+    max-height: 50vh; /* 最大高さを設定 */
+    height: 55vh; /* チャットエリアの高さ */
+    width: 40rem;
+    padding: 10px;
+    background-color: #b4f0f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin: 0 auto; /* 中央に配置 */
+    overflow-y: auto; /* 縦方向のスクロールを有効化 */
+}
+  
+  /* メッセージエリアのスタイル */
+  .messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* メッセージバブルの基本スタイル */
+  .message-bubble {
+    max-width: 70%;
+    padding: 10px 18px;
+    border-radius: 22px;
+    line-height: 1.5;
+    font-size: 14px;
+    position: relative;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 自分のメッセージのスタイル */
+  .my-message {
+    align-self: flex-end;
+    background-color: #dcf8c6; /* LINEの緑色に近い色 */
+    color: #000;
+    border-radius: 22px 0.1px 22px 22px; /* 吹き出しの形状 */
+    position: relative;
+    margin-right: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 他のユーザーのメッセージのスタイル */
+  .other-message {
+    align-self: flex-start;
+    background-color: #f8fcfc;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 0.1px 22px 22px 22px; /* 吹き出しの形状 */
+    position: relative;
+    margin-left: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* メッセージフォームのスタイル */
+  .chat-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* メッセージ入力欄 */
+  .message-input {
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 14px;
+    width: 30rem;
+  }
+  
+  /* 送信ボタン */
+  .send-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom-heading {
+    font-size: 3rem; /* 必要に応じてサイズ調整 */
+    font-weight: bold;
+    margin-bottom: 3rem;
+    margin-top: 6rem;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+  }
+
+  .chat_room-container {
+    display: flex; /* フレックスボックスを適用 */
+    flex-direction: column; /* 要素を縦方向に並べる */
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    gap: 10px; /* 入力欄と送信ボタンの間にスペース */
+    padding: 10px;
+    width: 20%; /* コンテナが親要素にフィット */
+  }
+
+  /* 送信日時のスタイル */
+.message-timestamp {
+  color: #999; /* 文字色を少し薄くして控えめに表示 */
+  margin-bottom: 1px; /* メッセージ間に適度なスペースを追加 */
+  font-size: 0.875rem;
+}
+
+/* 自分のメッセージに対応する日時を右寄せ */
+.my-timestamp {
+  text-align: right;
+}
+
+/* 他のユーザーのメッセージに対応する日時を左寄せ */
+.other-timestamp {
+  text-align: left;
+}
+
+/* お気に入りボタンのスタイル (自分のメッセージ) */
+.favorite-button-my,
+.favorite-button-other {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 5px; /* 日付との間隔を少しだけ開ける */
+}
+
+.favorite-button-my:hover {
+  color: #e67e22; /* ホバー時に色を変更 */
+}
+
+/* 自分のメッセージの場合は右寄せにする */
+.my-meta {
+  justify-content: flex-end; /* 自分のメッセージは右寄せ */
+}
+
+
+/* 他のユーザーのメッセージのメタ情報を左に寄せる */
+.other-meta {
+  justify-content: flex-start;
+}
+
+.message-meta {
+  display: grid;
+  align-items: center;
+  gap: 2px; /* タイムスタンプとお気に入りボタンの間のスペース */
+}
+
+.chat-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messages-section {
+  width: 70%;
+}
+
+.favorite-section {
+  width: 25%;
+  padding-left: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.favorite-toggle-button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10rem;
+}
+
+.favorite-messages-list {
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.favorite-messages-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.favorite-messages-list li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}

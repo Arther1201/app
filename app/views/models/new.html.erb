@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag 'models_new', media: 'all', 'data-turbo-track': 'reload' %>
+
+<body class="model_new-background">
+  <div class="form-container">
+    <div class="form-scroll-container">
+      <h2>患者模型作成</h2>
+      <p class="patient_model_english">Patient Model Creation</p>
+      <%= form_with(model: @model, url: models_path, method: :post, local: true) do |form| %>
+        <fieldset>
+          <legend>模型情報</legend>
+      
+          <!-- 印象日 -->
+          <div class="form-group">
+            <%= form.label :impression_date, "印象日" %>
+            <%= form.date_field :impression_date, class: "general-input" %>
+          </div>
+      
+          <!-- カルテ番号 -->
+          <div class="form-group">
+            <%= form.label :medical_record_number, "カルテ番号" %>
+            <%= form.text_field :medical_record_number, class: "general-input", placeholder: "12345" %>
+          </div>
+      
+          <!-- 氏名 -->
+          <div class="form-group">
+            <%= form.label :patient_name, "氏名" %>
+            <%= form.text_field :patient_name, class: "general-input", placeholder: "吉良 太郎" %>
+          </div>
+      
+          <!-- 保管場所 -->
+          <div class="form-group">
+            <%= form.label :storage_location, "保管場所" %>
+            <%= form.select :storage_location, options_for_select([["1F棚", "1F棚"], ["2F", "2F"], ["技工室", "技工室"], ["院長室", "院長室"]]), { include_blank: "選択してください" }, class: "general-input" %>
+          </div>
+    
+          <!-- 登録ボタン -->
+          <div class="submit-container">
+            <%= form.submit "登録", class: "btn btn-primary" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</body>

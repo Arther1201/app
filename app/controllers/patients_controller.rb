@@ -50,6 +50,13 @@ class PatientsController < ApplicationController
                               (params[:patient][:upper_right] || []) +
                               (params[:patient][:lower_left] || []) +
                               (params[:patient][:lower_right] || [])
+
+    existing_model = Model.find_by(medical_record_number: @patient.medical_record_number, patient_name: @patient.name)
+
+    if existing_model
+      flash[:alert] = "登録された模型があります."
+    end
+
     if @patient.save
       redirect_to patients_path, notice: '患者が正常に登録されました。'
     else

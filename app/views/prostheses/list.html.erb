@@ -1,0 +1,152 @@
+<%= stylesheet_link_tag 'prostheses_list', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="proshteses_list_title">-<%= params[:letter] %>行-</div>
+
+<div class="alphabet-row">
+  <% case params[:group] %>
+  <% when 'あ行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['あ', 'い', 'う', 'え', 'お'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'あ行', letter: letter), class: "alphabet-btn", data: { group: 'あ行' } %>
+    <% end %>
+  <% when 'か行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['か', 'き', 'く', 'け', 'こ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'か行', letter: letter), class: "alphabet-btn", data: { group: 'か行' } %>
+    <% end %>
+  <% when 'さ行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['さ', 'し', 'す', 'せ', 'そ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'さ行', letter: letter), class: "alphabet-btn", data: { group: 'さ行' } %>
+    <% end %>
+  <% when 'た行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['た', 'ち', 'つ', 'て', 'と'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'た行', letter: letter), class: "alphabet-btn", data: { group: 'た行' } %>
+    <% end %>
+  <% when 'な行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['な', 'に', 'ぬ', 'ね', 'の'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'な行', letter: letter), class: "alphabet-btn", data: { group: 'な行' } %>
+    <% end %>
+  <% when 'は行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['は', 'ひ', 'ふ', 'へ', 'ほ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'は行', letter: letter), class: "alphabet-btn", data: { group: 'は行' } %>
+    <% end %>
+  <% when 'ま行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['ま', 'み', 'む', 'め', 'も'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'ま行', letter: letter), class: "alphabet-btn", data: { group: 'ま行' } %>
+    <% end %>
+  <% when 'や行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['や', 'ゆ', 'よ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'や行', letter: letter), class: "alphabet-btn", data: { group: 'や行' } %>
+    <% end %>
+  <% when 'ら行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['ら', 'り', 'る', 'れ', 'ろ'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'ら行', letter: letter), class: "alphabet-btn", data: { group: 'ら行' } %>
+    <% end %>
+  <% when 'わ行' %>
+    <span class="alphabet-grouplist-title"></span>
+      <% ['わ', 'を', 'ん'].each do |letter| %>
+        <%= link_to letter, list_prostheses_path(group: 'わ行', letter: letter), class: "alphabet-btn", data: { group: 'わ行' } %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="proshteses_list_title2">[<%= params[:letter] %>] で始まる歯科用語</div>
+
+<div id="prosthesis-list-container">
+  <ul id="prosthesis-list">
+    <% @prostheses.each do |prosthesis| %>
+      <li class="prosheses_list">
+        <a href="#" class="open-modal" data-id="<%= prosthesis.id %>"><%= prosthesis.name %></a>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<!-- モーダルウィンドウ -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modal-details"></div> <!-- ここに詳細情報が表示される -->
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    // 現在のページURLを確認
+    if (window.location.pathname.includes("list")) {
+      // モーダルと閉じるボタンを取得
+      var modal = document.getElementById("modal");
+      var span = document.getElementsByClassName("close")[0];
+  
+      // span や modal が存在するかを確認してから onclick を設定
+      if (modal && span) {
+        span.onclick = function() {
+          modal.style.display = "none";
+        };
+      } else {
+        console.error("Modal or Close button (span) not found.");
+      }
+  
+      // リスト項目がクリックされたらモーダルを開く
+      document.querySelectorAll('.open-modal').forEach(function(item) {
+        item.addEventListener('click', function(event) {
+          event.preventDefault();
+    
+          // ProsthesisのIDを取得してAjaxで詳細情報を取得
+          var prosthesisId = this.dataset.id;
+    
+          // Ajaxリクエストで詳細情報を取得
+          fetch(`/prostheses/${prosthesisId}`)
+            .then(response => response.json())
+            .then(data => {
+              // モーダル内に詳細情報を表示
+              document.getElementById('modal-details').innerHTML = `
+                <div class="modal-title">${data.name}</div>
+                <div class="modal-description">${data.description}</div>
+                <!-- 他の詳細情報 -->
+              `;
+              modal.style.display = "block"; // モーダルを表示
+            });
+        });
+      });
+  
+      // モーダル外をクリックしても閉じる
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+  
+      // リストを 10 個ごとに新しい列に分割して表示する
+      const listContainer = document.getElementById('prosthesis-list-container');
+      const listItems = document.querySelectorAll('#prosthesis-list li');
+  
+      if (listContainer && listItems.length > 0) {
+        let group = document.createElement('div');
+        group.classList.add('list-column');
+        
+        listItems.forEach((item, index) => {
+            if (index > 0 && index % 10 === 0) {
+                // 10個ごとに新しい列を作成
+                listContainer.appendChild(group);
+                group = document.createElement('div');
+                group.classList.add('list-column');
+            }
+            group.appendChild(item);
+        });
+        
+        // 最後のグループを追加
+        listContainer.appendChild(group);
+      } else {
+        console.error("List container or list items not found.");
+      }
+    }
+  });
+</script>
