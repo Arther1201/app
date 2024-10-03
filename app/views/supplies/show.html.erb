@@ -87,7 +87,6 @@
           .then(response => response.json())
           .then(data => {
             if (data.status === 'success') {
-              alert('納品日が更新されました。');
               checkbox.checked = true; // チェックを保持
               const deliveryDateCell = checkbox.closest('tr').querySelector('td:nth-child(3)');
               deliveryDateCell.textContent = new Date().toLocaleDateString(); // 今日の日付を表示
