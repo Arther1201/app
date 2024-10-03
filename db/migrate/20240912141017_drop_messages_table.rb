@@ -5,5 +5,6 @@ class DropMessagesTable < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foreign_key: true
       t.references :department, null: false, foreign_key: true
       t.timestamps
+    end
   end
 end
