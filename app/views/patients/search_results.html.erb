@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'patients_search_results', media: 'all', 'data-turbo-track': 'reload' %>
 
+<% breadcrumb :search_results %>
 <div class="patient-list">
   <h5>検索結果</h5>
   <div class="patient_search_subtitle">Search Results</div>
@@ -39,7 +40,12 @@
               <%= patient.prosthesis_type_denture %>
             </td>
             <td class="tooth-diagram-font">
-              <%= convert_to_dental_notation(Array(patient.prosthesis_sites)) if patient.prosthesis_sites.present? %>
+              <%= convert_to_dental_notation(
+                upper_left: patient.upper_left, 
+                upper_right: patient.upper_right, 
+                lower_left: patient.lower_left, 
+                lower_right: patient.lower_right
+              ) if patient.upper_left.present? || patient.upper_right.present? || patient.lower_left.present? || patient.lower_right.present? %>
             </td>
             <td><%= patient.metal_type %></td>
             <td>

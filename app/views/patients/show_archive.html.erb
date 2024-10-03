@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'patient_show_archive', media: 'all', 'data-turbo-track': 'reload' %>
 
+<% breadcrumb :show_archive_patients, @archive_patients.first %>
 <div class="patient_show_archive_title"><%= params[:year] %>年のアーカイブデータ</div>
 <div class="patient_show_archive_subtitle">Archived Data</div>
 <table>

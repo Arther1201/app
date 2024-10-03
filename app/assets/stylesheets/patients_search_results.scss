@@ -6,6 +6,7 @@ h5 {
     letter-spacing: 0.15em; /* 文字の間隔を広げる */
     text-transform: uppercase; /* すべて大文字にする */
     font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    margin-top: 4rem;
 }
 
 .patient_search_subtitle {
@@ -22,4 +23,8 @@ h5 {
   -webkit-background-clip: text;
   color: transparent; /* 背景グラデーションで文字の色を表現 */
   background-clip: text; /* WebKit以外のブラウザでは無効 */
+}
+
+.pagination-container {
+  margin-bottom: 5rem;
 }

@@ -1,0 +1,124 @@
+.archive_patient_showtitle {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 7rem; /* デフォルトのマージンをリセット */
+}
+
+.archive_patient_show_subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #555;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+}
+
+/* アーカイブ患者詳細を中央に配置 */
+.archive-patient-container {
+    display: flex;
+    justify-content: center; /* 水平方向に中央揃え */
+    align-items: center; /* 垂直方向に中央揃え */
+    min-height: 80vh; /* 画面の高さに合わせる */
+    padding: 20px; /* 余白を追加 */
+  }
+  
+/* アーカイブ患者詳細全体のスタイル */
+.archive-patient-detail {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* 各情報のスタイル */
+  .archive-patient-detail p {
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  /* ラベル（<strong>）のスタイル */
+  .archive-patient-detail p strong {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* 補綴部位のスタイル */
+  .tooth-notation {
+    margin-top: 15px;
+  }
+  
+  /* 補綴詳細のスタイル */
+  .prosthesis-details ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .prosthesis-details ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* セクションごとのスタイル */
+  .prosthesis-details,
+  .tooth-notation {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
+  }
+  
+  /* メタル量の表示 */
+  .archive-patient-detail p.metal-amount {
+    color: #e67e22; /* オレンジ色 */
+    font-weight: bold;
+  }
+  
+  /* チェックの表示スタイル */
+  .archive-patient-detail p.check-status {
+    font-style: italic;
+    color: #28a745; /* グリーン色 */
+  }
+  
+  /* アーカイブ年度のスタイル */
+  .archive-patient-detail p.archived-year {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #555;
+    margin-top: 20px;
+  }
+  
+  /* スマートフォン用レスポンシブデザイン */
+  @media (max-width: 768px) {
+    .archive-patient-detail {
+      padding: 15px;
+    }
+  
+    .archive-patient-detail p {
+      font-size: 0.9rem;
+    }
+  
+    .prosthesis-details,
+    .tooth-notation {
+      padding: 8px;
+    }
+  }
+  

@@ -1,5 +1,10 @@
-<h2>アーカイブ患者詳細</h2>
+<%= stylesheet_link_tag 'archive_patient_show', media: 'all', 'data-turbo-track': 'reload' %>
 
+<% breadcrumb :archive_patient_show %>
+<div class="archive_patient_showtitle">アーカイブ患者詳細</div>
+<div class="archive_patient_show_subtitle">Archived Patient Details</div>
+
+<div class="archive-patient-container">
 <div class="archive-patient-detail">
   <p><strong>氏名:</strong> <%= @archive_patient.name %></p>
   <p><strong>カルテ番号:</strong> <%= @archive_patient.medical_record_number %></p>
@@ -33,6 +38,7 @@
   <p><strong>チェック:</strong> <%= @archive_patient.note_checked ? '済' : '未' %></p>
   <p><strong>納品チェック:</strong> <%= @archive_patient.delivery_checked ? '済' : '未' %></p>
   <p><strong>アーカイブ年度:</strong> <%= @archive_patient.archived_year %>年</p>
+</div>
 </div>
 
 

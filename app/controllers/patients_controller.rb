@@ -44,7 +44,6 @@ class PatientsController < ApplicationController
   
   
   def create
-    puts params.inspect
     @patient = Patient.new(patient_params)
     @patient.prosthesis_sites = (params[:patient][:upper_left] || []) +
                               (params[:patient][:upper_right] || []) +

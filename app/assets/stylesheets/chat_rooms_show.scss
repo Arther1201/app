@@ -258,6 +258,11 @@
     font-size: 2rem; /* タイトルのサイズを小さく */
     margin-top: 1rem; /* タイトルの上のマージンを減らす */
   }
+
+  .breadcrumbs {
+    margin-top: 6rem; /* スマホでのヘッダーとの重なりを防ぐために十分な余白を確保 */
+    height: 4rem; /* 高さを少し増やしてレイアウトを調整 */
+  }
 }
 
 @media (max-width: 480px) {
@@ -319,4 +324,5 @@
   .favorite-section {
     padding-left: 10px; /* スマートフォン用にパディングを調整 */
   }
+
 }

@@ -3,8 +3,9 @@
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", crossorigin: "anonymous" %>
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js", crossorigin: "anonymous" %>
 
+<% breadcrumb :patient, @patient %>
 <div class="patient-details-container">
-  <h1 class="patient_show">患者詳細</h1>
+  <div class="patient_show">患者詳細</div>
   <p class="patient_details">Patient Details</p>
   <div class="patient-detail">
     <strong>印象日:</strong>

@@ -153,3 +153,47 @@ main {
     }
   }
 }
+
+.breadcrumbs {
+  padding-left: 25px;
+  padding-top: 15px;
+  top: 55px;
+  height: 3rem;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+}
+
+main {
+  margin-top: 4rem; 
+}
+
+/* ページネーションの横並び設定 */
+.pagination {
+  display: flex;
+  list-style: none; /* リストのデフォルトスタイルを無効化 */
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.pagination li {
+  margin: 0 5px; /* 各ページ番号に間隔を追加 */
+}
+
+.pagination a,
+.pagination .current {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  color: #007bff;
+}
+
+.pagination .current {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+}

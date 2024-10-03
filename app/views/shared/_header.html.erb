@@ -31,9 +31,9 @@
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
       <% elsif @supply.present? && current_page?(supply_path(@supply)) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
-      <% elsif @supply.present? && current_page?(archives_supplies_path) %> 
+      <% elsif current_page?(archives_supplies_path) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
-      <% elsif @supply.present? && current_page?(show_archive_supply_path(@supply)) %> 
+      <% elsif params[:id].present? && current_page?(show_archive_supply_path(params[:id])) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
       <% elsif current_page?(archives_patients_path) %> 
         <%= link_to '戻る', patients_path, class: "navbar-item" %>

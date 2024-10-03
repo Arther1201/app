@@ -55,6 +55,7 @@ gem 'kana'
 
 gem 'mojinizer'
 
+gem 'gretel'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

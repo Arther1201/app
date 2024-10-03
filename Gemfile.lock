@@ -111,6 +111,9 @@ GEM
       momentjs-rails (>= 2.9.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    gretel (5.0.1)
+      actionview (>= 6.1)
+      railties (>= 6.1)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.13.0)
@@ -304,6 +307,7 @@ DEPENDENCIES
   carrierwave (= 2.2.2)
   debug
   fullcalendar-rails
+  gretel
   importmap-rails
   jbuilder
   jquery-rails
