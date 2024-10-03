@@ -31,7 +31,7 @@
 
     <div class="form-actions">
       <%= form.submit '更新', class: 'btn-update' %>
-      <%= button_to '削除', supply_path(@supply), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'supplies_btn-delete' %>
+      <%= link_to '削除', supply_path(@supply), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'supplies_btn-delete' %>
     </div>
 
     <!-- 注文と納品の履歴表示 -->
