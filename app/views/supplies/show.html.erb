@@ -1,0 +1,107 @@
+<%= stylesheet_link_tag 'supplies_show', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="supply-detail-container">
+  <div class="supply_show_title">物品詳細</div>
+  
+  <%= form_with(model: @supply, local: true, method: :patch) do |form| %>
+    <div class="form-group">
+      <%= form.label :category, "分類" %>
+      <%= form.text_field :category, value: @supply.category, class: "supply-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :item_name, "商品名" %>
+      <%= form.text_field :item_name, value: @supply.item_name, class: "supply-input" %>
+    </div>
+
+    <div class="form_group">
+        <%= form.label :manufacturer, "メーカー" %>
+        <%= form.select :manufacturer, options_for_select([["KO", "KO"], ["ci", "ci"], ["デンツプライシロナ", "デンツプライシロナ"], ["FEED", "FEED"]], @supply.manufacturer), { include_blank: "選択してください" } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :price, "価格" %>
+      <%= form.number_field :price, value: @supply.price, class: "supply-input" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :stock_quantity, "注文総数" %>
+      <%= form.number_field :stock_quantity, value: @supply.stock_quantity, class: "supply-input" %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit '更新', class: 'btn-update' %>
+      <%= button_to '削除', supply_path(@supply), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'supplies_btn-delete' %>
+    </div>
+
+    <!-- 注文と納品の履歴表示 -->
+    <div class="history-container">
+      <h3>注文履歴</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>注文日</th>
+            <th>注文数</th>
+            <th>納品日</th>
+            <th>納品</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.order_date %></td>
+              <td><%= order.order_quantity %></td>
+              <td><%= order.delivery_date || '未納品' %></td>
+              <td>
+                <%= form_with(url: mark_delivered_order_path(order), method: :patch, local: true, class: 'delivery-form') do |f| %>
+                  <%= f.check_box :delivered, checked: order.delivery_date.present?, class: 'supplies_delivery-check', data: { order_id: order.id } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('turbo:load', () => {
+    const deliveryChecks = document.querySelectorAll('.supplies_delivery-check');
+  
+    deliveryChecks.forEach(check => {
+      check.addEventListener('change', (event) => {
+        const checkbox = event.target;
+        const form = checkbox.closest('.delivery-form');
+        const orderId = checkbox.dataset.orderId;
+  
+        if (form) {
+          fetch(`/orders/${orderId}/mark_delivered`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ delivered: checkbox.checked })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              alert('納品日が更新されました。');
+              checkbox.checked = true; // チェックを保持
+              const deliveryDateCell = checkbox.closest('tr').querySelector('td:nth-child(3)');
+              deliveryDateCell.textContent = new Date().toLocaleDateString(); // 今日の日付を表示
+            } else {
+              alert('エラーが発生しました: ' + data.message);
+              checkbox.checked = false; // チェックを元に戻す
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            checkbox.checked = false; // チェックを元に戻す
+          });
+        }
+      });
+    });
+  });
+</script>

@@ -22,11 +22,12 @@
     margin-bottom: 20px;
     margin-top: 5rem;
     justify-content: center;
+    flex-wrap: wrap; /* 折り返しを許可して、画面幅に収める */
 }
 
 .alphabet-btn {
     display: inline-block;
-    padding: 10px 50px;
+    padding: 10px 30px;
     background-color: #f4f4f4;
     color: #333;
     border: 1px solid #ccc; /* 四角の境界線 */
@@ -35,7 +36,7 @@
     text-decoration: none;
     font-size: 0.7rem;
     transition: background-color 0.3s ease;
-
+    margin: 5px; /* ボタン間に余白を追加 */
 }
 
 .alphabet-btn:hover {
@@ -130,3 +131,77 @@
     line-height: 2rem;
     letter-spacing: 0.6px;
   }
+
+  /* スマートフォンとタブレット用のレスポンシブデザイン */
+@media screen and (max-width: 1024px) {
+  .proshteses_list_title {
+      font-size: 2rem;
+      margin-top: 5rem;
+      margin-left: 2rem;
+  }
+
+  .proshteses_list_title2 {
+      font-size: 1rem;
+      margin-left: 5rem;
+  }
+
+  .alphabet-btn {
+      padding: 8px 20px; /* ボタンのサイズを小さく */
+      font-size: 0.6rem;
+  }
+
+  .prosthesis-details-container {
+      margin: 10px 0;
+      padding: 10px;
+  }
+
+  .modal-content {
+      padding: 15px;
+      width: 90%;
+  }
+
+  .modal-title {
+      font-size: 2rem;
+  }
+
+  .modal-description {
+      font-size: 1rem;
+      line-height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .proshteses_list_title {
+      font-size: 1.8rem;
+      margin-top: 4rem;
+      margin-left: 1rem;
+  }
+
+  .proshteses_list_title2 {
+      font-size: 0.9rem;
+      margin-left: 2rem;
+  }
+
+  .alphabet-btn {
+      padding: 6px 15px; /* スマホ用にさらに小さく */
+      font-size: 0.5rem;
+  }
+
+  #prosthesis-list-container {
+      margin-bottom: 1rem;
+  }
+
+  .modal-content {
+      padding: 10px;
+      width: 90%;
+  }
+
+  .modal-title {
+      font-size: 1.5rem;
+  }
+
+  .modal-description {
+      font-size: 0.9rem;
+      line-height: 1.2rem;
+  }
+}

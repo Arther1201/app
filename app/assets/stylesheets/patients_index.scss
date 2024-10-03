@@ -1,101 +1,131 @@
+/* 共通のスタイル */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .patient-list {
-    padding-top: 100px;
-    justify-content: center; /* テーブル全体を中央に配置 */
-    justify-content: center; /* テーブル全体を中央に配置 */
-    overflow-y: auto; /* 縦方向にスクロール可能にする */
-    max-height: 90vh; /* ビューポートの高さの80%を最大高さとする */
-  }  
+  padding-top: 100px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-y: auto;
+  max-height: 90vh;
+}
 
 table {
-    width: 89rem;
-    border-collapse: collapse;
-    border: 1.4px solid #333; /* テーブル全体を囲む枠線 */
-    margin: 0 auto;
+  width: 100%;
+  max-width: 89rem;
+  border-collapse: collapse;
+  border: 1.4px solid #333;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 th, td {
-    padding: 10px;
-    text-align: left;
-    border: 2px solid #c6c4c4; /* 各セルを囲む枠線 */
-    font-size: 14px; /* 通常のフォントサイズ */
-    white-space: nowrap; /* 一行に表示 */
-    overflow: hidden; /* 溢れる部分を隠す */
+  padding: 8px;
+  text-align: left;
+  border: 2px solid #c6c4c4;
+  font-size: 14px;
+  overflow: hidden;
 }
 
 th {
-    background-color: #f4f4f4;
-    font-size: 12px;
-    text-align: center;
-}
-
-.check-column,
-.delivery-column {
-    text-align: center; /* セル内のテキストを中央揃え */
-    vertical-align: middle; /* セル内のコンテンツを縦中央揃え */
-}
-
-.check-column input[type="checkbox"],
-.delivery-column input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin: 0; /* チェックボックスの外側の余白をリセット */
-    vertical-align: middle; /* チェックボックスを縦方向に中央揃え */
+  background-color: #f4f4f4;
+  font-size: 12px;
+  text-align: center;
 }
 
 h1 {
-    text-align: center;
-    font-size: 3rem;
-    color: #333;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
-    letter-spacing: 0.15em; /* 文字の間隔を広げる */
-    text-transform: uppercase; /* すべて大文字にする */
-    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 0; /* デフォルトのマージンをリセット */
 }
 
 .patient-list-english {
   text-align: center;
   font-size: 1.3rem;
-  font-weight: 400; /* フォントの太さを調整 */
-  margin-bottom: 20px; /* テーブルとの余白を追加 */
+  font-weight: 400;
   color: #555;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
-  letter-spacing: 0.15em; /* 文字の間隔を広げる */
-  text-transform: uppercase; /* すべて大文字にする */
-  font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
   background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
   -webkit-background-clip: text;
-  color: transparent; /* 背景グラデーションで文字の色を表現 */
-  background-clip: text; /* WebKit以外のブラウザでは無効 */
+  color: transparent;
+  background-clip: text;
 }
 
-.patient-list h1 {
-  margin-bottom: 0.2rem; /* h1とpの間の余白をさらに減らす */
+.patients-btn-archive {
+  margin-bottom: 2rem;
 }
 
-.pagination {
-    display: flex; /* ページネーション全体を水平に配置 */
-    justify-content: center; /* 中央に配置 */
-    margin-top: 1rem;
+/* スマートフォン用のスタイル調整 */
+@media (max-width: 768px) {
+  .patient-list {
+      padding-top: 50px;
+      padding-left: 1rem;
+      padding-right: 1rem;
   }
-  
-  .pagination .page-item {
-    display: inline-block; /* 各ページ番号を水平に並べる */
-    margin: 0 5px; /* 各ページ間にスペースを追加 */
+
+  h1 {
+      font-size: 2rem;
+      margin-top: 20px; /* スマートフォン時の余白を追加 */
   }
-  
-  .pagination .page-link {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    color: #007bff; /* テキストカラーを設定 */
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
+
+  .patient-list-english {
+      font-size: 1rem;
   }
-  
-  .pagination .page-item.active .page-link {
-    z-index: 2;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+
+  table {
+      width: 100%;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
   }
+
+  th, td {
+      font-size: 12px;
+  }
+
+  .pagination {
+      flex-wrap: wrap;
+  }
+
+  .patient_archive-button {
+      margin-left: 0;
+      text-align: center;
+  }
+
+  /* ページネーションのスタイル */
+  .pagination {
+    margin-bottom: 4rem; /* 下に余白を追加 */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 1.5rem;
+      margin-top: 20px; /* スマートフォン時の余白を追加 */
+  }
+
+  .patient-list-english {
+      font-size: 0.9rem;
+  }
+
+  th, td {
+      font-size: 10px;
+  }
+
+  .check-column input[type="checkbox"],
+  .delivery-column input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+  }
+}

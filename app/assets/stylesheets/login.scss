@@ -1,103 +1,155 @@
-  .text-center {
-    text-align: center;
-    margin-bottom: 1rem;
-    margin-top: 100px;
-    font-size: 2rem;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; /* 全要素のボックスサイズ設定 */
+}
 
-  .form-group label {
-    display: block; /* ラベルをブロックレベル要素として表示 */
-    margin-bottom: 0.1rem; /* ラベルの下にマージンを設定 */
-  }  
+.text-center {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 100px; /* デフォルトの上部マージン */
+  font-size: 2rem;
+}
 
-  .btn-block {
-    width: 100%;
-  }
+.form-group label {
+  display: block; /* ラベルをブロックレベル要素として表示 */
+  margin-bottom: 0.1rem; /* ラベルの下にマージンを設定 */
+}
 
-  .field {
-    margin-bottom: 1rem; /* 2remの間隔を設定 */
-  }
+.btn-block {
+  width: 100%;
+}
 
-  .form-check {
-    margin-bottom: 2rem; /* チェックボックス下のマージン追加 */
-  }
+.field {
+  margin-bottom: 1rem; /* 2remの間隔を設定 */
+}
 
-  .actions {
-    margin-bottom: 20px; /* ログインボタンの下に 20px の間隔を追加 */ 
-  }
+.form-check {
+  margin-bottom: 2rem; /* チェックボックス下のマージン追加 */
+}
 
-  .login-container {
-    display: flex; /* Flexbox を有効化 */
-    flex-direction: column; /* 子要素を垂直方向に配置 */
-    align-items: center; /* 水平中央揃え */
-    max-width: 400px; /* コンテナの最大幅 */
-    margin: 0 auto; /* 水平方向に中央配置 */
-    padding: 2rem;
-    border-radius: 10px; /* 角を丸くする */
-    box-shadow: 0 0 10px rgba(251, 249, 249, 0.1); /* 影をつける */
+.actions {
+  margin-bottom: 20px; /* ログインボタンの下に 20px の間隔を追加 */
+}
+
+.login-container {
+  display: flex; /* Flexbox を有効化 */
+  flex-direction: column; /* 子要素を垂直方向に配置 */
+  align-items: center; /* 水平中央揃え */
+  max-width: 400px; /* コンテナの最大幅 */
+  margin: 0 auto; /* 水平方向に中央配置 */
+  padding: 2rem;
+  border-radius: 10px; /* 角を丸くする */
+  box-shadow: 0 0 10px rgba(251, 249, 249, 0.1); /* 影をつける */
 }
 
 .login-container .form-control, .login-container .btn {
-    width: 100%; /* 全幅を指定 */
-    padding: 12px 20px; /* パディングを適用 */
-    border-radius: 4px; /* 角を丸くする */
-    border: 1px solid #ccc; /* 境界線を設定 */
-    box-sizing: border-box; /* ボックスサイズをborder-boxに設定 */
+  width: 100%; /* 全幅を指定 */
+  padding: 12px 20px; /* パディングを適用 */
+  border-radius: 4px; /* 角を丸くする */
+  border: 1px solid #ccc; /* 境界線を設定 */
+  box-sizing: border-box; /* ボックスサイズをborder-boxに設定 */
 }
 
 .login-container .form-group {
-    width: 100%; /* 幅を親要素に合わせる */
-    margin-bottom: 1rem; /* 各フォームグループの間隔 */
+  width: 100%; /* 幅を親要素に合わせる */
+  margin-bottom: 1rem; /* 各フォームグループの間隔 */
 }
 
 .login-container .actions {
-    width: 100%; /* 幅を親要素に合わせる */
-    display: flex; /* Flexbox を有効化 */
-    justify-content: center; /* 子要素を中央に配置 */
+  width: 100%; /* 幅を親要素に合わせる */
+  display: flex; /* Flexbox を有効化 */
+  justify-content: center; /* 子要素を中央に配置 */
 }
 
 .login-container .actions .btn {
-    font-size: 1rem; /* ボタンのフォントサイズを指定 */
-    background-color: #007bff; /* ボタンの背景色 */
-    color: white; /* テキストの色 */
-    width: 16rem; /* 自動で幅を調整 */
-    padding: 12px 20px; /* パディングを適用 */
+  font-size: 1rem; /* ボタンのフォントサイズを指定 */
+  background-color: #007bff; /* ボタンの背景色 */
+  color: white; /* テキストの色 */
+  width: 16rem; /* 自動で幅を調整 */
+  padding: 12px 20px; /* パディングを適用 */
 }
 
+.auth-links {
+  display: flex;
+  justify-content: space-between; /* 項目の間に等間隔のスペースを作る */
+  width: 100%; /* 必要に応じて調整 */
+}
 
-  .auth-links {
-    display: flex;
-    justify-content: space-between; /* 項目の間に等間隔のスペースを作る */
-    width: 100%; /* 必要に応じて調整 */
+.link-section {
+  display: flex;           /* Flexbox を使って要素を横に並べる */
+  justify-content: center; /* 中央に配置 */
+  align-items: center;     /* アイテムを垂直方向の中央に配置 */
+  white-space: nowrap;     /* 改行を許さない */
+  overflow: hidden;        /* はみ出した内容を隠す */
+  text-overflow: ellipsis; /* はみ出した内容を省略記号で表示 */
+  padding: 1rem 0;         /* 上下に余白を設定 */
+}
+
+.link-section a {
+  color: rgb(8, 122, 209); /* リンクの色を指定 */
+  text-decoration: none;   /* アンダーラインを消す */
+  padding: 0.5rem;         /* タッチしやすくするためのパディング */
+  margin: 0 10px;          /* リンク間の余白を設定 */
+}
+
+.login-background {
+  background-image: url('login_image.jpg');
+  background-size: cover; /* 画像を画面全体にフィットさせる */
+  background-position: center; /* 画像を中央に配置 */
+  background-repeat: no-repeat; /* 画像を繰り返さない */
+  height: 100vh; /* 画面全体の高さを確保 */
+  margin: 0;
+}
+
+h2 {
+  color: rgb(7, 135, 114);
+}
+
+/* レスポンシブデザイン: タブレットとスマートフォン向け */
+@media screen and (max-width: 768px) {
+  .text-center {
+    font-size: 1.5rem; /* タイトルのフォントサイズを小さくする */
+    margin-top: 20px; /* 上部の余白を減らす */
+  }
+
+  .login-container {
+    max-width: 90%; /* コンテナの最大幅を小さくする */
+    padding: 1rem; /* 内側の余白を減らす */
+  }
+
+  .login-container .actions .btn {
+    width: 100%; /* ボタンの幅を全幅に変更 */
+    font-size: 0.9rem; /* ボタンのフォントサイズを小さくする */
+    padding: 10px 15px; /* パディングを調整 */
   }
 
   .link-section {
-    display: flex;           /* Flexbox を使って要素を横に並べる */
-    justify-content: center; /* 中央に配置 */
-    align-items: center;     /* アイテムを垂直方向の中央に配置 */
-    white-space: nowrap;     /* 改行を許さない */
-    overflow: hidden;        /* はみ出した内容を隠す */
-    text-overflow: ellipsis; /* はみ出した内容を省略記号で表示 */
-    padding: 1rem 0;         /* 上下に余白を設定 */
+    flex-direction: column; /* リンクを縦並びにする */
+    padding: 0.5rem 0; /* 上下の余白を減らす */
   }
-  
+
   .link-section a {
-    color: rgb(8, 122, 209); /* リンクの色を指定 */
-    text-decoration: none;   /* アンダーラインを消す */
-    padding: 0.5rem;         /* タッチしやすくするためのパディング */
-    margin: 0 10px;          /* リンク間の余白を設定 */
+    margin: 5px 0; /* リンク間の余白を調整 */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .text-center {
+    font-size: 1.2rem; /* スマートフォン向けにさらに小さくする */
+    margin-top: 10px; /* 上部の余白を減らす */
   }
 
-  .login-background {
-    background-image: url('login_image.jpg');
-    background-size: cover; /* 画像を画面全体にフィットさせる */
-    background-position: center; /* 画像を中央に配置 */
-    background-repeat: no-repeat; /* 画像を繰り返さない */
-    height: 100vh; /* 画面全体の高さを確保 */
-    margin: 0;
+  .login-container {
+    padding: 0.5rem; /* 内側の余白を減らす */
   }
 
-  h2 {
-    color:  rgb(7, 135, 114);
+  .login-container .form-group label {
+    font-size: 0.9rem; /* ラベルのフォントサイズを小さくする */
   }
-  
+
+  .login-container .actions .btn {
+    font-size: 0.8rem; /* ボタンのフォントサイズを小さくする */
+    padding: 8px 10px; /* パディングを調整 */
+  }
+}

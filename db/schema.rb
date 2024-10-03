@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_21_112623) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_03_064912) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -48,6 +48,39 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_112623) do
     t.string "medical_record_number"
     t.string "patient_name"
     t.string "storage_location"
+  end
+
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "supply_id", null: false
+    t.date "order_date"
+    t.date "delivery_date"
+    t.integer "order_quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supply_id"], name: "index_orders_on_supply_id"
+  end
+
+  create_table "patient_archives", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "medical_record_number"
+    t.date "impression_date"
+    t.string "prosthesis_type_insurance"
+    t.string "prosthesis_type_crown"
+    t.string "prosthesis_type_denture"
+    t.string "upper_left"
+    t.string "upper_right"
+    t.string "lower_left"
+    t.string "lower_right"
+    t.decimal "metal_amount", precision: 10
+    t.string "requester"
+    t.string "trial_or_set"
+    t.date "set_date"
+    t.boolean "note_checked"
+    t.boolean "delivery_checked"
+    t.integer "archived_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "patient_id"
   end
 
   create_table "patients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -88,6 +121,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_112623) do
     t.string "group"
   end
 
+  create_table "supplies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "category"
+    t.string "item_name"
+    t.date "order_date"
+    t.integer "order_quantity"
+    t.date "delivery_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "manufacturer"
+    t.decimal "price", precision: 10
+    t.integer "stock_quantity"
+    t.boolean "delivered"
+    t.integer "department_id"
+  end
+
+  create_table "supply_archives", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "year"
+    t.text "archived_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -101,4 +156,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_112623) do
   add_foreign_key "chat_rooms", "departments"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "supplies"
 end

@@ -25,6 +25,24 @@
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(list_prostheses_path) %> 
         <%= link_to '戻る', prostheses_path, class: "navbar-item" %>
+      <% elsif current_page?(supplies_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(new_supply_path) %> 
+        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
+      <% elsif @supply.present? && current_page?(supply_path(@supply)) %> 
+        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
+      <% elsif current_page?(archives_supplies_path) %> 
+        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
+      <% elsif @supplies.present? && current_page?(show_archive_supply_path) %> 
+        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
+      <% elsif current_page?(archives_patients_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif params[:year].present? && current_page?(show_archive_patients_path(year: params[:year])) %>
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif @archive_patient && current_page?(patient_archive_path(@archive_patient)) %> 
+        <%= link_to '戻る', show_archive_patients_path(year: @archive_patient.archived_year), class: "navbar-item" %>
+      <% elsif current_page?(shipments_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif request.fullpath.start_with?(patients_path) %>
         <!-- サイドバーボタンを表示 -->
         <button id="sidebar-toggle" aria-label="Toggle Sidebar" class="navbar-item">☰</button>
@@ -57,7 +75,9 @@
     <li><%= link_to 'チャット', chat_rooms_path %></li>
     <li><%= link_to 'セット日カレンダー', calendar_patients_path %></li>
     <li><%= link_to '情報', prostheses_path %></li>
-    <li><%= link_to '集荷', '#' %></li>
+    <li><%= link_to '集荷', shipments_path %></li>
     <li><%= link_to '模型管理', models_path %></li>
+    <li><%= link_to '物品管理', supplies_path %></li>
+    <li><%= link_to '保管庫', archives_patients_path %></li>
   </ul>
 </div>

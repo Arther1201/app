@@ -169,6 +169,7 @@
 .chat-container {
   display: flex;
   justify-content: space-between;
+  margin-top: 6rem; /* 全体の内容を下に配置 */
 }
 
 .messages-section {
@@ -211,4 +212,110 @@
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+/* スマートフォンとタブレット向けのメディアクエリ */
+@media (max-width: 768px) {
+  .chat-container {
+    flex-direction: column; /* 縦に並べる */
+    align-items: center; /* 中央に配置 */
+    margin-top: 4rem; /* スマートフォン・タブレットでも下に配置 */
+  }
+
+  .messages-section,
+  .favorite-section {
+    width: 90%; /* 各セクションを幅90%に */
+    margin-bottom: 20px; /* セクション間に余白を追加 */
+  }
+
+  /* メッセージコンテナのサイズ調整 */
+  .messages-container {
+    max-height: 40vh; /* 高さを少し小さく */
+    width: 100%; /* 横幅を画面に合わせる */
+  }
+
+  /* メッセージバブルの幅を調整 */
+  .message-bubble {
+    max-width: 80%; /* メッセージバブルの最大幅を調整 */
+    font-size: 12px; /* フォントサイズを少し小さく */
+  }
+
+  /* 入力欄のサイズを調整 */
+  .message-input {
+    width: 80%; /* 横幅を画面に合わせる */
+    padding: 8px; /* パディングを少し小さく */
+  }
+
+  /* 送信ボタンのサイズを調整 */
+  .send-button {
+    padding: 8px 16px; /* パディングを少し小さく */
+    font-size: 14px; /* フォントサイズを調整 */
+  }
+
+  /* ヘッダーのタイトル調整 */
+  .custom-heading {
+    font-size: 2rem; /* タイトルのサイズを小さく */
+    margin-top: 1rem; /* タイトルの上のマージンを減らす */
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    flex-direction: column; /* 縦に並べる */
+    align-items: center; /* 中央に配置 */
+    margin-top: 4rem; /* 全体をさらに下に配置 */
+  }
+
+  .messages-section,
+  .favorite-section {
+    width: 95%; /* 各セクションを幅95%に */
+    margin-bottom: 20px; /* セクション間に余白を追加 */
+  }
+
+  /* メッセージコンテナのサイズ調整 */
+  .messages-container {
+    max-height: 30vh; /* 高さをさらに小さく */
+    width: 100%; /* 横幅を画面に合わせる */
+  }
+
+  /* メッセージバブルの幅を調整 */
+  .message-bubble {
+    max-width: 90%; /* メッセージバブルの最大幅を調整 */
+    font-size: 12px; /* フォントサイズを小さく */
+  }
+
+  /* 入力欄のサイズを調整 */
+  .message-input {
+    width: 20rem; /* スマートフォン画面で幅を広げる */
+    padding: 12px; /* パディングを調整して入力欄を広くする */
+    font-size: 18px; /* フォントサイズを大きく */
+  }
+
+  /* 送信ボタンのサイズを調整 */
+  .send-button {
+    padding: 6px 40px; /* ボタンのパディングを調整 */
+    font-size: 16px; /* ボタンのフォントサイズを調整 */
+    padding: 10px; /* パディングを均等にする */
+    width: 100%; /* 幅を100%にして親要素にフィット */
+  }
+
+  /* ヘッダーのタイトル調整 */
+  .custom-heading {
+    font-size: 1.5rem; /* タイトルのサイズをさらに小さく */
+    margin-top: 2rem; /* 上部の余白を減らして少し下に配置 */
+  }
+
+  /* お気に入りメッセージリストのサイズ調整 */
+  .favorite-messages-list {
+    max-height: 30vh; /* 高さを小さく */
+    width: 100%; /* 横幅を画面に合わせる */
+  }
+
+  .favorite-toggle-button {
+    margin-top: 0.1rem; /* スマートフォンの画面で上のマージンを少なくする */
+  }
+
+  .favorite-section {
+    padding-left: 10px; /* スマートフォン用にパディングを調整 */
+  }
 }

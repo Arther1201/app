@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  medical_record_number: MyString
+  impression_date: 2024-09-27
+  prosthesis_type_insurance: MyString
+  prosthesis_type_crown: MyString
+  prosthesis_type_denture: MyString
+  upper_left: MyString
+  upper_right: MyString
+  lower_left: MyString
+  lower_right: MyString
+  metal_amount: 9.99
+  requester: MyString
+  trial_or_set: MyString
+  set_date: 2024-09-27
+  note_checked: false
+  delivery_checked: false
+  archived_year: 1
+
+two:
+  name: MyString
+  medical_record_number: MyString
+  impression_date: 2024-09-27
+  prosthesis_type_insurance: MyString
+  prosthesis_type_crown: MyString
+  prosthesis_type_denture: MyString
+  upper_left: MyString
+  upper_right: MyString
+  lower_left: MyString
+  lower_right: MyString
+  metal_amount: 9.99
+  requester: MyString
+  trial_or_set: MyString
+  set_date: 2024-09-27
+  note_checked: false
+  delivery_checked: false
+  archived_year: 1

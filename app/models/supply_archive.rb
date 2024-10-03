@@ -1,0 +1,2 @@
+class SupplyArchive < ApplicationRecord
+end

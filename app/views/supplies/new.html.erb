@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag 'supplies_new', media: 'all', 'data-turbo-track': 'reload' %>
+
+<body class="supply_new-background">
+  <div class="form-container">
+    <div class="form-scroll-container">
+      <h2>物品作成</h2>
+      <p class="supply_creation_english">Supply Creation</p>
+      <%= form_with(model: @supply, local: true) do |form| %>
+        <fieldset>
+          <legend>物品情報</legend>
+
+          <div class="form_group">
+            <%= form.label :manufacturer, "メーカー" %>
+            <%= form.select :manufacturer, options_for_select([["KO", "KO"], ["ci", "ci"], ["デンツプライシロナ", "デンツプライシロナ"], ["FEED", "FEED"]]), { include_blank: "選択してください" } %>
+          </div>
+      
+          <!-- 分類 -->
+          <div class="form-group">
+            <%= form.label :category, "既存の分類" %>
+            <%= form.select :category, options_for_select(@categories, @supply.category), { include_blank: "選択してください" }, class: "general-input" %>
+
+            <%= form.label :new_category, "新しい分類を追加" %>
+            <%= form.text_field :new_category, class: "general-input", placeholder: "例: レジン" %>
+          </div>
+      
+          <!-- 商品名 -->
+          <div class="form-group">
+            <%= form.label :item_name, "商品名" %>
+            <%= form.text_field :item_name, class: "general-input", placeholder: "例: グローブ" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :price, "価格" %>
+            <%= form.number_field :price, class: "general-input", placeholder: "例: 50" %>
+          </div>
+    
+          <!-- 登録ボタン -->
+          <div class="submit-container">
+            <%= form.submit "登録", class: "btn btn-primary" %>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+</body>

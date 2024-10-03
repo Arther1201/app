@@ -1,0 +1,37 @@
+<%= stylesheet_link_tag 'supplies_show_archive', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="supplies_show_archive_body">
+  <h2 class="archive_supplies_year"><%= @archive.year %>年の物品データ</h2>
+  <div class="archive_suppkies_year_subtitle"><%= @archive.year %> Supplies Data for the Year</div>
+  <table class="supplies_table">
+    <thead>
+      <tr>
+        <th>分類</th>
+        <th>商品名</th>
+        <th>メーカー</th>
+        <th>価格</th>
+        <th>注文日</th>
+        <th>注文数</th>
+        <th>納品日</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @supplies.each do |supply| %>
+        <tr>
+          <td><%= supply["category"] %></td>
+          <td><%= supply["item_name"] %></td>
+          <td><%= supply["manufacturer"] %></td>
+          <td><%= supply["price"] %></td>
+          <td><%= supply["order_date"] %></td>
+          <td><%= supply["order_quantity"] %></td>
+          <td><%= supply["delivery_date"] || '未納品' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-container">
+    <%= paginate @supplies %>
+</div>
+

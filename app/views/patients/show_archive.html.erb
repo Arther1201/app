@@ -1,0 +1,53 @@
+<%= stylesheet_link_tag 'patient_show_archive', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="patient_show_archive_title"><%= params[:year] %>年のアーカイブデータ</div>
+<div class="patient_show_archive_subtitle">Archived Data</div>
+<table>
+  <thead>
+    <tr>
+      <th>印象日</th>
+      <th>カルテ番号</th>
+      <th>氏名</th>
+      <th>補綴種類</th>
+      <th>補綴部位</th>
+      <th>メタル量</th>
+      <th>依頼先</th>
+      <th>セット/試適</th>
+      <th>セット日</th>
+      <th>チェック</th>
+      <th>納品チェック</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @archive_patients.each do |patient| %>
+      <tr>
+        <td><%= patient.impression_date %></td>
+        <td><%= patient.medical_record_number %></td>
+        <td><%= patient.name %></td>
+        <td>
+          <%= [patient.prosthesis_type_insurance, patient.prosthesis_type_crown, patient.prosthesis_type_denture].reject(&:blank?).join(', ') %>
+        </td>
+        <td class="tooth-diagram-font">
+          <%= convert_to_dental_notation(
+            upper_left: JSON.parse(patient.upper_left || '[]'),
+            upper_right: JSON.parse(patient.upper_right || '[]'),
+            lower_left: JSON.parse(patient.lower_left || '[]'),
+            lower_right: JSON.parse(patient.lower_right || '[]')
+          ) %>
+        </td>
+        <td><%= patient.metal_amount %></td>
+        <td><%= patient.requester %></td>
+        <td><%= patient.trial_or_set %></td>
+        <td><%= patient.set_date %></td>
+        <td><%= patient.note_checked ? '済' : '未' %></td>
+        <td><%= patient.delivery_checked ? '済' : '未' %></td>
+        <td><%= link_to '詳細', patient_archive_path(id: patient.id), class: 'btn btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination-container">
+  <%= paginate @archive_patients %>
+</div>

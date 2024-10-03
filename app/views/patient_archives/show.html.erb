@@ -1,0 +1,38 @@
+<h2>アーカイブ患者詳細</h2>
+
+<div class="archive-patient-detail">
+  <p><strong>氏名:</strong> <%= @archive_patient.name %></p>
+  <p><strong>カルテ番号:</strong> <%= @archive_patient.medical_record_number %></p>
+  <p><strong>印象日:</strong> <%= @archive_patient.impression_date %></p>
+
+  <div class="prosthesis-details">
+    <p><strong>補綴種類:</strong></p>
+    <ul>
+      <li>保険補綴: <%= @archive_patient.prosthesis_type_insurance %></li>
+      <li>クラウン: <%= @archive_patient.prosthesis_type_crown %></li>
+      <li>義歯: <%= @archive_patient.prosthesis_type_denture %></li>
+    </ul>
+  </div>
+
+  <div class="tooth-notation">
+    <p><strong>補綴部位:</strong></p>
+    <p>
+      <%= convert_to_dental_notation(
+          upper_left: JSON.parse(@archive_patient.upper_left || '[]'),
+          upper_right: JSON.parse(@archive_patient.upper_right || '[]'),
+          lower_left: JSON.parse(@archive_patient.lower_left || '[]'),
+          lower_right: JSON.parse(@archive_patient.lower_right || '[]')
+        ) %>
+    </p>
+  </div>
+
+  <p><strong>メタル量:</strong> <%= @archive_patient.metal_amount.present? ? "#{@archive_patient.metal_amount}g" : "" %></p>
+  <p><strong>依頼先:</strong> <%= @archive_patient.requester %></p>
+  <p><strong>セット/試適:</strong> <%= @archive_patient.trial_or_set %></p>
+  <p><strong>セット日:</strong> <%= @archive_patient.set_date %></p>
+  <p><strong>チェック:</strong> <%= @archive_patient.note_checked ? '済' : '未' %></p>
+  <p><strong>納品チェック:</strong> <%= @archive_patient.delivery_checked ? '済' : '未' %></p>
+  <p><strong>アーカイブ年度:</strong> <%= @archive_patient.archived_year %>年</p>
+</div>
+
+

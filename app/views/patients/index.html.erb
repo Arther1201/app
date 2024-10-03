@@ -2,6 +2,10 @@
   <h1>患者一覧</h1>
   <p class="patient-list-english">Patient List</p>
 
+  <div class="patient_archive-button">
+    <%= button_to '今年の患者データをアーカイブ', archive_patients_path(year: Date.current.year), method: :post, class: 'patients-btn-archive' %>
+  </div>
+
   <!-- 患者データの表示部分 -->
   <div id="patient-table-container">
     <table>
@@ -66,7 +70,9 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @patients %>
+    <div class="pagination-container">
+      <%= paginate @patients %>
+    </div>
   </div>
 </div>
 

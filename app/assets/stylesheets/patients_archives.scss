@@ -1,0 +1,67 @@
+ /* アーカイブリスト全体のスタイル */
+.archive-list {
+  list-style: none; /* デフォルトのリストマーカーを削除 */
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center; /* 横方向の中央揃え */
+  align-items: center; /* 縦方向の中央揃え */
+  flex-wrap: wrap;
+  gap: 15px; /* リスト項目間のスペース */
+}
+
+/* アーカイブ項目のスタイル */
+.archive-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  width: 250px; /* 各アイテムの幅を設定 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  transition: transform 0.3s, box-shadow 0.3s; /* ホバー効果のためのトランジション */
+  margin-top: 1rem;
+}
+
+/* アーカイブリンクのスタイル */
+.archive-link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ホバー効果 */
+.archive-item:hover {
+  transform: translateY(-5px); /* ホバー時に少し持ち上げる */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* ホバー時の影を強くする */
+}
+
+.patient_yearly_title {
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+  letter-spacing: 0.15em; /* 文字の間隔を広げる */
+  text-transform: uppercase; /* すべて大文字にする */
+  font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+  margin-top: 6rem;
+  font-weight: bold;
+}
+
+.patient_yearly_subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 400; /* フォントの太さを調整 */
+  margin-bottom: 20px; /* テーブルとの余白を追加 */
+  color: #555;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+  letter-spacing: 0.15em; /* 文字の間隔を広げる */
+  text-transform: uppercase; /* すべて大文字にする */
+  font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+  background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+  -webkit-background-clip: text;
+  color: transparent; /* 背景グラデーションで文字の色を表現 */
+  background-clip: text; /* WebKit以外のブラウザでは無効 */
+}
+

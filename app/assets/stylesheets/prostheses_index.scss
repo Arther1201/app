@@ -33,10 +33,11 @@
   
   .alphabet-row {
     display: flex;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
-    margin-left: 5rem;
+    margin-left: 2rem;
+    gap: 10px; /* ボタン間の余白を調整 */
   }
   
   .alphabet-group-title {
@@ -47,15 +48,14 @@
   }
   
   .alphabet-btn {
-    padding: 10px 15px;
-    font-size: 1.2rem;
+    padding: 8px 12px;
+    font-size: 1rem;
     color: #fff;
     background-color: #007bff;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-right: 5px;
     margin-bottom: 5px;
   }
   
@@ -132,3 +132,50 @@
     background-clip: text; /* WebKit以外のブラウザでは無効 */
     margin-bottom: 3rem;
   }
+
+  /* スマートフォンとタブレット用のレスポンシブデザイン */
+@media screen and (max-width: 767px) {
+  .prostheses-title {
+    font-size: 2rem; /* タイトルのフォントサイズを調整 */
+    margin-top: 3rem; /* 上部の余白を調整 */
+  }
+
+  .alphabet-row {
+    margin-left: 1rem; /* 左の余白を減らす */
+    flex-wrap: wrap; /* 折り返しを許可 */
+  }
+
+  .alphabet-btn {
+    padding: 8px 12px; /* ボタンサイズを小さくする */
+    font-size: 1rem; /* ボタンのフォントサイズを調整 */
+  }
+
+  .prostheses_name {
+    font-size: 2rem; /* タイトルのフォントサイズを調整 */
+    margin-top: 4rem; /* 上部の余白を調整 */
+  }
+
+  .prosthesis-details-container {
+    padding: 10px; /* 詳細表示エリアのパディングを調整 */
+  }
+}
+
+/* 非常に小さいスマートフォン用のレスポンシブデザイン */
+@media screen and (max-width: 480px) {
+  .alphabet-row {
+    justify-content: center; /* ボタンを中央に配置 */
+  }
+
+  .prostheses_name {
+    font-size: 1.5rem; /* タイトルのフォントサイズをさらに調整 */
+    margin-top: 2rem; /* 上部の余白を調整 */
+  }
+
+  .prosthesis-title {
+    font-size: 1rem; /* リストのフォントサイズを調整 */
+  }
+
+  .prosthesis-details-container {
+    padding: 5px; /* 詳細表示エリアのパディングを最小化 */
+  }
+}

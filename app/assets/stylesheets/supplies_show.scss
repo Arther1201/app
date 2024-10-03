@@ -1,0 +1,125 @@
+.supply_show_title {
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    margin-top: 6rem;
+}
+
+.supply-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .supply-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .btn-update {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-update:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-back {
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .btn-back:hover {
+    background-color: #5a6268;
+  }
+
+  .supplies_btn-delete {
+    background-color: rgb(220, 11, 11);
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .history-container {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .history-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .history-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .history-container th, .history-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .history-container th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .history-container tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .history-container tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .history-container td {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .supplies_delivery-check {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0; /* チェックボックスの外側の余白をリセット */
+    vertical-align: middle; /* チェックボックスを縦方向に中央揃え */
+  }
+  

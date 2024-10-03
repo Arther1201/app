@@ -1,0 +1,213 @@
+/* 共通のスタイル */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* タイトル */
+.supply_title {
+  margin-top: 5rem;
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  font-weight: bold;
+}
+
+.supply_subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #555;
+  background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+}
+
+/* 検索フォーム */
+.supply-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+.supply-search-input,
+.supply-search-day {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 200px;
+  transition: box-shadow 0.3s ease;
+}
+
+.supply-search-input:focus,
+.supply-search-day:focus {
+  box-shadow: 0 0 10px rgba(29, 78, 216, 0.5);
+}
+
+.supplies_search-form-submit,
+.supply-back-button,
+.btn-archives_sipplies,
+.supplies_btn-archive {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-new_supplies {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-right: 5rem;
+}
+
+.supplies_search-form-submit:hover,
+.supply-back-button:hover,
+.btn-new_supplies:hover,
+.btn-archives_sipplies:hover,
+.supplies_btn-archive:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* ボタンを含むコンテナ */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* テーブル全体のスタイル */
+.supplies_table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+/* .supplies_table 内の独自のスタイル */
+.supplies_table th.supplies-th,
+.supplies_table td.supplies-td {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+/* thのスタイル */
+.supplies_table th.supplies-th {
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* tdのスタイル */
+.supplies_table td.supplies-td {
+  font-size: 14px;
+  overflow: hidden;
+}
+
+/* 注文数、注文総数、操作カラムに追加スタイルが必要なら以下に */
+.supplies_table .supplies_quantity,
+.supplies_table .supplies_all_quantity,
+.supplies_table .supplies_detail {
+  text-align: center; /* 必要なら特定の列に対してのスタイル */
+}
+
+/* フォームの入力フィールド */
+.stock-input {
+  width: 100%;
+  max-width: 60px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* 操作ボタン */
+.order-button,
+.btn-detail {
+  padding: 5px 15px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-button:hover,
+.btn-detail:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* スマホ用のスタイル調整 */
+@media screen and (max-width: 767px) {
+  .supply-search-form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .supply-search-input,
+  .supply-search-day {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .supplies_table {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  /* 注文ボタンと入力フィールドを縦に並べる */
+  .stock-input,
+  .order-button {
+    width: 100%;
+    max-width: 100px; /* スマホでの最大幅 */
+    margin-bottom: 5px; /* ボタンと入力フィールドの間に余白を追加 */
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+  }
+
+  .supplies_btn-archive,
+  .btn-archives_sipplies,
+  .supply-back-button,
+  .btn-new_supplies,
+  .supplies_search-form-submit {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}

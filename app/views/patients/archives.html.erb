@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag 'patients_archives', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="patient_yearly_title">年度別アーカイブ一覧</div>
+<div class="patient_yearly_subtitle">Yearly Archive List</div>
+<ul class="archive-list">
+  <% @archives.each do |archive| %>
+    <li class="archive-item">
+      <%= link_to "#{archive.archived_year}年の患者データ", show_archive_patients_path(year: archive.archived_year), class: 'archive-link' %>
+    </li>
+  <% end %>
+</ul>

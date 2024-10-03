@@ -6,59 +6,44 @@
 
 .header {
   background-color: #033465; /* 任意の背景色を指定 */
-  padding: 1rem;
-  position: fixed; /* ヘッダーを固定する */
+  padding: 0.5rem 1rem; /* パディングを調整 */
+  position: fixed; /* ヘッダーを固定 */
   top: 0;
-  left: 0; /* 左端から開始 */
-  right: 0; /* 右端まで広がる */
+  left: 0;
+  right: 0;
+  height: 60px; /* ヘッダーの固定高さ */
   width: 100%;
-  z-index: 1000; /* 他の要素より前に表示する */
+  z-index: 1000; /* 他の要素より前に表示 */
   color: #ffffff; /* ヘッダー内のテキスト色を白に設定 */
-}
-
-
-nav {
   display: flex;
-  justify-content: space-between; /* ナビゲーションメニューを左右に配置 */
-  align-items: center;
-  width: 100%;
-}
-
-.navbar-end {
-  display: flex;
-  align-items: center;
-  margin-left: auto; /* 左側の余白を自動で調整して右寄せに */
-}
-
-.department {
-  display: inline-flex; /* 横並びにする */
+  justify-content: space-between;
   align-items: center;
 }
 
-.department-name {
-  display: inline;
+/* ヘッダーの高さ分の余白をコンテンツに追加 */
+.main-content {
+  margin-top: 60px; /* ヘッダーの高さに合わせて調整 */
 }
 
 .navbar-item {
-  display: inline; /* インライン要素として表示 */
-  margin-left: 1rem; /* 横並びの間に余白を追加 */
-  background-color: #033465; /* ヘッダーと同じ背景色を指定 */
-  color: #ffffff; /* テキスト色を白に指定 */
-  padding: 0.3rem 2rem; /* パディングを設定 */
-  border: none; /* ボタンの境界線をなくす */
-  font: inherit; /* フォントを継承 */
-  cursor: pointer; /* カーソルをポインターに */
+  display: inline-block;
+  margin-left: 1rem;
+  color: #ffffff;
+  padding: 0.3rem 1rem;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 .navbar-item:hover {
-  text-decoration: underline; /* ホバー時に下線を表示 */
+  text-decoration: underline;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%; /* コンテナが全幅を取るように設定 */
+  width: 100%;
 }
 
 .logout-button {
@@ -66,5 +51,32 @@ nav {
 }
 
 .navbar-item, a {
-  text-decoration: none; /* デフォルトの下線を消す */
+  text-decoration: none;
+}
+
+/* レスポンシブデザイン: スマートフォン用 */
+@media screen and (max-width: 768px) {
+  .header {
+    height: auto; /* 高さを自動調整 */
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-item {
+    margin-left: 1rem;
+    padding: 0.5rem;
+  }
+
+  .navbar-end {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    width: auto;
+  }
+
+  /* モバイルでもメインコンテンツのマージンを確保 */
+  .main-content {
+    margin-top: 100px;
+  }
 }

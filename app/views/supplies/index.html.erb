@@ -1,0 +1,121 @@
+<%= stylesheet_link_tag 'supplies_index', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="supply-container">
+  <div class="supply_title">物品一覧</div>
+  <div class="supply_subtitle">Inventory List</div>
+
+  <!-- 検索フォーム -->
+  <div class="search-form">
+    <%= form_with url: supplies_path, method: :get, local: true, class: "supply-search-form" do |f| %>
+      <div class="create-supplies-button">
+        <%= link_to '物品作成', new_supply_path, class: 'btn-new_supplies' %>
+      </div>
+      <div class="supplies_input-group">
+        <!-- 分類検索 -->
+        <%= f.select :category, options_for_select(@categories, params[:category]), { include_blank: "分類で検索" }, class: "supply-search-input" %>
+        <!-- 商品名検索 -->
+        <%= f.text_field :name, placeholder: "商品名で検索", value: params[:name], class: "supply-search-input", autocomplete: "off" %>
+        <!-- 注文日検索 -->
+        <div class="search-field">
+          <%= f.label :order_date, "注文日", class: "search-label" %>
+          <%= f.date_field :order_date, value: params[:order_date], class: "supply-search-day" %>
+        </div>
+      </div>
+      <div class="button-group">
+        <%= f.submit "検索", class: "supplies_search-form-submit" %>
+        <%= link_to '物品一覧に戻る', supplies_path, class: 'supply-back-button' %>
+        <%= link_to 'アーカイブ一覧', archives_supplies_path, class: 'btn-archives_sipplies' %>
+        <%= button_to '今年のデータをアーカイブ', archive_supplies_path(year: Date.current.year), method: :post, class: 'supplies_btn-archive' %>
+      </div>
+    <% end %>
+  </div>
+
+  <table class="supplies_table">
+    <thead>
+      <tr>
+        <th class="supplies-th">分類</th>
+        <th class="supplies-th">商品名</th>
+        <th class="supplies-th">メーカー</th>
+        <th class="supplies-th">価格</th>
+        <th class="supplies-th supplies_quantity">注文数</th>
+        <th class="supplies-th supplies_all_quantity">注文総数</th>
+        <th class="supplies-th supplies_detail">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @supplies.each do |supply| %>
+        <tr>
+          <td class="supplies-td"><%= supply.category %></td>
+          <td class="supplies-td"><%= supply.item_name %></td>
+          <td class="supplies-td"><%= supply.manufacturer %></td>
+          <td class="supplies-td"><%= supply.price %></td>
+          <td class="supplies-td">
+            <%= form_with(model: supply, url: update_quantity_supply_path(supply), method: :patch, local: true) do |f| %>
+              <%= f.number_field :order_quantity, value: 0, min: 0, class: "stock-input" %>
+              <%= f.submit '注文', class: 'order-button' %>
+            <% end %>
+          </td>
+          <td class="supplies-td supplies_text-right"><%= supply.stock_quantity %></td>
+          <td class="supplies-td"><%= link_to '詳細', supply_path(supply), class: 'btn-detail' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener('turbo.load', () => {
+    const stockInputs = document.querySelectorAll('.stock-input');
+  
+    stockInputs.forEach(input => {
+      input.addEventListener('change', (event) => {
+        const stockQuantity = event.target.value;
+        const supplyId = event.target.getAttribute('data-id');
+  
+        fetch(`/supplies/${supplyId}/update_stock`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ stock_quantity: stockQuantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            alert('在庫数が更新されました。');
+          } else {
+            alert('エラーが発生しました: ' + data.message);
+          }
+        });
+      });
+    });
+
+    document.body.addEventListener('change', function(event) {
+      if (event.target.matches('.delivery-check')) {
+        const form = event.target.closest('form');
+        if (form) {
+          const formData = new FormData(form);
+          const url = form.action;
+
+          fetch(url, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
+      }
+    });
+  });
+</script>

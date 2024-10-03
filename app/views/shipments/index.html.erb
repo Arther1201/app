@@ -1,0 +1,40 @@
+<%= stylesheet_link_tag 'shipments', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="shipments-container">
+  <div class="shipments_title">集荷情報一覧</div>
+  <div class="shipments_subtitle">Pickup Information List</div>
+
+  <table class="shipment-table">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shipments.each do |shipment| %>
+        <tr>
+          <td><%= shipment[:name] %></td>
+          <td>
+            <% if shipment[:homepage] %>
+              ホームページ: <%= link_to 'こちら', shipment[:homepage], target: '_blank' %><br>
+              クロネコID: <%= shipment[:id] %><br>
+              パスワード: <%= shipment[:password] %>
+            <% end %>
+        
+            <% if shipment[:phone] %>
+              TEL: <%= shipment[:phone] %><br>
+              <% if shipment[:name] == '杏友会' %>
+                医院ID: <%= shipment[:hospital_id] %>
+              <% end %>
+            <% end %>
+        
+            <% if shipment[:address].present? %>
+              住所: <%= shipment[:address] %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

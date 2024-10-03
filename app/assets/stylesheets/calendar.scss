@@ -1,6 +1,6 @@
 #calendar {
-    width: 60rem;
-    flex-grow: 1;
+    width: 100%; /* 画面サイズに合わせる */
+    max-width: 60rem; /* デスクトップでは最大幅を60remに */
     margin: 0 auto;
     padding-bottom: 90px;
     height: calc(100vh - 100px);
@@ -10,9 +10,8 @@
   body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* ビューポートの高さに応じて調整 */
+    min-height: 100vh;
     margin: 0;
-    height: 10rem;
   }
 
   .fc-daygrid-day-number {
@@ -31,3 +30,27 @@
     font-family: 'Baloo 2', cursive;
   }
   
+  /* スマートフォンとタブレットのレイアウト調整 */
+@media screen and (max-width: 767px) {
+  #calendar {
+    padding-bottom: 50px; /* 下の余白を減らす */
+    height: calc(100vh - 150px); /* ヘッダーの高さを考慮 */
+  }
+
+  h6 {
+    margin-top: 8rem; /* タイトルの上の余白を調整 */
+    font-size: 2rem; /* タイトルのフォントサイズを小さく */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #calendar {
+    padding-bottom: 30px; /* より小さい画面での調整 */
+    height: calc(100vh - 120px);
+  }
+
+  h6 {
+    margin-top: 6rem; /* タイトルの上の余白をさらに調整 */
+    font-size: 1.5rem; /* タイトルのフォントサイズをさらに小さく */
+  }
+}

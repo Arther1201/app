@@ -145,6 +145,51 @@ class PatientsController < ApplicationController
     end
   end
   
+  def archive
+    year = params[:year] || Date.current.year
+    patients_to_archive = Patient.where('extract(year from impression_date) = ?', year)
+  
+    patients_to_archive.each do |patient|
+      archive_entry = PatientArchive.new(
+        patient_id: patient.id,
+        name: patient.name,
+        medical_record_number: patient.medical_record_number,
+        impression_date: patient.impression_date,
+        prosthesis_type_insurance: patient.prosthesis_type_insurance, # 補綴種類の保存
+        prosthesis_type_crown: patient.prosthesis_type_crown,
+        prosthesis_type_denture: patient.prosthesis_type_denture,
+        upper_left: patient.upper_left, # 補綴部位の保存
+        upper_right: patient.upper_right,
+        lower_left: patient.lower_left,
+        lower_right: patient.lower_right,
+        metal_amount: patient.metal_amount,
+        requester: patient.requester,
+        trial_or_set: patient.trial_or_set,
+        set_date: patient.set_date,
+        note_checked: patient.note_checked,
+        delivery_checked: patient.delivery_checked,
+        archived_year: year
+      )
+  
+      unless archive_entry.save
+        flash[:alert] = "アーカイブに失敗しました: #{archive_entry.errors.full_messages.join(', ')}"
+        redirect_to patients_path and return
+      end
+    end
+  
+    flash[:notice] = "#{year}年の患者データをアーカイブしました。"
+    redirect_to patients_path
+  end
+  
+  # アーカイブの一覧を表示
+  def archives
+    @archives = PatientArchive.select(:archived_year).distinct.order(archived_year: :desc)
+  end
+  
+  # アーカイブの詳細を表示
+  def show_archive
+    @archive_patients = PatientArchive.where(archived_year: params[:year]).page(params[:page]).per(20)
+  end
 
   private
 

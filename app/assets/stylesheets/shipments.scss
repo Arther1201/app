@@ -1,0 +1,92 @@
+  /* 全体のコンテナに左右の余白を設定 */
+  .shipments-container {
+    max-width: 80%; /* コンテンツの最大幅を設定 */
+    margin: 0 auto; /* 水平中央に配置 */
+    padding: 20px; /* 上下左右に余白を追加 */
+  }
+  
+  .shipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .shipment-table th, .shipment-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .shipment-table th {
+    background-color: #f9f9f9;
+  }
+  
+  .shipment-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .shipments_title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    margin-top: 6rem;
+  }
+
+  .shipments_subtitle {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 400; /* フォントの太さを調整 */
+    margin-bottom: 40px; /* テーブルとの余白を追加 */
+    color: #555;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* テキストに影をつける */
+    letter-spacing: 0.15em; /* 文字の間隔を広げる */
+    text-transform: uppercase; /* すべて大文字にする */
+    font-family: 'Roboto', sans-serif; /* スタイリッシュなフォントを適用 */
+    background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+    -webkit-background-clip: text;
+    color: transparent; /* 背景グラデーションで文字の色を表現 */
+    background-clip: text; /* WebKit以外のブラウザでは無効 */
+  }
+
+  /* スマートフォンとタブレット用のレスポンシブデザイン */
+@media screen and (max-width: 1024px) {
+    .shipments_title {
+        font-size: 2.5rem; /* フォントサイズを調整 */
+        margin-top: 4rem;
+    }
+
+    .shipments_subtitle {
+        font-size: 1.1rem; /* フォントサイズを調整 */
+        margin-bottom: 30px;
+    }
+
+    .shipment-table th, .shipment-table td {
+        padding: 8px; /* パディングを少し減らす */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .shipments_title {
+        font-size: 2rem; /* フォントサイズをさらに小さく */
+        margin-top: 4rem;
+    }
+
+    .shipments_subtitle {
+        font-size: 1rem; /* フォントサイズをさらに小さく */
+        margin-bottom: 20px;
+    }
+
+    .shipment-table th, .shipment-table td {
+        padding: 5px; /* パディングをさらに減らす */
+    }
+
+    .shipments-container {
+        max-width: 95%; /* コンテナの最大幅を広げる */
+        padding: 10px; /* コンテナのパディングを減らす */
+    }
+}

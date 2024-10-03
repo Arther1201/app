@@ -97,4 +97,53 @@
     background-clip: text; /* WebKit以外のブラウザでは無効 */
     margin-bottom: 3rem;
   }
+
+  /* レスポンシブデザイン: スマートフォンやタブレット向け */
+@media (max-width: 768px) {
+  .patient-details-container {
+      padding: 10px;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+  }
+
+  .patient-detail {
+      flex-direction: column; /* 詳細を縦並びにする */
+      margin-left: 0; /* 左余白をリセット */
+  }
+
+  .patient-detail strong {
+      width: 100%; /* 強調テキストの幅を100%に変更 */
+      margin-bottom: 0.5rem; /* 下余白を追加 */
+  }
+
+  .patient-actions {
+      margin-left: 0; /* 左余白をリセット */
+      text-align: center; /* アクションボタンを中央揃え */
+  }
+
+  .thumbnail {
+      max-width: 100px; /* 画像のサイズを小さく */
+      max-height: 100px;
+  }
+
+  .patient_details {
+      font-size: 1rem; /* フォントサイズを小さく */
+  }
+}
+
+@media (max-width: 480px) {
+  .patient-detail strong {
+      font-size: 1rem; /* フォントサイズをさらに小さく */
+  }
+
+  .thumbnail {
+      max-width: 80px; /* 画像のサイズをさらに小さく */
+      max-height: 80px;
+  }
+
+  .patient_details {
+      font-size: 0.9rem; /* フォントサイズをさらに小さく */
+  }
+}
   
