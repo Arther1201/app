@@ -6,7 +6,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if User.exists?(email: @user.email)
+      flash[:alert] = "このメールアドレスはすでに登録されています。"
+      render :new
+    elsif @user.save
       log_in(@user)
       redirect_to patients_path, notice: 'ユーザー登録が完了しました。'
     else

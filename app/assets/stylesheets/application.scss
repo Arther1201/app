@@ -18,7 +18,10 @@
  */
 
 /* app/assets/stylesheets/application.css */
-  
+body {
+  font-family: 'Noto Sans JP', Arial, sans-serif;
+}
+
   .alert-notice {
     background-color: #dff0d8;
     color: #3c763d;
