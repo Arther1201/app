@@ -13,18 +13,18 @@ module PatientsHelper
     if upper_left.present? && upper_right.present?
       notation << "#{upper_right}⊥#{upper_left}"
     elsif upper_left.present?
-      notation << "⸤#{upper_left}"  # 左側だけの場合も降順
+      notation << "⌞#{upper_left}"  # 左側だけの場合も降順
     elsif upper_right.present?
-      notation << "#{upper_right}⸥"  # 右側だけの場合も昇順
+      notation << "#{upper_right}⌟"  # 右側だけの場合も昇順
     end
   
     # 下顎の処理
     if lower_left.present? && lower_right.present?
       notation << "#{lower_right}⊤#{lower_left}"
     elsif lower_left.present?
-      notation << "⸢#{lower_left}"  # 左側だけの場合も降順
+      notation << "⌜#{lower_left}"  # 左側だけの場合も降順
     elsif lower_right.present?
-      notation << "#{lower_right}⸣"  # 右側だけの場合も昇順
+      notation << "#{lower_right}⌝"  # 右側だけの場合も昇順
     end
   
     notation.join(" ")
