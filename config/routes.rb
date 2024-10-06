@@ -86,6 +86,8 @@ Rails.application.routes.draw do
   get  '/password/edit', to: 'users#edit_password', as: 'edit_password'
   patch '/password/update', to: 'users#update_password', as: 'update_password'
 
+  get '/health', to: 'health#show'
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
