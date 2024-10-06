@@ -1,0 +1,326 @@
+<%= stylesheet_link_tag 'metal_show', media: 'all', 'data-turbo-track': 'reload' %>
+
+<% breadcrumb :metals_show, @metal %>
+<div class="container my-5 vertical-container">
+  <!-- 購入履歴 -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white text-center">
+      <h2 class="h4 my-2"><%= @metal.name %> の購入履歴</h2>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>購入日</th>
+            <th>購入量 (g)</th>
+            <th>価格 (円)</th>
+            <th>仕入れ先</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @purchases.each do |purchase| %>
+            <tr>
+              <td>
+                <%= form_with(model: [@metal, purchase], local: true, url: metal_metal_purchase_path(@metal, purchase), method: :patch) do |f| %>
+                  <%= f.date_field :purchase_date, value: purchase.purchase_date, id: "purchase_date_#{purchase.id}" %>
+              </td>
+              <td>
+                  <%= f.number_field :purchase_quantity, value: purchase.purchase_quantity, id: "purchase_quantity_#{purchase.id}" %> g
+              </td>
+              <td>
+                  ¥<%= f.number_field :price, value: purchase.price, id: "price_#{purchase.id}" %>
+              </td>
+              <td>
+                  <%= f.text_field :supplier, value: purchase.supplier, id: "supplier_#{purchase.id}" %>
+              </td>
+              <td class="operation-buttons">
+                <%= f.submit '更新', class: 'btn btn-primary btn-sm custom-edit-btn' %>
+                <% end %>
+
+                <%= button_to '削除', metal_metal_purchase_path(@metal, purchase), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn custom-delete-btn btn-sm' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="metal_show_center my-3">
+        <%= link_to 'メタルの購入を追加', new_purchase_metal_path(@metal), class: 'metal_show_bun btn btn-primary btn-lg' %>
+      </div>
+    </div>
+  </div>
+
+  <!-- 残量の表示 -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-warning text-white text-center">
+      <h2 class="h4 my-2">現在の残量</h2>
+    </div>
+    <div class="card-body">
+      <p id="remaining-quantity" class="text-center"><strong>残量:</strong> <%= @metal.remaining_quantity %> g</p>
+    </div>
+  </div>
+
+  <!-- 使用履歴 -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-secondary text-white text-center">
+      <h2 class="h4 my-2">使用履歴</h2>
+    </div>
+    <div class="card-body">
+      <div class="center-form">
+        <%= form_with(model: [@metal, MetalUsage.new], remote: true, url: metal_metal_usages_path(@metal), method: :post, id: 'usage-form') do |f| %>
+          <div class="form-metal_show mb-3">
+            <%= f.label :used_quantity, '使用量 (g)', for: "used_quantity_#{@metal.id}" %>
+            <%= f.number_field :used_quantity, step: 0.1, class: 'form-control', id: "used_quantity_#{@metal.id}" %>
+          </div>
+          <div class="form-metal_show mb-3">
+            <%= f.label :department, '使用技工名', for: "department_#{@metal.id}" %>
+            <%= f.text_field :department, class: 'form-control', id: "department_#{@metal.id}" %>
+          </div>
+          <div class="form-metal_show mb-3">
+            <%= f.label :used_date, '使用日', for: "used_date_#{@metal.id}" %>
+            <%= f.date_field :used_date, class: 'form-control', id: "used_date_#{@metal.id}" %>
+          </div>
+          <div class="form-metal_show text-center">
+            <%= f.submit '使用する', class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
+
+      <table class="table table-bordered table-hover mt-4">
+        <thead class="table-dark">
+          <tr>
+            <th>使用日</th>
+            <th>使用技工名</th>
+            <th>使用量 (g)</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="usage-history">
+          <% @usages.each do |usage| %>
+            <tr>
+              <td><%= usage.used_date %></td>
+              <td><%= usage.department %></td>
+              <td><%= usage.used_quantity %> g</td>
+              <td>
+                <%= link_to '削除', metal_metal_usage_path(@metal, usage), method: :delete, remote: true, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm', id: "delete-usage-#{usage.id}" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 統計 -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-info text-white text-center">
+      <h2 class="h4 my-2">統計</h2>
+    </div>
+    <div class="card-body">
+      <p id="total-usage" class="text-center"><strong>総使用量:</strong> <%= @usages.sum(:used_quantity) %> g</p>
+    </div>
+  </div>
+
+  <!-- グラフ -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header bg-success text-white text-center">
+      <h2 class="h4 my-2">購入金額のグラフ</h2>
+      <div class="btn-group" role="group" aria-label="期間選択">
+        <button type="button" class="btn btn-secondary" id="day-view">日</button>
+        <button type="button" class="btn btn-secondary" id="week-view">週</button>
+        <button type="button" class="btn btn-secondary" id="month-view">月</button>
+      </div>
+    </div>
+    <div class="card-body chart-container">
+      <canvas id="purchase-chart" class="small-chart"></canvas>
+    </div>
+  </div>
+
+<script>
+document.addEventListener('turbo:load', function() {
+  var chartElement = document.getElementById('purchase-chart');
+  var currentView = 'day';
+
+  if (chartElement) {
+    var ctx = chartElement.getContext('2d');
+
+    if (window.chart) {
+      window.chart.destroy();
+    }
+
+    // 初期グラフの描画
+    renderChart('day');
+
+    // ボタンクリックイベント
+    document.getElementById('day-view').addEventListener('click', function() {
+      currentView = 'day';
+      renderChart(currentView);
+    });
+    document.getElementById('week-view').addEventListener('click', function() {
+      currentView = 'week';
+      renderChart(currentView);
+    });
+    document.getElementById('month-view').addEventListener('click', function() {
+      currentView = 'month';
+      renderChart(currentView);
+    });
+
+    // グラフを描画する関数
+    function renderChart(view) {
+      var labels, data;
+
+      if (view === 'day') {
+        labels = <%= @purchases.map { |purchase| purchase.purchase_date&.strftime('%Y-%m-%d') }.to_json.html_safe %>;
+        data = <%= @purchases.map do |purchase|
+          # メタルの種類に応じて計算単位を変更
+          unit = case purchase.metal&.name
+                 when 'パラジウム'
+                   30.0
+                 when 'ゴールド(24K)'
+                   5.0
+                 else
+                   10.0
+                 end
+          purchase.price.present? ? (purchase.price / (purchase.purchase_quantity / unit)) : 0
+        end.to_json.html_safe %>;
+      } else if (view === 'week') {
+        labels = generateWeeklyLabels();
+        data = generateWeeklyData();
+      } else if (view === 'month') {
+        labels = generateMonthlyLabels();
+        data = generateMonthlyData();
+      }
+
+      if (window.chart) {
+        window.chart.destroy();
+      }
+
+      window.chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '購入金額 (円)',
+            data: data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: '金額 (円)'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: '期間'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            }
+          }
+        }
+      });
+    }
+
+    // 週ごとのラベルを生成する関数
+    function generateWeeklyLabels() {
+      // ここで週ごとのラベルを生成します
+      return ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    }
+
+    // 週ごとのデータを生成する関数
+    function generateWeeklyData() {
+      // ここで週ごとのデータを生成します
+      return [1000, 2000, 1500, 3000];
+    }
+
+    // 月ごとのラベルを生成する関数
+    function generateMonthlyLabels() {
+      // ここで月ごとのラベルを生成します
+      return ['January', 'February', 'March'];
+    }
+
+    // 月ごとのデータを生成する関数
+    function generateMonthlyData() {
+      // ここで月ごとのデータを生成します
+      return [5000, 7000, 6000];
+    }
+  }
+
+  const usageForm = document.getElementById('usage-form');
+
+  if (usageForm && !usageForm.dataset.listenerAdded) {
+    usageForm.addEventListener('submit', handleUsageFormSubmit);
+    usageForm.dataset.listenerAdded = true; // リスナーが追加されたことを示すデータ属性を追加
+  }
+});
+
+function handleUsageFormSubmit(event) {
+  event.preventDefault();
+
+  const usageForm = event.target;
+  const formData = new FormData(usageForm);
+
+  fetch(usageForm.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.success) {
+      // 残量の更新
+      const remainingQuantityElement = document.getElementById('remaining-quantity');
+      if (remainingQuantityElement) {
+        remainingQuantityElement.innerText = `残量: ${data.remaining_quantity} g`;
+      }
+
+      // 総使用量の更新
+      const totalUsageElement = document.getElementById('total-usage');
+      if (totalUsageElement) {
+        totalUsageElement.innerText = `総使用量: ${data.total_usage} g`;
+      }
+
+      // 使用履歴の更新
+      const usageHistory = document.getElementById('usage-history');
+      if (usageHistory) {
+        // 新しい使用履歴のデータを使って追加
+        usageHistory.insertAdjacentHTML('beforeend', `
+          <tr>
+            <td>${data.usage.used_date}</td>
+            <td>${data.usage.department}</td>
+            <td>${data.usage.used_quantity} g</td>
+          </tr>
+        `);
+      }
+
+      // フォームの入力をクリア
+      usageForm.reset();
+    } else {
+      alert(`使用量の登録に失敗しました: ${data.errors.join(', ')}`);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+</script>

@@ -143,6 +143,21 @@ crumb :archive_patient_show do |patient_archive|
   end
 end
 
+crumb :metals do
+  link "メタル一覧", metals_path
+  parent :patients
+end
+
+crumb :metals_new do
+  link "メタルの新規登録", new_metal_path
+  parent :metals
+end
+
+crumb :metals_show do |metal|
+  link "購入履歴", metal_path(metal)
+  parent :metals
+end
+
 
     
 # crumb :projects do

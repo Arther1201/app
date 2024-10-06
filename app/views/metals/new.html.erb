@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag 'metal_new', media: 'all', 'data-turbo-track': 'reload' %>
+
+<% breadcrumb :metals_new %>
+<div class="metal_new_container">
+  <div class="metal_new_title">メタルの新規登録</div>
+  <div class="metal_new_subtitle">New Metal Registration</div>
+
+  <div class="center-form-container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <%= form_with(model: @metal, local: true) do |form| %>
+          <div class="form-metal_new mb-4">
+            <%= form.label :name, "メタルの種類", class: "form-metal_new_label" %>
+            <%= form.text_field :name, class: "form-control form-control-lg", placeholder: "例: ゴールド, プラチナ" %>
+          </div>
+
+          <div class="text-center">
+            <%= form.submit "登録", class: "btn btn-metal_primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<%= stylesheet_link_tag 'metal_index', media: 'all', 'data-turbo-track': 'reload' %>
+
+<% breadcrumb :metals %>
+<div class="metal_index_container">
+  <div class="metal_index_title">メタル一覧</div>
+  <div class="metal_index_subtitle">Metal List</div>
+
+  <div class="btn-container">
+    <%= link_to '新しいメタルを追加', new_metal_path, class: 'btn btn-metal_primary' %>
+  </div>
+
+  <table class="metals_table">
+    <thead>
+      <tr>
+        <th>メタルの種類</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @metals.each do |metal| %>
+        <tr class="metals_list">
+          <td class="metal_name"><%= metal.name %></td>
+          <td class="metal_show"><%= link_to '詳細', metal_path(metal), class: 'btn btn-metal_detail' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

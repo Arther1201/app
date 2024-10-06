@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_03_064912) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -39,6 +39,40 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_03_064912) do
     t.datetime "updated_at", null: false
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "metal_purchases", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "metal_id", null: false
+    t.date "purchase_date"
+    t.decimal "purchase_quantity", precision: 10
+    t.decimal "price", precision: 10
+    t.string "supplier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["metal_id"], name: "index_metal_purchases_on_metal_id"
+  end
+
+  create_table "metal_usages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "metal_id", null: false
+    t.string "department"
+    t.date "used_date"
+    t.decimal "used_quantity", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["metal_id"], name: "index_metal_usages_on_metal_id"
+  end
+
+  create_table "metals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "purchase_date"
+    t.date "consumption_date"
+    t.string "consumption_place"
+    t.decimal "remaining_quantity", precision: 10
+    t.decimal "purchase_quantity", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10
+    t.string "supplier"
   end
 
   create_table "models", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -156,5 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_03_064912) do
   add_foreign_key "chat_rooms", "departments"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "metal_purchases", "metals"
+  add_foreign_key "metal_usages", "metals"
   add_foreign_key "orders", "supplies"
 end

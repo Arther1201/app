@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  purchase_date: 2024-10-04
+  consumption_date: 2024-10-04
+  consumption_place: MyString
+  remaining_quantity: 9.99
+  purchase_quantity: 9.99
+
+two:
+  name: MyString
+  purchase_date: 2024-10-04
+  consumption_date: 2024-10-04
+  consumption_place: MyString
+  remaining_quantity: 9.99
+  purchase_quantity: 9.99

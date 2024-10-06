@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'metal_usages/new'
+  get 'metal_usages/create'
+  get 'metals/index'
+  get 'metals/new'
+  get 'metals/create'
+  get 'metals/edit'
+  get 'metals/update'
+  get 'metals/show'
   get 'supplies/index'
   get 'messages/create'
   get 'chat_rooms/index'
@@ -28,16 +36,28 @@ Rails.application.routes.draw do
   resources :models do
     patch 'update_storage_location', on: :member
   end
+  
   resources :chat_rooms, only: [:index, :show] do
     resources :messages, only: [:create] do
       post 'favorite', on: :member
     end
   end
+
   resources :prostheses, only: [:index, :show] do
     collection do
       get 'list', to: 'prostheses#list'
     end
   end
+
+  resources :metals do
+    resources :metal_purchases, only: [:edit, :update, :destroy]
+    resources :metal_usages, only: [:new, :create, :destroy]
+    member do
+      get 'new_purchase'
+      post 'create_purchase'
+    end
+  end
+
   resources :supplies, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
     member do
       patch :update_quantity

@@ -43,6 +43,14 @@
         <%= link_to '戻る', show_archive_patients_path(year: @archive_patient.archived_year), class: "navbar-item" %>
       <% elsif current_page?(shipments_path) %> 
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(metals_path) %> 
+        <%= link_to '戻る', patients_path, class: "navbar-item" %>
+      <% elsif current_page?(new_metal_path) %> 
+        <%= link_to '戻る', metals_path, class: "navbar-item" %>
+      <% elsif @metal.present? && current_page?(metal_path(@metal)) %> 
+        <%= link_to '戻る', metals_path, class: "navbar-item" %>
+      <% elsif @metal.present? && current_page?(new_purchase_metal_path(@metal)) %> 
+        <%= link_to '戻る', metal_path(@metal), class: "navbar-item" %>
       <% elsif request.fullpath.start_with?(patients_path) %>
         <!-- サイドバーボタンを表示 -->
         <button id="sidebar-toggle" aria-label="Toggle Sidebar" class="navbar-item">☰</button>
@@ -79,5 +87,6 @@
     <li><%= link_to '模型管理', models_path %></li>
     <li><%= link_to '物品管理', supplies_path %></li>
     <li><%= link_to '保管庫', archives_patients_path %></li>
+    <li><%= link_to 'メタル保管', metals_path %></li>
   </ul>
 </div>

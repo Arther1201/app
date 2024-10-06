@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  metal: one
+  department: MyString
+  used_date: 2024-10-05
+  used_quantity: 9.99
+
+two:
+  metal: two
+  department: MyString
+  used_date: 2024-10-05
+  used_quantity: 9.99

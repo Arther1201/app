@@ -1,0 +1,2 @@
+module MetalPurchasesHelper
+end

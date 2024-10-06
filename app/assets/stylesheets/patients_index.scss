@@ -38,7 +38,6 @@ th {
 
 /* 名前のセルに対するスタイル調整 */
 td {
-  white-space: nowrap; /* テキストを折り返さない */
   overflow: hidden; /* 溢れたテキストを非表示に */
   text-overflow: ellipsis; /* 溢れたテキストに省略記号を表示 */
 }

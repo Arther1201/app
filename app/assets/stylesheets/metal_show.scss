@@ -1,0 +1,218 @@
+/* 全体コンテナのスタイル */
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+/* カードのスタイル */
+.card {
+  width: 90%;
+  max-width: 1200px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* テーブルのスタイル */
+.table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* 操作ボタンのスタイル */
+.operation-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* カスタムボタンスタイル */
+.custom-edit-btn,
+.custom-delete-btn {
+  display: inline-block;
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.custom-edit-btn {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.custom-delete-btn {
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.custom-delete-btn:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* フォームスタイル */
+.form-metal_show {
+  font-weight: bold;
+  margin: 1rem auto;
+  width: 75%;
+  max-width: 600px;
+}
+
+/* フォームを中央に配置するスタイル */
+.center-form {
+  display: flex;
+  justify-content: center;
+}
+
+.center-form form {
+  width: 75%;
+  max-width: 600px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* テーブルの中央配置 */
+.center-table {
+  display: flex;
+  justify-content: center;
+}
+
+.center-table table {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* テーブルヘッダーのスタイル */
+.table-dark th {
+  background-color: #343a40;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ボタンの中央配置とスタイル */
+.metal_show_center {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* カスタムボタンのスタイル */
+.metal_show_bun {
+  width: 200px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  transition: all 0.3s ease;
+}
+
+.metal_show_bun:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-secondary {
+  width: 100px;
+}
+
+.small-chart {
+  width: 800px !important;
+  height: 500px !important;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center; /* 横方向の中央揃え */
+  align-items: center; /* 縦方向の中央揃え */
+}
+
+/* スマホ画面サイズ用 */
+@media (max-width: 768px) {
+  .card {
+    width: 95%;
+    margin-bottom: 15px;
+  }
+
+  .table th, .table td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .center-form form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .metal_show_bun {
+    width: 150px;
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .btn-secondary {
+    width: 80px;
+  }
+
+  .small-chart {
+    width: 90% !important;
+    height: 200px !important;
+  }
+}
+
+/* タブレット画面サイズ用 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .table th, .table td {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .center-form form {
+    width: 80%;
+    padding: 1.8rem;
+  }
+
+  .metal_show_bun {
+    width: 180px;
+    padding: 9px 18px;
+    font-size: 15px;
+  }
+
+  .btn-secondary {
+    width: 90px;
+  }
+
+  .small-chart {
+    width: 90% !important;
+    height: auto !important;
+  }
+}

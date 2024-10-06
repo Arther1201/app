@@ -1,0 +1,161 @@
+/* コンテナ全体のスタイル */
+.metal_index_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトルのスタイル */
+.metal_index_title {
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  font-family: 'Roboto', sans-serif;
+  margin: 2rem;
+  font-weight: bold;
+}
+
+/* ボタンのコンテナ */
+.btn-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ボタンのスタイル */
+.btn-metal_primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-metal_primary:hover {
+  background-color: #0056b3;
+}
+
+/* テーブルのスタイル */
+.metals_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.metals_table th, .metals_table td {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.metals_table th {
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+}
+
+.metals_table td {
+  background-color: #fff;
+  font-size: 1.1rem;
+}
+
+/* リストアイテムのスタイル */
+.metals_list {
+  transition: background-color 0.3s;
+}
+
+.metals_list:hover {
+  background-color: #f1f1f1;
+}
+
+/* 詳細ボタンのスタイル */
+.btn-metal_detail {
+  background-color: #28a745;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-metal_detail:hover {
+  background-color: #218838;
+}
+
+.metal_index_subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #555;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(90deg, rgba(29, 78, 216, 1) 0%, rgba(219, 39, 119, 1) 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+}
+
+/* スマホ画面サイズ用 */
+@media (max-width: 768px) {
+  .metal_index_container {
+    padding: 1rem;
+  }
+
+  .metal_index_title {
+    font-size: 2rem;
+    margin: 1.5rem;
+    margin-top: 5rem;
+  }
+
+  .metals_table th, .metals_table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-metal_primary, .btn-metal_detail {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .btn-container {
+    margin-bottom: 1rem;
+  }
+}
+
+/* タブレット画面サイズ用 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .metal_index_container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .metal_index_title {
+    font-size: 2.5rem;
+    margin: 1.5rem;
+  }
+
+  .metals_table th, .metals_table td {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .btn-metal_primary, .btn-metal_detail {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .btn-container {
+    margin-bottom: 1.5rem;
+  }
+}

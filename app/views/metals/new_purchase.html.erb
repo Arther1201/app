@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'metal_new_purchase', media: 'all', 'data-turbo-track': 'reload' %>
+
+<div class="container my-5 center-form-container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h2 class="h4 text-center my-2">メタルの購入を追加</h2>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: [@metal, @purchase], url: create_purchase_metal_path(@metal), local: true) do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :purchase_date, '購入日', class: 'form-label' %>
+          <%= f.date_field :purchase_date, class: 'form-control' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :purchase_quantity, '購入量 (g)', class: 'form-label' %>
+          <%= f.number_field :purchase_quantity, class: 'form-control', step: 0.01, placeholder: '例: 50' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :price, '価格 (円)', class: 'form-label' %>
+          <%= f.number_field :price, class: 'form-control', placeholder: '例: 10000' %>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :supplier, '購入先', class: 'form-label' %>
+          <%= f.text_field :supplier, class: 'form-control', placeholder: '例: ABC商店' %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit '追加', class: 'btn btn-primary btn-lg px-5' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

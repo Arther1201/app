@@ -1,0 +1,11 @@
+.center-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ビューポートの高さ全体を確保 */
+  }
+  
+  .card {
+    width: 50%; /* カードの幅を調整 */
+    max-width: 600px; /* 最大幅を設定 */
+  }

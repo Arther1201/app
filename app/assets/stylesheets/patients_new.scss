@@ -125,7 +125,6 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    width: 100%;
     max-width: 500px;
     margin: 0;
   }
@@ -135,6 +134,8 @@
     justify-content: space-between;
     width: 46%; /* 横幅を調整して十字の幅に合わせる */
     padding-left: 15px; /* 全体を右にずらす */
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .tooth-group.upper label {
@@ -175,8 +176,8 @@
   .cross::after {
     content: "";
     position: absolute;
-    top: -60px;
-    bottom: -60px;
+    top: -40px;
+    bottom: -40px;
     left: 50%;
     width: 2px;
     background-color: rgb(25, 24, 24);
@@ -242,3 +243,8 @@
     color: transparent; /* 背景グラデーションで文字の色を表現 */
     background-clip: text; /* WebKit以外のブラウザでは無効 */
   }
+
+#select-upper-jaw,
+#select-lower-jaw {
+  margin-bottom: 15px; /* 必要に応じて余白の大きさを調整 */
+}
