@@ -26,6 +26,17 @@
     width: 100%;
     padding: 5px;
   }
+
+  .model-screen {
+    text-align: center;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+  }
   
   .model-list-english {
     text-align: center;
@@ -177,6 +188,10 @@
     background-color: #0056b3; /* 編集ボタンのホバー時の色 */
   }
 
+  .models_pagination {
+    margin-bottom: 2rem;
+  }
+
   /* モバイルデバイス対応用メディアクエリ */
 @media screen and (max-width: 1024px) {
   .model-list table {
@@ -196,13 +211,18 @@
 
 @media screen and (max-width: 767px) {
   .model-list {
-      padding-top: 50px;
+      padding-top: 100px;
+      overflow-x: auto;
+      max-height: 90vh;
   }
   .model-list-english {
       font-size: 1rem;
   }
   .model-list table {
       font-size: 0.9rem; /* テーブル内の文字を小さくしてコンパクトに */
+      table-layout: fixed; /* テーブルのレイアウトを固定 */
+      width: 100%;
+      min-width: 800px;
   }
   .create-model-button {
       margin: 20px auto;

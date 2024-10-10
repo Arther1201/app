@@ -2,7 +2,7 @@
 
 <% breadcrumb :models %>
 <div class="model-list">
-  <h1 class="model-screen">模型管理</h1>
+  <div class="model-screen">模型管理</div>
   <p class="model-list-english">Model Management</p>
 
   <!-- 検索フォーム -->
@@ -83,7 +83,9 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @models %>
+    <div class="models_pagination">
+      <%= paginate @models %>
+    </div>
   </div>
 </div>
 

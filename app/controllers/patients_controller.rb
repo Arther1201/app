@@ -1,10 +1,20 @@
 class PatientsController < ApplicationController
 
   before_action :set_patient, only: [:update_note_checked, :update_delivery_checked]
+  before_action :check_guest_user, only: [:index]
   
   def index
-    @patients = Patient.order(impression_date: :asc).page(params[:page]).per(20)
+    guest_user = User.find_by(email: 'guest@example.com') 
+
+    if current_user.guest?
+      # ゲストユーザーの場合、自分の患者だけを取得
+      @patients = Patient.where(user_id: current_user.id).order(impression_date: :asc).page(params[:page]).per(20)
+    else
+      # 通常のユーザーの場合、全ての患者データを取得
+      @patients = Patient.where.not(user_id: guest_user.id).order(impression_date: :asc).page(params[:page]).per(20)
+    end
   end
+  
 
   def show
     @patient = Patient.find(params[:id])
@@ -44,7 +54,7 @@ class PatientsController < ApplicationController
   
   
   def create
-    @patient = Patient.new(patient_params)
+    @patient = current_user.patients.build(patient_params)
     @patient.prosthesis_sites = (params[:patient][:upper_left] || []) +
                               (params[:patient][:upper_right] || []) +
                               (params[:patient][:lower_left] || []) +
@@ -102,32 +112,46 @@ class PatientsController < ApplicationController
   end
 
   def search
-    @patients = Patient.order(impression_date: :asc).page(params[:page]).per(20)
-
+    guest_user = User.find_by(email: 'guest@example.com')
+  
+    if current_user.guest?
+      @patients = Patient.where(user_id: current_user.id).order(impression_date: :asc)
+    else
+      @patients = Patient.where.not(user_id: guest_user.id).order(impression_date: :asc)
+    end
+  
     if params[:name].present?
       @patients = @patients.where('name LIKE ?', "%#{params[:name]}%")
     end
-
+  
     if params[:medical_record_number].present?
       @patients = @patients.where('medical_record_number LIKE ?', "%#{params[:medical_record_number]}%")
     end
-
+  
     if params[:impression_date].present?
       @patients = @patients.where(impression_date: params[:impression_date])
     end
-
+  
     if params[:set_date].present?
       @patients = @patients.where(set_date: params[:set_date])
     end   
-
+  
     @patients = @patients.page(params[:page]).per(10)
     
     render 'search_results'
   end
 
   def calendar
-    @patients = Patient.all
-
+    guest_user = User.find_by(email: 'guest@example.com')
+  
+    if current_user.guest?
+      # ゲストユーザーの場合、自分の患者データのみ取得
+      @patients = Patient.where(user_id: current_user.id)
+    else
+      # 通常のユーザーの場合、ゲストデータを除く全ての患者データを取得
+      @patients = Patient.where.not(user_id: guest_user.id)
+    end
+  
     respond_to do |format|
       format.html
       format.json do
@@ -167,7 +191,8 @@ class PatientsController < ApplicationController
         set_date: patient.set_date,
         note_checked: patient.note_checked,
         delivery_checked: patient.delivery_checked,
-        archived_year: year
+        archived_year: year,
+        user_id: current_user.id
       )
   
       unless archive_entry.save
@@ -182,12 +207,12 @@ class PatientsController < ApplicationController
   
   # アーカイブの一覧を表示
   def archives
-    @archives = PatientArchive.select(:archived_year).distinct.order(archived_year: :desc)
+    @archives = PatientArchive.where(user_id: current_user.id).select(:archived_year).distinct.order(archived_year: :desc)
   end
   
   # アーカイブの詳細を表示
   def show_archive
-    @archive_patients = PatientArchive.where(archived_year: params[:year]).page(params[:page]).per(20)
+    @archive_patients = PatientArchive.where(archived_year: params[:year], user_id: current_user.id).page(params[:page]).per(20)
   end
 
   private
@@ -202,6 +227,11 @@ class PatientsController < ApplicationController
 
   def metal_amount_params
     params.require(:patient).permit(:metal_amount)
+  end
+
+  def check_guest_user
+    if current_user.guest?
+    end
   end
 
 end

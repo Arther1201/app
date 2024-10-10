@@ -29,6 +29,11 @@
         <%= f.collection_select :department_id, Department.all, :id, :name, { include_blank: "選択してください" }, { class: "form-control" } %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :employee_keyword, "吉良歯科の従業員ですか？キーワードを入力してください" %>
+        <%= f.text_field :employee_keyword, class: "form-control", placeholder: "キーワード" %>
+      </div>
+
       <div class="actions">
         <%= f.submit "新規登録", class: "btn btn-primary" %>
       </div>

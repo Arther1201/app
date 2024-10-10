@@ -5,7 +5,7 @@ class PasswordResetsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user
-      user.generate_password_reset_token!  # トークン生成メソッドをユーザーモデルに追加します
+      user.generate_password_reset_token!  # トークン生成メソッドをユーザーモデルに追加
       PasswordMailer.with(user: user).reset_password_email.deliver_now
       redirect_to login_path, notice: 'パスワードリセットの手順がメールで送信されました。'
     else

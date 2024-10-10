@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+User.find_or_create_by(email: "guest@example.com") do |user|
+    user.password = SecureRandom.urlsafe_base64  # ゲスト用にランダムなパスワードを生成
+    user.name = "ゲストユーザー"
+    user.department = Department.find_or_create_by(name: "ゲスト部署") # 必要に応じて部署を設定
+end

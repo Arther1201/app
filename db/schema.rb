@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_10_054936) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -82,6 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
     t.string "medical_record_number"
     t.string "patient_name"
     t.string "storage_location"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_models_on_user_id"
   end
 
   create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -115,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "patient_id"
+    t.integer "user_id"
   end
 
   create_table "patients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -144,6 +147,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
     t.string "prosthesis_type_insurance"
     t.string "prosthesis_type_crown"
     t.string "prosthesis_type_denture"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "prostheses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -184,6 +189,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_05_132418) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "department_id"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["department_id"], name: "index_users_on_department_id"
   end
 

@@ -5,6 +5,7 @@ class Patient < ApplicationRecord
   serialize :lower_left, Array
   mount_uploaders :images, ImageUploader
   serialize :images, JSON
+  belongs_to :user
 
   validates :prosthesis_type_insurance, presence: true, if: -> { prosthesis_type_crown.blank? && prosthesis_type_denture.blank? }
   validates :prosthesis_type_crown, presence: true, if: -> { prosthesis_type_insurance.blank? && prosthesis_type_denture.blank? }

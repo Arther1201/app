@@ -16,8 +16,11 @@ Rails.application.routes.draw do
   get 'patients/index'
   get 'patients/show'
   get 'shipments', to: 'shipments#index', as: 'shipments'
+
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :users 
+
+  resources :users, except: [:index] 
+
   resources :patients, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     collection do
       get :archives
@@ -79,6 +82,8 @@ Rails.application.routes.draw do
   get    '/login',  to: 'sessions#new'
   post   '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  post 'guest_login', to: 'sessions#guest_login'
 
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'

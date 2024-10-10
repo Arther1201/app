@@ -23,6 +23,13 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def guest_login
+    # ゲストユーザーを検索または作成
+    user = User.find_by(email: 'guest@example.com') || User.create_guest_user
+    log_in(user)
+    redirect_to patients_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
   private
 
   def log_in(user)

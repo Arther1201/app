@@ -1,17 +1,26 @@
 class ModelsController < ApplicationController
-    def index
-        @models = Model.all
-      
-        if params[:search].present?
-          @models = @models.where('patient_name LIKE ? OR medical_record_number LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
-        end
-      
-        if params[:impression_date].present?
-          @models = @models.where(impression_date: params[:impression_date])
-        end
-      
-        @models = @models.order(created_at: :desc).page(params[:page])
+  def index
+    if current_user.guest?
+      # ゲストユーザーの場合、自分のデータのみ表示
+      @models = Model.where(user_id: current_user.id)
+    else
+      # 通常ユーザーの場合、ゲストユーザーのデータを除外
+      guest_user = User.find_by(email: 'guest@example.com')
+      @models = Model.where.not(user_id: guest_user.id)
     end
+    
+    # 検索機能
+    if params[:search].present?
+      @models = @models.where('patient_name LIKE ? OR medical_record_number LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
+    if params[:impression_date].present?
+      @models = @models.where(impression_date: params[:impression_date])
+    end
+
+    # ページネーションとソート
+    @models = @models.order(created_at: :desc).page(params[:page]).per(20)
+  end
     
     # 保管場所の更新
     def update_storage_location
@@ -38,6 +47,7 @@ class ModelsController < ApplicationController
 
     def create
       @model = Model.new(model_params)
+      @model.user = current_user
       if @model.save
         redirect_to models_path, notice: '患者模型が作成されました。'
       else
