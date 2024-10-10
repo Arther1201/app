@@ -50,14 +50,14 @@
           <td class="supplies-td"><%= supply.item_name %></td>
           <td class="supplies-td"><%= supply.manufacturer %></td>
           <td class="supplies-td"><%= supply.price %></td>
-          <td class="supplies-td">
+          <td class="supplies-td supplies_quantity2">
             <%= form_with(model: supply, url: update_quantity_supply_path(supply), method: :patch, local: true) do |f| %>
               <%= f.number_field :order_quantity, value: 0, min: 0, class: "stock-input" %>
               <%= f.submit '注文', class: 'order-button' %>
             <% end %>
           </td>
           <td class="supplies-td supplies_text-right"><%= supply.stock_quantity %></td>
-          <td class="supplies-td"><%= link_to '詳細', supply_path(supply), class: 'btn-detail' %></td>
+          <td class="supplies-td"><%= link_to '詳細', supply_path(supply), class: 'supplies_show_button' %></td>
         </tr>
       <% end %>
     </tbody>

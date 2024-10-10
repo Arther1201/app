@@ -166,6 +166,7 @@
     display: flex;
     gap: 10px; /* 編集ボタンと削除ボタンの間にスペースを追加 */
     justify-content: center;
+    align-items: center;
   }
   
   .edit-button, .btn-danger {

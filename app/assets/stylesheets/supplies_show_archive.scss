@@ -27,3 +27,9 @@
   background-clip: text; /* WebKit以外のブラウザでは無効 */
 }
 
+/* スマホ用のスタイル調整 */
+@media screen and (max-width: 767px) {
+  .archive_supplies_year {
+    margin-top: 10rem;
+  }
+}
