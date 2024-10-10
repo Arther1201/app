@@ -85,7 +85,7 @@ class SuppliesController < ApplicationController
   def update
     @supply = Supply.find(params[:id])
     if @supply.update(supply_params)
-      redirect_to supplies_path(@supply), notice: '物品情報が更新されました。'
+      redirect_to supplies_path, notice: '物品情報が更新されました。'
     else
       render :show
     end
