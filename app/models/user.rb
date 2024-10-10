@@ -25,7 +25,7 @@ class User < ApplicationRecord
   def self.create_guest_user
     create!(
       email: 'guest@example.com',
-      password: SecureRandom.hex(10),
+      password: 'guestpassword',
       guest: true
     )
   end
