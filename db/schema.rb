@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_10_054936) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_10_104227) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
