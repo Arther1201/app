@@ -22,6 +22,10 @@ class User < ApplicationRecord
     save!
   end
 
+  def password_reset_expired?
+    password_reset_sent_at < 24.hours.ago
+  end
+
   def self.create_guest_user
     create!(
       email: 'guest@example.com',
