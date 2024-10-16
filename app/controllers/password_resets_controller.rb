@@ -16,6 +16,7 @@ class PasswordResetsController < ApplicationController
 
   def edit
     @user = User.find_by(password_reset_token: params[:id])
+    Rails.logger.debug "Token received: #{params[:id]}" # デバッグ用
     unless @user
       redirect_to new_password_reset_path, alert: '無効なパスワードリセットリンクです。'
     end

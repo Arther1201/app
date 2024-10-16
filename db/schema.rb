@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_11_125455) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -148,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_11_125455) do
     t.string "prosthesis_type_crown"
     t.string "prosthesis_type_denture"
     t.bigint "user_id", null: false
+    t.boolean "tel_pending"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
@@ -192,7 +193,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_11_125455) do
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.boolean "guest"
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+    t.integer "access_count_to_reset_password_page", default: 0
+    t.string "crypted_password"
+    t.string "salt"
     t.index ["department_id"], name: "index_users_on_department_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
   add_foreign_key "chat_rooms", "departments"

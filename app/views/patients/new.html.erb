@@ -110,7 +110,8 @@
       
           <div class="form-group">
             <%= form.label :set_date, "セット日" %>
-            <%= form.date_field :set_date, class: "general-input" %>
+            <%= form.select :tel_pending, options_for_select([["Tel待ちか選択", false], ["Tel待ち", true]]), { class: "form-select", id: "tel-pending-select" } %>
+            <%= form.date_field :set_date, class: "general-input", id: "set-date-field", disabled: false %> <!-- 初期状態は有効 -->
           </div>
 
           <div class="form-group">
@@ -181,5 +182,30 @@
         });
       }
     });
+
+    document.addEventListener("turbo:load", function() {
+    const setStatusSelect = document.getElementById('set_status');
+    const setDateField = document.getElementById('set_date');
+
+    if (setStatusSelect && setDateField) {
+      // 初期化: ページ読み込み時に選択状態を確認
+      toggleSetDateField(setStatusSelect.value);
+
+      // セット日選択変更時の処理
+      setStatusSelect.addEventListener('change', function() {
+        toggleSetDateField(setStatusSelect.value);
+      });
+    }
+
+    // フィールドを無効化する関数
+    function toggleSetDateField(selectedValue) {
+      if (selectedValue === 'tel_wait') {
+        setDateField.value = ''; // 日付フィールドをクリア
+        setDateField.disabled = true; // 無効化
+      } else {
+        setDateField.disabled = false; // 有効化
+      }
+    }
+  });
   </script>
 </body>

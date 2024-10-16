@@ -63,7 +63,13 @@
               </td>
               <td><%= patient.requester %></td>
               <td><%= patient.trial_or_set %></td>
-              <td><%= patient.set_date %></td>
+              <td>
+                <% if patient.set_date.nil? && patient.tel_pending %>
+                  Tel待ち
+                <% else %>
+                  <%= patient.set_date %>
+                <% end %>
+              </td>
               <td class="delivery-column">
                 <%= form_with(url: update_delivery_checked_patient_path(patient), method: :patch, id: "delivery-checked-form-#{patient.id}", local: false) do |form| %>
                   <%= form.check_box :delivery_checked, checked: patient.delivery_checked, class: "delivery-checked-checkbox" %>

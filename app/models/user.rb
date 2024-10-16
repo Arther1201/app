@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  authenticates_with_sorcery!
+  
   has_secure_password
   belongs_to :department
   has_and_belongs_to_many :favorited_messages, class_name: 'Message', join_table: 'favorites'
@@ -9,6 +11,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validate :correct_employee_keyword, on: :create
+  validates :reset_password_token, presence: true, uniqueness: true, allow_nil: true
 
   def generate_password_reset_token!
     self.password_reset_token = SecureRandom.urlsafe_base64

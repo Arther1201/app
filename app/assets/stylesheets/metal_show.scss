@@ -151,6 +151,13 @@
   align-items: center; /* 縦方向の中央揃え */
 }
 
+/* テーブルのスクロールを有効にするためのスタイル */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* 横スクロールを有効にする */
+  -webkit-overflow-scrolling: touch; /* スクロールの滑らかさをiOSで改善 */
+}
+
 /* スマホ画面サイズ用 */
 @media (max-width: 768px) {
   .card {

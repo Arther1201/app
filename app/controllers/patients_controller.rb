@@ -30,6 +30,10 @@ class PatientsController < ApplicationController
 
   def update
     @patient = Patient.find(params[:id])
+
+    if params[:patient][:set_status] == 'tel_wait'
+      @patient.set_date = nil
+    end
   
     # 画像の削除処理
     if params[:patient][:remove_images].present?
@@ -61,6 +65,10 @@ class PatientsController < ApplicationController
                               (params[:patient][:lower_right] || [])
 
     existing_model = Model.find_by(medical_record_number: @patient.medical_record_number, patient_name: @patient.name)
+
+    if params[:patient][:set_status] == 'tel_wait'
+      @patient.set_date = nil
+    end
 
     if existing_model
       flash[:alert] = "登録された模型があります."
@@ -218,7 +226,7 @@ class PatientsController < ApplicationController
   private
 
   def patient_params
-    params.require(:patient).permit(:impression_date, :note_checked, :medical_record_number, :name, :gender, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture, :prosthesis_site, :requester, :metal_type, :metal_amount, :trial_or_set, :set_date, :delivery_checked, :memo, :medicine_notebook, images: [], remove_images: [], upper_right: [], upper_left: [], lower_right: [], lower_left: [], prosthesis_sites: [])
+    params.require(:patient).permit(:impression_date, :note_checked, :medical_record_number, :name, :gender, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture, :prosthesis_site, :requester, :metal_type, :metal_amount, :trial_or_set, :set_date, :tel_pending, :delivery_checked, :memo, :medicine_notebook, images: [], remove_images: [], upper_right: [], upper_left: [], lower_right: [], lower_left: [], prosthesis_sites: [])
   end
 
   def set_patient
