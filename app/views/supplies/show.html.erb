@@ -54,9 +54,7 @@
               <td><%= order.order_quantity %></td>
               <td><%= order.delivery_date || '未納品' %></td>
               <td>
-                <%= form_with(url: mark_delivered_order_path(order), method: :patch, local: true, class: 'delivery-form') do |f| %>
-                  <%= f.check_box :delivered, checked: order.delivery_date.present?, class: 'supplies_delivery-check', data: { order_id: order.id } %>
-                <% end %>
+                <%= check_box_tag "delivered_#{order.id}", '1', order.delivery_date.present?, class: 'supplies_delivery-check', data: { order_id: order.id }, id: "order_delivered_#{order.id}" %>
               </td>
             </tr>
           <% end %>
@@ -73,34 +71,30 @@
     deliveryChecks.forEach(check => {
       check.addEventListener('change', (event) => {
         const checkbox = event.target;
-        const form = checkbox.closest('.delivery-form');
         const orderId = checkbox.dataset.orderId;
-  
-        if (form) {
-          fetch(`/orders/${orderId}/mark_delivered`, {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: JSON.stringify({ delivered: checkbox.checked })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.status === 'success') {
-              checkbox.checked = true; // チェックを保持
-              const deliveryDateCell = checkbox.closest('tr').querySelector('td:nth-child(3)');
-              deliveryDateCell.textContent = new Date().toLocaleDateString(); // 今日の日付を表示
-            } else {
-              alert('エラーが発生しました: ' + data.message);
-              checkbox.checked = false; // チェックを元に戻す
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
+
+        fetch(`/orders/${orderId}/mark_delivered`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify({ delivered: checkbox.checked })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            const deliveryDateCell = checkbox.closest('tr').querySelector('td:nth-child(3)');
+            deliveryDateCell.textContent = new Date().toLocaleDateString(); // 今日の日付を表示
+          } else {
+            alert('エラーが発生しました: ' + data.message);
             checkbox.checked = false; // チェックを元に戻す
-          });
-        }
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          checkbox.checked = false; // チェックを元に戻す
+        });
       });
     });
   });

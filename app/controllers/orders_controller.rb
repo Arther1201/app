@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
           @order.update(delivery_date: nil)
         end
     
-        if @order.save
+        if @order.persisted?
           render json: { status: 'success' }
         else
           render json: { status: 'error', message: @order.errors.full_messages.join(", ") }, status: :unprocessable_entity
