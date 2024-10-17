@@ -54,6 +54,4 @@ test:
 production:
   <<: *default
   database: myapp_production
-  username: <%= ENV['DATABASE_USERNAME'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: dental-tecnical-note.com
