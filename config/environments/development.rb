@@ -73,12 +73,12 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,
-  domain:               'dental-tecnical-note.com',
+  domain:               'localhost',
   user_name:            'your_email@gmail.com',
   password:             'your_password',
   authentication:       'plain',
   enable_starttls_auto: true  
   }
-  config.action_mailer.default_url_options = { host: 'dental-tecnical-note.com' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
 end
