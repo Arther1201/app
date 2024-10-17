@@ -54,4 +54,3 @@ test:
 production:
   <<: *default
   database: myapp_production
-  host: dental-tecnical-note.com
