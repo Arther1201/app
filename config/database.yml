@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: admin
-  password: 'password'
+  password: 'Arther1201'
   host: database-1.cx2kmea40oek.ap-northeast-1.rds.amazonaws.com
   port: 3306
 
