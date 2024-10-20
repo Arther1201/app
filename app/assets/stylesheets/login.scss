@@ -106,6 +106,16 @@ h2 {
   color: rgb(7, 135, 114);
 }
 
+.guest_login_hint {
+  white-space: nowrap;
+  margin-bottom: 1rem;
+  color: #4a1919;
+}
+
+.guest_email_hint {
+  margin-bottom: 1rem;
+}
+
 /* レスポンシブデザイン: タブレットとスマートフォン向け */
 @media screen and (max-width: 768px) {
   .text-center {
