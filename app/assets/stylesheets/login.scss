@@ -142,6 +142,11 @@ h2 {
   .link-section a {
     margin: 5px 0; /* リンク間の余白を調整 */
   }
+
+  .guest_login_hint {
+    font-size: 12px; /* スマホでフォントサイズを小さく */
+    padding: 8px; /* スマホでの余白を少し狭める */
+  }
 }
 
 @media screen and (max-width: 480px) {
