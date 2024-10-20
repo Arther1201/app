@@ -2,6 +2,7 @@ class PatientsController < ApplicationController
 
   before_action :set_patient, only: [:update_note_checked, :update_delivery_checked]
   before_action :check_guest_user, only: [:index]
+  before_action :authenticate_user
   
   def index
     guest_user = User.find_by(email: 'guest@example.com') 
@@ -90,9 +91,17 @@ class PatientsController < ApplicationController
   def update_note_checked
     @patient = Patient.find(params[:id])
     note_checked_value = params[:note_checked] || params.dig(:patient, :note_checked)
+
+    if current_user.nil?
+      Rails.logger.error "current_userがnilです"
+      head :unprocessable_entity
+      return
+    end
+
     if @patient.update(note_checked: note_checked_value)
       head :ok  # HTTPステータスコード200を返し、それ以上の処理は行わない
     else
+      Rails.logger.error @patient.errors.full_messages.join(", ")
       head :unprocessable_entity  # エラーがある場合は422エラーを返す
     end
   end
@@ -225,6 +234,12 @@ class PatientsController < ApplicationController
 
   private
 
+  def authenticate_user
+    unless current_user
+      redirect_to login_path, alert: 'ログインが必要です。'
+    end
+  end
+
   def patient_params
     params.require(:patient).permit(:impression_date, :note_checked, :medical_record_number, :name, :gender, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture, :prosthesis_site, :requester, :metal_type, :metal_amount, :trial_or_set, :set_date, :tel_pending, :delivery_checked, :memo, :medicine_notebook, images: [], remove_images: [], upper_right: [], upper_left: [], lower_right: [], lower_left: [], prosthesis_sites: [])
   end
@@ -238,7 +253,9 @@ class PatientsController < ApplicationController
   end
 
   def check_guest_user
-    if current_user.guest?
+    if current_user.nil?
+      redirect_to login_path, alert: "ログインしてください。"
+    elsif current_user.guest?
     end
   end
 

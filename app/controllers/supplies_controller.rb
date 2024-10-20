@@ -8,10 +8,6 @@ class SuppliesController < ApplicationController
     if params[:category].present?
       @supplies = @supplies.where('category LIKE ?', "%#{params[:category]}%")
     end
-
-    if params[:category].present?
-      @supplies = @supplies.where('category LIKE ?', "%#{params[:category]}%")
-    end
     if params[:item_name].present?
       @supplies = @supplies.where('name LIKE ?', "%#{params[:item_name]}%")
     end
@@ -59,6 +55,7 @@ class SuppliesController < ApplicationController
   
     # 在庫数を更新
     @supply.stock_quantity = (@supply.stock_quantity || 0) + additional_quantity
+    @supply.order_quantity = (@supply.order_quantity || 0) + additional_quantity 
     @supply.order_date = Date.today
   
     # 注文履歴に新しい注文を追加
@@ -68,6 +65,7 @@ class SuppliesController < ApplicationController
       flash[:notice] = "注文が更新されました。"
       redirect_to supplies_path
     else
+      Rails.logger.debug "注文の更新に失敗しました: #{order.errors.full_messages.join(', ')}"
       flash[:alert] = "注文の更新に失敗しました。"
       render :edit
     end
@@ -103,12 +101,41 @@ class SuppliesController < ApplicationController
   def archive
     year = params[:year] || Date.current.year
     supplies = Supply.where(order_date: "#{year}-01-01".."#{year}-12-31")
+  
+    ActiveRecord::Base.transaction do
 
-    archived_data = supplies.as_json # データをJSON形式に変換
-    SupplyArchive.create(year: year, archived_data: archived_data.to_json)
+      archive_data = supplies.map do |supply|
+        total_order_quantity = supply.orders.sum(:order_quantity)
+        
+        {
+          id: supply.id,
+          category: supply.category,
+          item_name: supply.item_name,
+          order_quantity: supply.order_quantity,  # 注文総数を保存
+          stock_quantity: supply.stock_quantity,  # 在庫数を保存
+          order_date: supply.order_date,
+          delivery_date: supply.delivery_date,
+          manufacturer: supply.manufacturer,
+          price: supply.price,
+          total_order_quantity: total_order_quantity
+        }
+      end
 
+      # アーカイブを作成
+      SupplyArchive.create!(year: year, archived_data: archive_data.to_json)
+  
+      # 在庫をリセットし、注文履歴を削除
+      supplies.each do |supply|
+        supply.update(stock_quantity: 0)
+        supply.orders.delete_all
+      end
+    end
+  
     redirect_to supplies_path, notice: "#{year}年のデータをアーカイブしました。"
+  rescue ActiveRecord::RecordInvalid => e
+    redirect_to supplies_path, alert: "アーカイブに失敗しました。"
   end
+  
 
   def show_archive
     @archive = SupplyArchive.find(params[:id])

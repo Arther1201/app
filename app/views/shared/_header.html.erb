@@ -41,6 +41,8 @@
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif @archive_patient && current_page?(patient_archive_path(@archive_patient)) %> 
         <%= link_to '戻る', show_archive_patients_path(year: @archive_patient.archived_year), class: "navbar-item" %>
+      <% elsif params[:id].present? && request.path.start_with?('/archives/details') %>
+        <%= link_to '戻る', show_archive_patients_path(year: @archive_patient.archived_year), class: "navbar-item" %>
       <% elsif current_page?(shipments_path) %> 
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(metals_path) %> 

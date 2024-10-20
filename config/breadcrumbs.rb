@@ -101,9 +101,15 @@ crumb :new_supply do
   parent :supplies
 end
 
-crumb :show_supply do
-  link "物品詳細", supply_path
-  parent :new_supply
+crumb :show_supply do |supply|
+  if supply.present? && supply.id.present?
+    link "物品詳細", supply_path(supply)
+    parent :supplies
+  else
+    # supplyがnilの場合の処理（エラーを防ぐため）
+    link "物品詳細", supplies_path
+    parent :supplies
+  end
 end
 
 crumb :archives_supplies do
@@ -141,6 +147,7 @@ crumb :archive_patient_show do |patient_archive|
   else
     link "患者データ", archives_patients_path
   end
+  parent :archives
 end
 
 crumb :metals do

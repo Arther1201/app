@@ -26,7 +26,7 @@
         <%= f.submit "検索", class: "supplies_search-form-submit" %>
         <%= link_to '物品一覧に戻る', supplies_path, class: 'supply-back-button' %>
         <%= link_to 'アーカイブ一覧', archives_supplies_path, class: 'btn-archives_sipplies' %>
-        <%= button_to '今年のデータをアーカイブ', archive_supplies_path(year: Date.current.year), method: :post, class: 'supplies_btn-archive' %>
+        <%= link_to '今年のデータをアーカイブ', archive_supplies_path(year: Date.current.year), method: :post, class: 'supplies_btn-archive', data: { turbo: false } %>
       </div>
     <% end %>
   </div>

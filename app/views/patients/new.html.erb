@@ -109,9 +109,9 @@
           </div>
       
           <div class="form-group">
-            <%= form.label :set_date, "セット日" %>
-            <%= form.select :tel_pending, options_for_select([["Tel待ちか選択", false], ["Tel待ち", true]]), { class: "form-select", id: "tel-pending-select" } %>
-            <%= form.date_field :set_date, class: "general-input", id: "set-date-field", disabled: false %> <!-- 初期状態は有効 -->
+            <%= form.label :set_date, "セット日", for: "set_date" %>
+            <%= form.select :tel_pending, options_for_select([["Tel待ちか選択", false], ["Tel待ち", true]], @patient.tel_pending), { class: "form-select", id: "tel_pending" } %>
+            <%= form.date_field :set_date, class: "general-input", id: "set_date", disabled: @patient.tel_pending %>
           </div>
 
           <div class="form-group">

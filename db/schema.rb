@@ -149,7 +149,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
     t.string "prosthesis_type_denture"
     t.bigint "user_id", null: false
     t.boolean "tel_pending"
-    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "prostheses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -177,8 +176,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
   end
 
   create_table "supply_archives", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "year"
-    t.text "archived_data"
+    t.integer "year", null: false
+    t.text "archived_data", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -192,7 +191,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
     t.integer "department_id"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.boolean "guest"
+    t.boolean "guest", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"

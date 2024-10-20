@@ -11,9 +11,7 @@
         <th>商品名</th>
         <th>メーカー</th>
         <th>価格</th>
-        <th>注文日</th>
-        <th>注文数</th>
-        <th>納品日</th>
+        <th>注文総数</th>
       </tr>
     </thead>
     <tbody>
@@ -23,9 +21,7 @@
           <td><%= supply["item_name"] %></td>
           <td><%= supply["manufacturer"] %></td>
           <td><%= supply["price"] %></td>
-          <td><%= supply["order_date"] %></td>
-          <td><%= supply["order_quantity"] %></td>
-          <td><%= supply["delivery_date"] || '未納品' %></td>
+          <td><%= supply["total_order_quantity"] %></td>
         </tr>
       <% end %>
     </tbody>
