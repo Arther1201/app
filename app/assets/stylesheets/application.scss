@@ -159,12 +159,13 @@ main {
 
 .breadcrumbs {
   padding-left: 25px;
-  padding-top: 30px;
-  top: 55px;
-  height: 4rem;
+  padding-top: 20px;
+  top: 60px;
+  height: 3rem;
   width: 100%;
   background-color: white;
   position: fixed;
+  z-index: 1000;
 }
 
 main {

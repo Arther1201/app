@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_22_233826) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
     t.string "prosthesis_type"
     t.string "prosthesis_site"
     t.string "metal_type"
-    t.decimal "metal_amount", precision: 10
+    t.decimal "metal_amount", precision: 10, scale: 2
     t.string "trial_or_set"
     t.date "set_date"
     t.boolean "delivery_checked"
@@ -149,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
     t.string "prosthesis_type_denture"
     t.bigint "user_id", null: false
     t.boolean "tel_pending"
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "prostheses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -176,8 +177,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
   end
 
   create_table "supply_archives", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "year", null: false
-    t.text "archived_data", null: false
+    t.integer "year"
+    t.text "archived_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -191,7 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_16_143529) do
     t.integer "department_id"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.boolean "guest", default: false, null: false
+    t.boolean "guest"
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"

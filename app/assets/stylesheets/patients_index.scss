@@ -72,11 +72,55 @@ h1 {
 }
 
 .patients-btn-archive {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-left: 2rem;
+  border: none;
 }
 
 .pagination-container {
   margin-bottom: 5rem;
+}
+
+.note-checked-checkbox,
+.delivery-checked-checkbox {
+  -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+  transform: scale(1.5); /* 標準の構文 */
+  margin: 5px;
+  cursor: pointer;
+}
+
+.check-column,
+.delivery-column {
+  text-align: center; /* テキストとインライン要素の中央寄せ */
+  vertical-align: middle; /* 垂直方向の中央寄せ */
+}
+
+.check-column input[type="checkbox"] {
+  position: relative;
+  z-index: 1; /* 低い値を設定して他の要素に被覆されるように */
+}
+
+.today-btn-primary {
+  min-width: 60px; /* ボタンの最小幅を設定 */
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.todaysbuttons-container {
+  display: flex;
+  align-items: center; /* 中央揃えにする場合 */
+  justify-content: space-between; /* ボタン間にスペースを均等に配分 */
+  margin-bottom: 1rem; /* 必要に応じてマージンを調整 */
 }
 
 /* スマートフォン用のスタイル調整 */

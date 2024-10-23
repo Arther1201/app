@@ -3,11 +3,12 @@
   <h1>患者一覧</h1>
   <p class="patient-list-english">Patient List</p>
 
-  <% if !current_user.guest? %>
-    <div class="patient_archive-button">
+  <div class="todaysbuttons-container">
+    <%= link_to '今日', patients_path(today: true), id: "today-button", class: "today-btn-primary" %>
+    <% if !current_user.guest? %>
       <%= button_to '今年の患者データをアーカイブ', archive_patients_path(year: Date.current.year), method: :post, class: 'patients-btn-archive' %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <!-- 患者データの表示部分 -->
   <div id="patient-table-container">
@@ -57,7 +58,7 @@
               <td><%= patient.metal_type %></td>
               <td>
                 <%= form_with(model: patient, local: true, url: update_metal_amount_patient_path(patient), method: :patch) do |form| %>
-                  <%= form.text_field :metal_amount, value: patient.metal_amount, class: "metal-amount-field" %>
+                  <%= form.text_field :metal_amount, value: number_with_precision(patient.metal_amount, precision: 2, strip_insignificant_zeros: true), class: "metal-amount-field" %>
                   <span style="margin-left: 5px;">g</span>
                 <% end %>
               </td>
@@ -92,34 +93,54 @@
 </div>
 
 <script>
-  document.addEventListener('turbo:load', function() {
-    document.body.addEventListener('change', function(event) {
-      if (event.target.matches('.check-column input[type="checkbox"], .delivery-column input[type="checkbox"]')) {
-        event.preventDefault();
-        const checkbox = event.target;
-        const form = checkbox.closest('form');
-        if (form) {
-          const formData = new FormData(form);
-          const url = form.action;
+document.addEventListener('turbo:load', function() {
+  // チェックボックスの変更を処理するイベントリスナー
+  document.body.addEventListener('change', function(event) {
+    if (event.target.matches('.check-column input[type="checkbox"], .delivery-column input[type="checkbox"]')) {
+      event.preventDefault();
+      const checkbox = event.target;
+      const form = checkbox.closest('form');
+      if (form) {
+        const formData = new FormData(form);
+        const url = form.action;
 
-          fetch(url, {
-            method: 'PATCH',
-            body: formData,
-            headers: {
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-              'Accept': 'application/json'
-            }
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-        }
+        fetch(url, {
+          method: 'PATCH',
+          body: formData,
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       }
-    });
+    }
   });
+
+  // 「今日」ボタンと「全て表示」ボタンのイベントリスナー
+  const todayButton = document.getElementById('today-button');
+  const allButton = document.getElementById('all-button');
+
+  if (todayButton) {
+    todayButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = this.getAttribute('href') + "&toggle=true";
+    });
+  }
+
+  if (allButton) {
+    allButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location.href = this.getAttribute('href');
+    });
+  }
+});
+
 </script>

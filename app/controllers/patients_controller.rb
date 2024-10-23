@@ -6,14 +6,28 @@ class PatientsController < ApplicationController
   
   def index
     guest_user = User.find_by(email: 'guest@example.com') 
-
-    if current_user.guest?
-      # ゲストユーザーの場合、自分の患者だけを取得
-      @patients = Patient.where(user_id: current_user.id).order(impression_date: :asc).page(params[:page]).per(20)
-    else
-      # 通常のユーザーの場合、全ての患者データを取得
-      @patients = Patient.where.not(user_id: guest_user.id).order(impression_date: :asc).page(params[:page]).per(20)
+  
+    # ベースクエリを設定
+    base_query = if current_user.guest?
+                   Patient.where(user_id: current_user.id)
+                 else
+                   Patient.where.not(user_id: guest_user.id)
+                 end
+  
+    # 「今日」ボタンのフィルターのトグル処理
+    if params[:today]
+      session[:filter] = (session[:filter] == "today" ? nil : "today")
     end
+  
+    # セッションに保存されているフィルターを適用
+    if session[:filter] == "today"
+      @patients = base_query.where(impression_date: Date.current)
+    else
+      @patients = base_query
+    end
+  
+    # 並び替えとページネーションを適用
+    @patients = @patients.order(impression_date: :desc).page(params[:page]).per(20)
   end
   
 
