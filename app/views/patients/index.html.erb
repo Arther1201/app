@@ -95,7 +95,7 @@
       </tbody>
     </table>
     <div class="pagination-container">
-      <%= paginate @patients %>
+      <%= paginate @patients, params: { from: params[:from] } %>
     </div>
   </div>
 </div>

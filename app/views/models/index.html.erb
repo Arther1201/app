@@ -84,7 +84,7 @@
       </tbody>
     </table>
     <div class="models_pagination">
-      <%= paginate @models %>
+      <%= paginate @models, params: { from: params[:from] } %>
     </div>
   </div>
 </div>

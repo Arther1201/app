@@ -63,7 +63,7 @@
     </tbody>
   </table>
   <div class="pagination-container">
-    <%= paginate @supplies %>
+    <%= paginate @supplies, params: { from: params[:from] } %>
   </div>
 </div>
 
