@@ -232,19 +232,22 @@ document.addEventListener("turbo:load", function() {
   const crownSelect = document.getElementById("patient_prosthesis_type_crown");
   const additionalOptionsDiv = document.getElementById("additional-options");
 
-  function toggleAdditionalOptions() {
-    if (crownSelect.value === "AB") {
-      additionalOptionsDiv.style.display = "block";  // 表示
-    } else {
-      additionalOptionsDiv.style.display = "none";   // 非表示
+  if (crownSelect && additionalOptionsDiv) { // crownSelectとadditionalOptionsDivが存在するか確認
+    function toggleAdditionalOptions() {
+      if (crownSelect.value === "AB") {
+        additionalOptionsDiv.style.display = "block";  // 表示
+      } else {
+        additionalOptionsDiv.style.display = "none";   // 非表示
+      }
     }
+
+    // ページロード時の初期状態を設定
+    toggleAdditionalOptions();
+
+    // 選択肢が変更された時にトグルを実行
+    crownSelect.addEventListener("change", toggleAdditionalOptions);
   }
-
-  // ページロード時の初期状態を設定
-  toggleAdditionalOptions();
-
-  // 選択肢が変更された時にトグルを実行
-  crownSelect.addEventListener("change", toggleAdditionalOptions);
 });
+
 </script>
   
