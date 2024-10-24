@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_22_233826) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_24_025546) do
   create_table "chat_rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "department_id", null: false
     t.datetime "created_at", null: false
@@ -118,6 +118,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_22_233826) do
     t.datetime "updated_at", null: false
     t.integer "patient_id"
     t.integer "user_id"
+    t.string "additional_option"
+    t.json "images"
   end
 
   create_table "patients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -148,7 +150,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_22_233826) do
     t.string "prosthesis_type_crown"
     t.string "prosthesis_type_denture"
     t.bigint "user_id", null: false
-    t.boolean "tel_pending"
+    t.string "tel_pending"
+    t.string "additional_option"
     t.index ["user_id"], name: "index_patients_on_user_id"
   end
 

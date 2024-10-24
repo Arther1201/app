@@ -1,44 +1,76 @@
 <%= stylesheet_link_tag 'archive_patient_show', media: 'all', 'data-turbo-track': 'reload' %>
+<%= stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css", crossorigin: "anonymous" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", crossorigin: "anonymous" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js", crossorigin: "anonymous" %>
 
 <% breadcrumb :archive_patient_show %>
 <div class="archive_patient_showtitle">アーカイブ患者詳細</div>
 <div class="archive_patient_show_subtitle">Archived Patient Details</div>
 
 <div class="archive-patient-container">
-<div class="archive-patient-detail">
-  <p><strong>氏名:</strong> <%= @archive_patient.name %></p>
-  <p><strong>カルテ番号:</strong> <%= @archive_patient.medical_record_number %></p>
-  <p><strong>印象日:</strong> <%= @archive_patient.impression_date %></p>
+  <div class="archive-patient-detail">
+    <p><strong>氏名:</strong> <%= @archive_patient.name %></p>
+    <p><strong>カルテ番号:</strong> <%= @archive_patient.medical_record_number %></p>
+    <p><strong>印象日:</strong> <%= @archive_patient.impression_date %></p>
 
-  <div class="prosthesis-details">
-    <p><strong>補綴種類:</strong></p>
-    <ul>
-      <li>保険補綴: <%= @archive_patient.prosthesis_type_insurance %></li>
-      <li>クラウン: <%= @archive_patient.prosthesis_type_crown %></li>
-      <li>義歯: <%= @archive_patient.prosthesis_type_denture %></li>
-    </ul>
-  </div>
-
-  <div class="tooth-notation">
-    <p><strong>補綴部位:</strong></p>
-    <p>
+    <div class="prosthesis-details">
+      <p><strong>補綴種類:</strong></p>
+      <ul>
+        <li>保険補綴: <%= @archive_patient.prosthesis_type_insurance %></li>
+        <li>クラウン: <%= @archive_patient.prosthesis_type_crown %></li>
+        <% if @archive_patient.prosthesis_type_crown == "AB" && @archive_patient.additional_option.present? %>
+          <li>上部構造: <%= @archive_patient.additional_option %></li>
+        <% end %>
+        <li>義歯: <%= @archive_patient.prosthesis_type_denture %></li>
+      </ul>
+    </div>
+  
+    <p><strong>補綴部位:</strong>
       <%= convert_to_dental_notation(
-          upper_left: JSON.parse(@archive_patient.upper_left || '[]'),
-          upper_right: JSON.parse(@archive_patient.upper_right || '[]'),
-          lower_left: JSON.parse(@archive_patient.lower_left || '[]'),
-          lower_right: JSON.parse(@archive_patient.lower_right || '[]')
-        ) %>
+        upper_left: JSON.parse(@archive_patient.upper_left || '[]'),
+        upper_right: JSON.parse(@archive_patient.upper_right || '[]'),
+        lower_left: JSON.parse(@archive_patient.lower_left || '[]'),
+        lower_right: JSON.parse(@archive_patient.lower_right || '[]')
+      ) %>
     </p>
+
+    <p><strong>メタル量:</strong> <%= @archive_patient.metal_amount.present? ? "#{@archive_patient.metal_amount}g" : "" %></p>
+    <p><strong>依頼先:</strong> <%= @archive_patient.requester %></p>
+    <p><strong>セット/試適:</strong> <%= @archive_patient.trial_or_set %></p>
+    
+    <p><strong>セット日:</strong> <%= @archive_patient.set_date || "未定" %></p>
+
+    <p><strong>チェック:</strong> <%= @archive_patient.note_checked ? '済' : '未' %></p>
+    <p><strong>納品チェック:</strong> <%= @archive_patient.delivery_checked ? '済' : '未' %></p>
+    <p><strong>アーカイブ年度:</strong> <%= @archive_patient.archived_year %>年</p>
+
+    <div class="patient-detail">
+      <strong>画像:</strong>
+      <% if @archive_patient.images.present? %>
+        <% @archive_patient.images.each do |image| %>
+          <%= link_to image.url, data: { lightbox: "patient-images", title: @archive_patient.name } do %>
+            <%= image_tag image.url, class: "thumbnail", alt: "#{@archive_patient.name}の画像" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>画像がありません</p>
+      <% end %>
+    </div>
   </div>
-
-  <p><strong>メタル量:</strong> <%= @archive_patient.metal_amount.present? ? "#{@archive_patient.metal_amount}g" : "" %></p>
-  <p><strong>依頼先:</strong> <%= @archive_patient.requester %></p>
-  <p><strong>セット/試適:</strong> <%= @archive_patient.trial_or_set %></p>
-  <p><strong>セット日:</strong> <%= @archive_patient.set_date %></p>
-  <p><strong>チェック:</strong> <%= @archive_patient.note_checked ? '済' : '未' %></p>
-  <p><strong>納品チェック:</strong> <%= @archive_patient.delivery_checked ? '済' : '未' %></p>
-  <p><strong>アーカイブ年度:</strong> <%= @archive_patient.archived_year %>年</p>
-</div>
 </div>
 
-
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const lightboxElements = document.querySelectorAll('[data-lightbox]');
+  
+  if (lightboxElements.length > 0) {
+    if (typeof lightbox !== 'undefined') {
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'fitImagesInViewport': true
+      });
+    }
+  }
+});
+</script>

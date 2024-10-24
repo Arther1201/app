@@ -117,6 +117,12 @@ h1 {
   text-align: center;
 }
 
+.today-btn-primary.active {
+  background-color: #030578;
+  color: white;
+  font-weight: bold;
+}
+
 .todaysbuttons-container {
   display: flex;
   align-items: center; /* 中央揃えにする場合 */

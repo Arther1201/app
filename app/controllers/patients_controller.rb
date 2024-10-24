@@ -46,7 +46,7 @@ class PatientsController < ApplicationController
   def update
     @patient = Patient.find(params[:id])
 
-    if params[:patient][:set_status] == 'tel_wait'
+    if params[:patient][:tel_pending] == 'tel' || params[:patient][:tel_pending] == 'set'
       @patient.set_date = nil
     end
   
@@ -166,6 +166,10 @@ class PatientsController < ApplicationController
     if params[:set_date].present?
       @patients = @patients.where(set_date: params[:set_date])
     end   
+
+    if params[:tel_pending].present?
+      @patients = @patients.where(tel_pending: params[:tel_pending])
+    end  
   
     @patients = @patients.page(params[:page]).per(10)
     
@@ -223,13 +227,17 @@ class PatientsController < ApplicationController
         note_checked: patient.note_checked,
         delivery_checked: patient.delivery_checked,
         archived_year: year,
-        user_id: current_user.id
+        user_id: current_user.id,
+        additional_option: patient.additional_option,
+        images: patient.images
       )
   
       unless archive_entry.save
         flash[:alert] = "アーカイブに失敗しました: #{archive_entry.errors.full_messages.join(', ')}"
         redirect_to patients_path and return
       end
+
+      patient.destroy
     end
   
     flash[:notice] = "#{year}年の患者データをアーカイブしました。"
@@ -255,7 +263,7 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:impression_date, :note_checked, :medical_record_number, :name, :gender, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture, :prosthesis_site, :requester, :metal_type, :metal_amount, :trial_or_set, :set_date, :tel_pending, :delivery_checked, :memo, :medicine_notebook, images: [], remove_images: [], upper_right: [], upper_left: [], lower_right: [], lower_left: [], prosthesis_sites: [])
+    params.require(:patient).permit(:impression_date, :note_checked, :medical_record_number, :name, :gender, :prosthesis_type_insurance, :prosthesis_type_crown, :prosthesis_type_denture, :prosthesis_site, :requester, :metal_type, :metal_amount, :trial_or_set, :set_date, :tel_pending, :delivery_checked, :additional_option, :memo, :medicine_notebook, images: [], remove_images: [], upper_right: [], upper_left: [], lower_right: [], lower_left: [], prosthesis_sites: [])
   end
 
   def set_patient

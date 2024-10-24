@@ -28,6 +28,9 @@
         <td><%= patient.name %></td>
         <td>
           <%= [patient.prosthesis_type_insurance, patient.prosthesis_type_crown, patient.prosthesis_type_denture].reject(&:blank?).join(', ') %>
+          <% if patient.prosthesis_type_crown == "AB" && patient.additional_option.present? %>
+            <br><strong>上部構造:</strong> <%= patient.additional_option %>
+          <% end %>
         </td>
         <td class="tooth-diagram-font">
           <%= convert_to_dental_notation(

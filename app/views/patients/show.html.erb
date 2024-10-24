@@ -40,6 +40,12 @@
   </div>
 
   <div class="patient-detail">
+    <% if @patient.prosthesis_type_crown == "AB" && @patient.additional_option.present? %>
+      <p><strong>上部構造:</strong> <%= @patient.additional_option %></p>
+    <% end %>
+  </div>
+
+  <div class="patient-detail">
     <strong>補綴部位:</strong>
     <p>
       <%= convert_to_dental_notation(
@@ -70,7 +76,13 @@
 
   <div class="patient-detail">
     <strong>セット日:</strong>
-    <p><%= @patient.set_date %></p>
+    <% if @patient.tel_pending == "tel" %>
+      <p>Tel待ち</p>
+    <% elsif @patient.tel_pending == "set" %>
+      <p>Set待ち</p>
+    <% else %>
+      <p><%= @patient.set_date || "未定" %></p>
+    <% end %>
   </div>
 
   <div class="patient-detail">

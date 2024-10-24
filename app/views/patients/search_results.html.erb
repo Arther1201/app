@@ -38,6 +38,10 @@
               <%= patient.prosthesis_type_insurance %>
               <%= patient.prosthesis_type_crown %>
               <%= patient.prosthesis_type_denture %>
+              <% if patient.prosthesis_type_crown == "AB" %>
+                <br>
+                <strong>上部構造:</strong> <%= patient.additional_option.present? ? patient.additional_option : "未選択" %>
+              <% end %>
             </td>
             <td class="tooth-diagram-font">
               <%= convert_to_dental_notation(
@@ -56,7 +60,17 @@
             </td>
             <td><%= patient.requester %></td>
             <td><%= patient.trial_or_set %></td>
-            <td><%= patient.set_date %></td>
+            <td>
+              <% if patient.tel_pending == 'tel' %>
+                Tel待ち
+              <% elsif patient.tel_pending == 'set' %>
+                Set待ち
+              <% elsif patient.set_date.present? %>
+                <%= patient.set_date %>
+              <% else %>
+                未定
+              <% end %>
+            </td>
             <td class="delivery-column">
               <%= form_with(url: update_delivery_checked_patient_path(patient), method: :patch, id: "delivery-checked-form-#{patient.id}") do |form| %>
                 <%= form.check_box :delivery_checked, checked: patient.delivery_checked, class: "delivery-checked-checkbox" %>

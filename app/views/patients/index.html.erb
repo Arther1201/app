@@ -4,9 +4,9 @@
   <p class="patient-list-english">Patient List</p>
 
   <div class="todaysbuttons-container">
-    <%= link_to '今日', patients_path(today: true), id: "today-button", class: "today-btn-primary" %>
+    <%= link_to '今日', patients_path(today: true), id: "today-button", class: "today-btn-primary #{'active' if session[:filter] == 'today'}" %>
     <% if !current_user.guest? %>
-      <%= button_to '今年の患者データをアーカイブ', archive_patients_path(year: Date.current.year), method: :post, class: 'patients-btn-archive' %>
+      <%= button_to '今年の患者データをアーカイブ', archive_patients_path(year: Date.current.year), method: :post, class: 'patients-btn-archive', data: { confirm: 'アーカイブすると患者一覧からデータが消えます。実行しますか？' } %>
     <% end %>
   </div>
 
@@ -46,6 +46,10 @@
                 <%= patient.prosthesis_type_insurance %>
                 <%= patient.prosthesis_type_crown %>
                 <%= patient.prosthesis_type_denture %>
+                <% if patient.prosthesis_type_crown == "AB" %>
+                  <br>
+                  <strong>上部構造:</strong> <%= patient.additional_option.present? ? patient.additional_option : "未選択" %>
+                <% end %>
               </td>
               <td class="tooth-diagram-font">
                 <%= convert_to_dental_notation(
@@ -65,10 +69,14 @@
               <td><%= patient.requester %></td>
               <td><%= patient.trial_or_set %></td>
               <td>
-                <% if patient.set_date.nil? && patient.tel_pending %>
+                <% if patient.tel_pending == 'tel' %>
                   Tel待ち
-                <% else %>
+                <% elsif patient.tel_pending == 'set' %>
+                  Set待ち
+                <% elsif patient.set_date.present? %>
                   <%= patient.set_date %>
+                <% else %>
+                  未定
                 <% end %>
               </td>
               <td class="delivery-column">

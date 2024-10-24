@@ -37,6 +37,13 @@
       </div>
 
       <div class="search-form-group">
+        <%= label_tag :tel_pending, "ステータス", class: "search-form-label" %>
+        <div class="search-form-input-container">
+          <%= select_tag :tel_pending, options_for_select([["選択してください", ""], ["Tel待ち", "tel"], ["Set待ち", "set"]], params[:tel_pending]), class: "search-form-input" %>
+        </div>
+      </div>
+
+      <div class="search-form-group">
         <%= submit_tag "検索", class: "search-form-submit" %>
       </div>
     <% end %>
