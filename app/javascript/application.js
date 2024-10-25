@@ -26,6 +26,7 @@ document.addEventListener("turbo:load", function() {
   const prosthesisTypeCrownSelect = document.getElementById("patient_prosthesis_type_crown");
   const prosthesisTypeDentureSelect = document.getElementById("patient_prosthesis_type_denture");
   const metalTypeSelect = document.getElementById("patient_metal_type");
+  const additionalOptionSelect = document.getElementById("patient_additional_option");
 
   function updateMetalType(prosthesisType) {
     if (prosthesisType === "In" || prosthesisType === "FMC" || prosthesisType === "Br" || prosthesisType === "前装冠" || prosthesisType === "前装Br" || prosthesisType === "キーパー" || prosthesisType === "コーピング" || prosthesisType === "OPアンカ") {
@@ -60,9 +61,15 @@ document.addEventListener("turbo:load", function() {
     });
   }
 
-  
- 
-  
+  if (additionalOptionSelect) {
+    additionalOptionSelect.addEventListener("change", function() {
+        if (additionalOptionSelect.value === "FMC") {
+            metalTypeSelect.value = "Pd"; // ABのFMCが選択された場合Pdを選択
+        } else {
+            updateMetalType(additionalOptionSelect.value);
+        }
+    });
+  }
 });
 
 
