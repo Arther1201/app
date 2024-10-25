@@ -32,22 +32,22 @@
 
           <div class="form-group">
             <%= form.label :prosthesis_type_insurance, "補綴種類(保険)", for: "patient_prosthesis_type_insurance" %>
-            <%= form.select :prosthesis_type_insurance, options_for_select([["コア(Ag)", "コア(Ag)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["In", "In"], ["FMC", "FMC"], ["Br", "Br"], ["前装冠", "前装冠"], ["前装Br", "前装Br"], ["CAD冠", "CAD冠"], ["CADIn", "CADIn"], ["マウスピース", "マウスピース"], ["スプリント", "スプリント"], ["矯正装置", "矯正装置"], ["義歯(保険)", "義歯(保険)"], ["CC", "CC"], ["WRC", "WRC"], ["OPアンカ", "OPアンカ"], ["キーパー", "キーパー"], ["コーピング", "コーピング"], ["ロケーター", "ロケーター"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_insurance" } %>
+            <%= form.select :prosthesis_type_insurance, options_for_select([["コア(Ag)", "コア(Ag)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["In", "In"], ["FMC", "FMC"], ["Br", "Br"], ["前装冠", "前装冠"], ["前装Br", "前装Br"], ["CAD冠", "CAD冠"], ["CADIn", "CADIn"], ["マウスピース", "マウスピース"], ["スプリント", "スプリント"], ["無呼吸装置", "無呼吸装置"], ["拡大床", "拡大床"], ["リテーナー", "リテーナー"], ["義歯(保険)", "義歯(保険)"], ["CC", "CC"], ["WRC", "WRC"], ["OPアンカ", "OPアンカ"], ["キーパー", "キーパー"], ["コーピング", "コーピング"], ["ロケーター", "ロケーター"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_insurance" } %>
           </div>
 
           <div class="form-group">
-            <%= form.label :prosthesis_type_crown, "補綴種類(自費・クラウン-Br)", for: "patient_prosthesis_type_crown" %>
-            <%= form.select :prosthesis_type_crown, options_for_select([["コア(Au)", "コア(Au)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["GIn", "GIn"], ["GFMC", "GFMC"], ["GBr", "GBr"], ["G前装冠", "G前装冠"], ["G前装Br", "G前装Br"], ["MB", "MB"], ["MBBr", "MBBr"], ["e-max", "e-max"], ["e-maxIn", "e-maxIn"], ["セラミックIn", "セラミックIn"], ["ジルコニア", "ジルコニア"], ["AB", "AB"], ["テセラ", "テセラ"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_crown" } %>
+            <%= form.label :prosthesis_type_crown, "補綴種類(自費)", for: "patient_prosthesis_type_crown" %>
+            <%= form.select :prosthesis_type_crown, options_for_select([["コア(Au)", "コア(Au)"], ["コア(ファイバー)", "コア(ファイバー)"], ["TEC", "TEC"], ["GIn", "GIn"], ["GFMC", "GFMC"], ["GBr", "GBr"], ["G前装冠", "G前装冠"], ["G前装Br", "G前装Br"], ["MB", "MB"], ["MBBr", "MBBr"], ["e-max", "e-max"], ["e-maxIn", "e-maxIn"], ["セラミックIn", "セラミックIn"], ["VITAエナミック", "VITAエナミック"], ["ジルコニア", "ジルコニア"], ["AB", "AB"], ["テセラ", "テセラ"], ["スポーツマウスピース", "スポーツマウスピース"], ["アライナー", "アライナー"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_crown" } %>
           </div>
 
           <div class="form-group" id="additional-options" style="display: none;">
             <%= form.label :additional_option, "上部構造の選択肢", for: "patient_additional_option" %>
-            <%= form.select :additional_option, options_for_select([["FMC", "FMC"], ["e-max", "e-max"], ["ジルコニア", "ジルコニア"], ["TEC", "TEC"]]), { include_blank: "選択してください", id: "patient_additional_option" } %>
+            <%= form.select :additional_option, options_for_select([["ABのみ", "ABのみ"], ["FMC", "FMC"], ["e-max", "e-max"], ["ジルコニア", "ジルコニア"], ["TEC", "TEC"], ["VITAエナミック", "VITAエナミック"]]), { include_blank: "選択してください", id: "patient_additional_option" } %>
           </div>
 
           <div class="form-group">
             <%= form.label :prosthesis_type_denture, "補綴種類(自費・義歯)", for: "patient_prosthesis_type_denture" %>
-            <%= form.select :prosthesis_type_denture, options_for_select([["金属床", "金属床"], ["ノンクラスプ(エステショット)", "ノンクラスプ(エステショット)"], ["ノンクラスプ(K-プラス)", "ノンクラスプ(K-プラス)"], ["ノンクラスプ(アルティメット)", "ノンクラスプ(アルティメット)"]]), { include_blank: "選択してください", id: "patient_prosthesis_type_denture" } %>
+            <%= form.select :prosthesis_type_denture, options_for_select([["金属床", "金属床"], ["ノンクラスプ(エステショット)", "ノンクラスプ(エステショット)"], ["ノンクラスプ(K-プラス)", "ノンクラスプ(K-プラス)"], ["ノンクラスプ(アルティメット)", "ノンクラスプ(アルティメット)"], ["イボカップ", "イボカップ"], ["ソフトデンチャー", "ソフトデンチャー"],]), { include_blank: "選択してください", id: "patient_prosthesis_type_denture" } %>
           </div>
 
           <div>
@@ -115,8 +115,8 @@
       
           <div class="form-group">
             <%= form.label :set_date, "セット日", for: "set_date" %>
-            <%= form.select :tel_pending, options_for_select([["Tel待ちか選択", ""], ["Tel待ち", "tel"]], @patient.tel_pending), { class: "form-select", id: "tel_pending" } %>
             <%= form.date_field :set_date, class: "general-input", id: "set_date", disabled: @patient.tel_pending %>
+            <%= form.select :tel_pending, options_for_select([["Tel待ちか選択", ""], ["Tel待ち", "tel"]], @patient.tel_pending), { class: "form-tel-select", id: "tel_pending" } %>
           </div>
 
           <div class="form-group">

@@ -27,6 +27,7 @@ class PatientsController < ApplicationController
     end
   
     # 並び替えとページネーションを適用
+    @from = params[:from]
     @patients = @patients.order(impression_date: :desc).page(params[:page]).per(20)
   end
   

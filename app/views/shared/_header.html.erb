@@ -25,7 +25,7 @@
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(list_prostheses_path) %> 
         <%= link_to '戻る', prostheses_path, class: "navbar-item" %>
-      <% elsif current_page?(supplies_path) %> 
+      <% elsif current_page?(supplies_path) || params[:from] == 'supplies' || request.path.start_with?("/supplies/index") %> 
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(new_supply_path) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>

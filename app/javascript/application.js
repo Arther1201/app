@@ -28,13 +28,13 @@ document.addEventListener("turbo:load", function() {
   const metalTypeSelect = document.getElementById("patient_metal_type");
 
   function updateMetalType(prosthesisType) {
-    if (prosthesisType === "In" || prosthesisType === "FMC" || prosthesisType === "Br" || prosthesisType === "前装冠" || prosthesisType === "前装Br" || prosthesisType === "キーパー" || prosthesisType === "コーピング") {
+    if (prosthesisType === "In" || prosthesisType === "FMC" || prosthesisType === "Br" || prosthesisType === "前装冠" || prosthesisType === "前装Br" || prosthesisType === "キーパー" || prosthesisType === "コーピング" || prosthesisType === "OPアンカ") {
       metalTypeSelect.value = "Pd";
-    } else if (prosthesisType === "GIn" || prosthesisType === "GFMC" || prosthesisType === "GBr" || prosthesisType === "G装冠" || prosthesisType === "G装冠Br" || prosthesisType === "コア(Au)") {
+    } else if (prosthesisType === "GIn" || prosthesisType === "GFMC" || prosthesisType === "GBr" || prosthesisType === "G前装冠" || prosthesisType === "G前装Br" || prosthesisType === "コア(Au)") {
       metalTypeSelect.value = "Au";
     } else if (prosthesisType === "コア(Ag)") {
       metalTypeSelect.value = "Ag";
-    } else if (prosthesisType === "金属床") {
+    } else if (prosthesisType === "金属床" || prosthesisType === "CC") {
       metalTypeSelect.value = "Co-Cr";
     } else {
       metalTypeSelect.value = "";

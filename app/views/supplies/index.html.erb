@@ -63,7 +63,7 @@
     </tbody>
   </table>
   <div class="pagination-container">
-    <%= paginate @supplies, params: { from: params[:from] } %>
+    <%= paginate @supplies, params: request.query_parameters.merge(from: @from) %>
   </div>
 </div>
 

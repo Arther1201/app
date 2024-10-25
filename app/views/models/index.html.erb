@@ -65,7 +65,7 @@
             <!-- 保管場所のインライン編集 -->
             <td>
               <%= form_with(model: model, local: true, url: update_storage_location_model_path(model), method: :patch, class: "edit-form") do |form| %>
-                <%= form.select :storage_location, options_for_select([["1F棚", "1F棚"], ["2F", "2F"], ["技工室", "技工室"], ["院長室", "院長室"]], selected: model.storage_location), class: "storage-location-field", disabled: true, id: "storage-location-#{model.id}" %>
+                <%= form.select :storage_location, options_for_select([["1F棚", "1F棚"], ["2F", "2F"], ["技工室", "技工室"], ["院長室", "院長室"], ["小児", "小児"]], selected: model.storage_location), class: "storage-location-field", disabled: true, id: "storage-location-#{model.id}" %>
               <% end %>
             </td>
 

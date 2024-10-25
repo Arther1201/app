@@ -1,5 +1,6 @@
 class SuppliesController < ApplicationController
   def index
+    session[:from] = params[:from] if params[:from].present?
     @supplies = Supply.where(department_id: current_user.department_id).page(params[:page]).per(20)
 
     # 分類の一覧を取得してビューに渡す
