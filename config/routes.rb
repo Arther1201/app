@@ -65,14 +65,18 @@ Rails.application.routes.draw do
     member do
       patch :update_quantity
       patch :mark_delivered
+      patch :update_inventory
       get :show_archive
     end
 
     collection do
       post :archive
       get :archives
+      patch :set_last_year_stock
+      patch :bulk_update
     end
   end
+
   resources :orders do
     patch :mark_delivered, on: :member
   end

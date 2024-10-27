@@ -27,99 +27,251 @@
         <%= link_to '物品一覧に戻る', supplies_path, class: 'supply-back-button' %>
         <%= link_to 'アーカイブ一覧', archives_supplies_path, class: 'btn-archives_sipplies' %>
         <%= link_to '今年のデータをアーカイブ', archive_supplies_path(year: Date.current.year), method: :post, class: 'supplies_btn-archive', data: { turbo: false, confirm: 'アーカイブすると物品一覧から注文総数が消えます。実行しますか？' } %>
+        <button id="inventory-button" class="inventory-button" type="button">棚卸しモード</button>
+        <%= link_to 'セット', set_last_year_stock_supplies_path, method: :patch, class: 'set-stock-button', data: { confirm: '現在の在庫数を昨年の在庫数として保存しますか？' } %>
       </div>
     <% end %>
   </div>
 
-  <table class="supplies_table">
-    <thead>
-      <tr>
-        <th class="supplies-th">分類</th>
-        <th class="supplies-th">商品名</th>
-        <th class="supplies-th">メーカー</th>
-        <th class="supplies-th">価格</th>
-        <th class="supplies-th supplies_quantity">注文数</th>
-        <th class="supplies-th supplies_all_quantity">注文総数</th>
-        <th class="supplies-th supplies_detail">操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @supplies.each do |supply| %>
+  <!-- 注文と棚卸しの個別フォーム -->
+<div class="table-container">
+<table class="supplies_table">
+  <thead>
+    <tr>
+      <th class="supplies-th">分類</th>
+      <th class="supplies-th">商品名</th>
+      <th class="supplies-th">メーカー</th>
+      <th class="supplies-th">価格</th>
+      <th class="supplies-th supplies_quantity">注文数</th>
+      <th class="supplies-th supplies_all_quantity">注文総数</th>
+      <th class="supplies-th stock-column" style="display: none;">去年の在庫</th>
+      <th class="supplies-th stock-column" style="display: none;">今年の在庫</th>
+      <th class="supplies-th stock-column" style="display: none;">消費量</th>
+      <th class="supplies-th supplies_detail">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @supplies.group_by { |supply| supply.category }.each do |category, supplies_in_category| %>
+    <!-- 分類の見出し -->
+    <tr>
+      <td colspan="10" class="category-header"><%= category.capitalize %></td>
+    </tr>
+
+      <% supplies_in_category.each do |supply| %>
         <tr>
           <td class="supplies-td"><%= supply.category %></td>
           <td class="supplies-td"><%= supply.item_name %></td>
           <td class="supplies-td"><%= supply.manufacturer %></td>
           <td class="supplies-td"><%= supply.price %></td>
-          <td class="supplies-td supplies_quantity2">
-            <%= form_with(model: supply, url: update_quantity_supply_path(supply), method: :patch, local: true) do |f| %>
-              <%= f.number_field :order_quantity, value: 0, min: 0, class: "stock-input" %>
-              <%= f.submit '注文', class: 'order-button' %>
-            <% end %>
+
+          <!-- 注文フォーム -->
+          <td id="order_quantity_<%= supply.id %>" class="supplies-td supplies_quantity">
+            <form id="order-form-<%= supply.id %>" action="<%= update_quantity_supply_path(supply) %>" method="post" data-id="<%= supply.id %>">
+              <input type="hidden" name="_method" value="patch">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input type="number" name="supply[order_quantity]" value="0" min="0" class="order_quantity stock-input" data-id="<%= supply.id %>">
+              <button type="submit" class="order-button">注文</button>
+            </form>
           </td>
-          <td class="supplies-td supplies_text-right"><%= supply.stock_quantity %></td>
+
+          <!-- 総注文数表示 -->
+          <td id="supplies_all_quantity_<%= supply.id %>" class="supplies-td supplies_all_quantity supplies_text-right">
+            <%= supply.supplies_all_quantity %>
+          </td>
+
+          <!-- 棚卸しモード用のフィールド -->
+          <td class="supplies-td stock-column" style="display: none;">
+            <input type="number" name="supplies[<%= supply.id %>][last_year_stock]" value="<%= supply.last_year_stock %>" class="last-year-stock stock-input" />
+          </td>
+          <td class="supplies-td stock-column" style="display: none;">
+            <input type="number" name="supplies[<%= supply.id %>][current_year_stock]" value="<%= supply.current_year_stock %>" class="current-year-stock stock-input" />
+          </td>
+          <td class="supplies-td stock-column" style="display: none;">
+            <input type="number" name="supplies[<%= supply.id %>][consumption]" value="<%= supply.consumption %>" readonly class="consumption stock-input" />
+          </td>
+
           <td class="supplies-td"><%= link_to '詳細', supply_path(supply), class: 'supplies_show_button' %></td>
         </tr>
       <% end %>
+    <% end %>
     </tbody>
   </table>
-  <div class="pagination-container">
-    <%= paginate @supplies, params: request.query_parameters.merge(from: @from) %>
-  </div>
+</div>
+
+<!-- 一括保存ボタン -->
+<button id="bulk-save-button" class="save-button">一括保存</button>
+
+<div class="pagination-container">
+  <%= paginate @supplies, params: request.query_parameters.merge(from: @from) %>
 </div>
 
 <script>
-  document.addEventListener('turbo.load', () => {
-    const stockInputs = document.querySelectorAll('.stock-input');
-  
-    stockInputs.forEach(input => {
-      input.addEventListener('change', (event) => {
-        const stockQuantity = event.target.value;
-        const supplyId = event.target.getAttribute('data-id');
-  
-        fetch(`/supplies/${supplyId}/update_stock`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-          },
-          body: JSON.stringify({ stock_quantity: stockQuantity })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            alert('在庫数が更新されました。');
-          } else {
-            alert('エラーが発生しました: ' + data.message);
-          }
-        });
-      });
-    });
+document.addEventListener('turbo:load', function() {
+  // 在庫関連の入力フィールド
+  const lastYearStockInputs = document.querySelectorAll('.last-year-stock');
+  const currentYearStockInputs = document.querySelectorAll('.current-year-stock');
+  const suppliesAllQuantityInputs = document.querySelectorAll('.supplies_all_quantity');
+  const consumptionInputs = document.querySelectorAll('.consumption');
 
-    document.body.addEventListener('change', function(event) {
-      if (event.target.matches('.delivery-check')) {
-        const form = event.target.closest('form');
-        if (form) {
-          const formData = new FormData(form);
-          const url = form.action;
+  // 消費量を計算する関数
+  function calculateConsumption(lastYearStock, currentYearStock, suppliesAllQuantity) {
+    return lastYearStock + suppliesAllQuantity - currentYearStock;
+  }
 
-          fetch(url, {
-            method: 'PATCH',
-            body: formData,
-            headers: {
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-              'Accept': 'application/json'
-            }
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-        }
-      }
+  // 消費量をリアルタイムで更新する関数
+  function updateConsumption(input) {
+    const row = input.closest('tr');
+    if (!row) return;
+
+    const lastYearStockInput = row.querySelector('.last-year-stock');
+    const currentYearStockInput = row.querySelector('.current-year-stock');
+    const suppliesAllQuantityInput = row.querySelector('.supplies_all_quantity');
+    const consumptionInput = row.querySelector('.consumption');
+
+    if (!lastYearStockInput || !currentYearStockInput || !suppliesAllQuantityInput || !consumptionInput) {
+      console.error("必要な入力フィールドが見つかりません");
+      return;
+    }
+
+    // 各フィールドの値を取得
+    const lastYearStock = parseFloat(lastYearStockInput.value) || 0;
+    const currentYearStock = parseFloat(currentYearStockInput.value) || 0;
+    const suppliesAllQuantity = parseFloat(suppliesAllQuantityInput.textContent) || 0;
+
+    console.log('Last Year Stock:', lastYearStock);
+    console.log('Current Year Stock:', currentYearStock);
+    console.log('Supplies All Quantity:', suppliesAllQuantity);
+
+    // 消費量を計算
+    const consumption = calculateConsumption(lastYearStock, currentYearStock, suppliesAllQuantity);
+
+    // 消費量を表示
+    consumptionInput.value = consumption; // 必要に応じて小数点以下の桁数を設定
+  }
+
+  // フィールドの変更を監視して、消費量をリアルタイムで更新
+  lastYearStockInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      updateConsumption(input);
     });
   });
+
+  currentYearStockInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      updateConsumption(input);
+    });
+  });
+
+  suppliesAllQuantityInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      updateConsumption(input);
+    });
+  });
+
+  // 注文フォームにリスナーを追加
+  const forms = document.querySelectorAll('form[id^="order-form-"]');
+  forms.forEach(form => {
+    form.removeEventListener('submit', handleSubmit);  // 重複リスナーを防止
+    form.addEventListener('submit', handleSubmit);     // リスナーを1回だけ追加
+  });
+
+  // 棚卸しモードのトグルボタンのリスナーを追加
+  const inventoryButton = document.getElementById('inventory-button');
+  const stockColumns = document.querySelectorAll('.stock-column');
+  if (inventoryButton && stockColumns) {
+    inventoryButton.removeEventListener('click', toggleInventoryMode);  // 重複リスナーを防止
+    inventoryButton.addEventListener('click', toggleInventoryMode);     // トグルリスナーを追加
+  }
+
+  // 一括保存ボタンのリスナーを追加
+  const bulkSaveButton = document.getElementById('bulk-save-button');
+  if (bulkSaveButton) {
+    bulkSaveButton.removeEventListener('click', handleBulkSave);  // 重複リスナーを防止
+    bulkSaveButton.addEventListener('click', handleBulkSave);     // 一括保存リスナーを追加
+  }
+});
+
+// 注文フォームの送信処理
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const orderQuantityInput = form.querySelector('input[name="supply[order_quantity]"]');
+  if (!orderQuantityInput || orderQuantityInput.value === '' || parseInt(orderQuantityInput.value) <= 0) {
+    return;  // 注文数が0以下の場合は処理しない
+  }
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton) submitButton.disabled = true;  // ボタン無効化
+
+  const formData = new FormData(form);
+  
+  fetch(form.action, {
+    method: 'PATCH',
+    body: formData,
+    headers: {
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      document.querySelector(`#supplies_all_quantity_${data.supply_id}`).textContent = data.supplies_all_quantity;
+      form.querySelector(`input[name="supply[order_quantity]"]`).value = 0;  // フォームリセット
+    }
+  })
+  .catch(error => console.error('エラーが発生しました: ', error));
+}
+
+// 棚卸しモードのトグル処理
+function toggleInventoryMode(event) {
+  event.preventDefault();
+  const stockColumns = document.querySelectorAll('.stock-column');
+  stockColumns.forEach(column => {
+    column.style.display = column.style.display === 'none' ? 'table-cell' : 'none';
+  });
+}
+
+// 一括保存の処理
+function handleBulkSave(event) {
+  event.preventDefault();
+  
+  const stockInputs = document.querySelectorAll('.stock-input');
+  const stockData = {};
+
+  stockInputs.forEach(input => {
+    const name = input.getAttribute('name');
+    const value = input.value;
+    const matches = name.match(/^supplies\[(\d+)\]\[(.+)\]$/);
+    if (matches) {
+      const supplyId = matches[1];
+      const fieldName = matches[2];
+      if (!stockData[supplyId]) stockData[supplyId] = {};
+      stockData[supplyId][fieldName] = value;
+    }
+  });
+
+  fetch('/supplies/bulk_update', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ supplies: stockData })
+  })
+  .then(response => response.json())
+  .then(data => {
+    const flashDiv = document.createElement('div');
+    if (data.status === 'success') {
+      flashDiv.classList.add('flash-notice');
+    } else {
+      flashDiv.classList.add('flash-alert');
+    }
+    flashDiv.textContent = data.message;
+    document.body.prepend(flashDiv);
+  })
+  .catch(error => console.error('エラーが発生しました: ', error));
+}
+
 </script>

@@ -185,6 +185,130 @@
   transform: translateY(-2px);
 }
 
+/* 棚卸しモードボタン */
+.inventory-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-button:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+}
+
+/* セットボタン */
+.set-stock-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffc107;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.set-stock-button:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+/* 一括保存ボタン */
+.save-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.save-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* ボタンを押したときのフィードバック */
+button:active,
+.inventory-button:active,
+.set-stock-button:active,
+.save-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 棚卸しモードでのフィールドスタイル */
+.stock-column input {
+  background-color: #f9f9f9;
+  border: 1px solid #007bff;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stock-column input:focus {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(29, 78, 216, 0.5);
+}
+
+/* テーブルの行ホバー効果 */
+.supplies_table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* テーブルヘッダーの固定（オプション） */
+.supplies_table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #007bff;
+  color: white;
+  z-index: 1;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* 横スクロールを許可 */
+  display: block;
+  white-space: nowrap; /* テーブル内のテキストが改行されずに横に並ぶようにする */
+}
+
+/* テーブル本体に対するスタイルはそのまま維持 */
+.supplies_table {
+  width: 100%; /* テーブルが親コンテナの幅に合わせて広がるようにする */
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: left;
+  white-space: nowrap; /* 改行を防ぎ横に広がるようにする */
+  overflow-x: auto; /* 横スクロールを確実に許可 */
+}
+
+.stock-column {
+  display: table-cell; /* テーブルセルとして表示 */
+  min-width: 100px; /* 最小幅を設定して表示が切れないようにする */
+}
+
+.category-header {
+  background-color: #0b03a5;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+
 /* スマホ用のスタイル調整 */
 @media screen and (max-width: 767px) {
   .supply-search-form {
@@ -235,5 +359,19 @@
   .supplies_search-form-submit {
     max-width: 300px;
     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .table-container {
+    overflow-x: scroll; /* 横スクロールを許可 */
+  }
+
+  .stock-column {
+    min-width: 120px; /* スマホやタブレット向けにカラムの幅を調整 */
+  }
+
+  .supplies_quantity {
+    width: 180px; /* 注文数のカラム幅を広く設定 */
   }
 }

@@ -248,3 +248,9 @@
 #select-lower-jaw {
   margin-bottom: 15px; /* 必要に応じて余白の大きさを調整 */
 }
+
+@media (max-width: 480px) {
+  .row {
+    margin-right: 10px;
+  }
+}

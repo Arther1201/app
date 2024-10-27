@@ -12,6 +12,25 @@ class Supply < ApplicationRecord
     where('extract(year from delivery_date) = ?', year).sum(:order_quantity)
   end
 
+  def calculate_consumption
+    self.consumption = (last_year_stock || 0) + (supplies_all_quantity || 0) - (current_year_stock || 0)
+    save
+  end
+
+  def set_current_stock_as_last_year
+    self.last_year_stock = self.current_year_stock
+    save
+  end
+
+  def reset_current_year_stock
+    self.current_year_stock = 0
+    save
+  end
+
+  def supplies_all_quantity
+    order_quantity || 0
+  end
+
   private
 
   def set_default_order_quantity
