@@ -90,7 +90,7 @@
             <input type="number" name="supplies[<%= supply.id %>][consumption]" value="<%= supply.consumption %>" readonly class="consumption stock-input" />
           </td>
 
-          <td class="supplies-td"><%= link_to '詳細', supply_path(supply), class: 'supplies_show_button' %></td>
+          <td class="supplies-td"><%= link_to '詳細', supply_path(supply, from: 'search_results', category: params[:category], name: params[:name], order_date: params[:order_date]), class: 'supplies_show_button' %></td>
         </tr>
       <% end %>
     <% end %>

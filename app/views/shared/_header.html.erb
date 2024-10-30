@@ -29,9 +29,11 @@
         <%= link_to '戻る', patients_path, class: "navbar-item" %>
       <% elsif current_page?(new_supply_path) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
-      <% elsif @supply.present? && current_page?(supply_path(@supply)) %> 
-        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
       <% elsif current_page?(archives_supplies_path) %> 
+        <%= link_to '戻る', supplies_path, class: "navbar-item" %>
+      <% elsif params[:from] == 'search_results' && @supply.present? && current_page?(supply_path(@supply)) %>
+        <%= link_to '戻る', supplies_path(category: params[:category], name: params[:name], order_date: params[:order_date], from: 'search_results'), class: "navbar-item" %>  
+      <% elsif @supply.present? && current_page?(supply_path(@supply)) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
       <% elsif params[:id].present? && current_page?(show_archive_supply_path(params[:id])) %> 
         <%= link_to '戻る', supplies_path, class: "navbar-item" %>
