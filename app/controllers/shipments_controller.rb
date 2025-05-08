@@ -5,7 +5,8 @@ class ShipmentsController < ApplicationController
           { name: '杏友会', phone: '03-6821-3398', hospital_id: '54212' },
           { name: '株式会社E-joint', phone: '04-2937-3972', address: '〒 358-1116 埼玉県所沢市東町10-16 廣澤ビル3F' },
           { name: '株式会社E-joint (サージカルガイド)', address: '〒 101-0021 東京都千代田区外神田2-17-3 アヤベビル603' },
-          { name: '株式会社GIKO', phone: '03-6456-1535', address: '〒 816-0811  東京都世田谷区桜上水2-8-10' }
+          { name: '株式会社GIKO', phone: '03-6456-1535', address: '〒 816-0811 東京都世田谷区桜上水2-8-10' },
+          { name: '株式会社Naoデンタルラボラトリー', phone: '042-467-3536', address: '〒 187-0011 東京都小平市鈴木町2-150-4 スザキビル3F' }
         ]
     end
 end
